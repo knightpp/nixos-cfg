@@ -12,24 +12,24 @@
       initialHashedPassword = "$6$pgzhN8I3kJ1O35mZ$dzoVn596Htt3Jc7S1ftGyRnoxHmqvNpY.ZKtN3c/j5y0K3ZlbpwbaMaA6Mw5XnuVQxrDQ0184dkMtZp98thXU1";
     };
     knightpp = {
-    isNormalUser = true;
-    	group = "knightpp";
+      isNormalUser = true;
+      group = "knightpp";
       initialHashedPassword = "$6$pgzhN8I3kJ1O35mZ$dzoVn596Htt3Jc7S1ftGyRnoxHmqvNpY.ZKtN3c/j5y0K3ZlbpwbaMaA6Mw5XnuVQxrDQ0184dkMtZp98thXU1";
-      openssh.authorizedKeys.keys = [ 
-	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG86t/Sa1mUjJtz7my7fhS0UvK3za5JCOyTw4u58rwvv Personal SSH" 
-	];
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG86t/Sa1mUjJtz7my7fhS0UvK3za5JCOyTw4u58rwvv Personal SSH"
+      ];
     };
   };
-  users.groups.knightpp = {};
+  users.groups.knightpp = { };
 
   security.rtkit.enable = true;
-services.pipewire = {
-  enable = true;
-  alsa.enable = true;
-  alsa.support32Bit = true;
-  pulse.enable = true;
-  jack.enable = true;
-};
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -52,32 +52,32 @@ services.pipewire = {
     sudo.enable = false;
   };
 
-security.doas.extraRules = [{
-users = [ "knightpp" ];
-keepEnv = true;
-persist = true;  
-}];
+  security.doas.extraRules = [{
+    users = [ "knightpp" ];
+    keepEnv = true;
+    persist = true;
+  }];
 
-services.flatpak.enable = true;
+  services.flatpak.enable = true;
 
-	services.xserver.enable = true;
+  services.xserver.enable = true;
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
-	environment.plasma5.excludePackages = with pkgs.libsForQt5; [
-  elisa
-  print-manager
-];
+  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+    elisa
+    print-manager
+  ];
 
 
   environment.systemPackages = builtins.attrValues {
     inherit (pkgs)
-      mg # emacs-like editor
-      jq # other programs
+      mg# emacs-like editor
+      jq# other programs
       mpv
       vscode
       nushell
       fish
-    ;
+      ;
   };
 }
