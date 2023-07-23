@@ -73,6 +73,7 @@ services.flatpak.enable = true;
     inherit (pkgs)
       mg # emacs-like editor
       jq # other programs
+      mpv
     ;
   };
 }
