@@ -74,6 +74,9 @@ services.flatpak.enable = true;
       mg # emacs-like editor
       jq # other programs
       mpv
+      vscode
+      nushell
+      fish
     ;
   };
 }
