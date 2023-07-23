@@ -23,8 +23,8 @@
     };
     networking = {
       # read changeHostName.txt file.
-      hostName = "exampleHost";
-      timeZone = "Europe/Berlin";
+      hostName = "nixbox";
+      timeZone = "Europe/Kyiv";
       hostId = "fcf7de2a";
     };
   };
