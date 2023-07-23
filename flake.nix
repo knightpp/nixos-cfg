@@ -1,6 +1,8 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs = {
+    	url = "github:nixos/nixpkgs/nixos-23.05";
+    };
     home-manager = {
       url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,6 +34,9 @@
                 else
                   throw "refuse to build: git tree is dirty";
                 system.stateVersion = "23.05";
+#		nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+#             		"vscode"
+#           	];
                 imports = [
                   "${nixpkgs}/nixos/modules/installer/scan/not-detected.nix"
                   # "${nixpkgs}/nixos/modules/profiles/hardened.nix"
@@ -57,7 +62,13 @@
         # configuration input
           (import ./hosts/${hostName} {
             system = system;
-            pkgs = nixpkgs.legacyPackages.${system};
+            #pkgs = nixpkgs.legacyPackages.${system};
+	    # see https://github.com/ne9z/dotfiles-flake/issues/4
+	    # there's a bug in 23.05 which prevents allowUnfree to work normally
+	    pkgs = import nixpkgs {
+          	config = { allowUnfree = true; };
+          	inherit system;
+	   };
           }));
     in {
       nixosConfigurations = {

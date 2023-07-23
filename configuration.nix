@@ -5,6 +5,7 @@
   # You can configure networking with "nmtui" command.
   networking.useDHCP = false;
   networking.networkmanager.enable = true;
+  nixpkgs.config.allowUnfree = true;
 
   users.users = {
     root = {
