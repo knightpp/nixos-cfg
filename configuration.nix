@@ -4,12 +4,14 @@
   # Enable NetworkManager for wireless networking,
   # You can configure networking with "nmtui" command.
   networking.useDHCP = true;
-  networking.networkmanager.enable = false;
+  networking.networkmanager.enable = true;
 
   users.users = {
     root = {
-      initialHashedPassword = "rootHash_placeholder";
-      openssh.authorizedKeys.keys = [ "sshKey_placeholder" ];
+      initialHashedPassword = "$6$pgzhN8I3kJ1O35mZ$dzoVn596Htt3Jc7S1ftGyRnoxHmqvNpY.ZKtN3c/j5y0K3ZlbpwbaMaA6Mw5XnuVQxrDQ0184dkMtZp98thXU1";
+      openssh.authorizedKeys.keys = [ 
+	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG86t/Sa1mUjJtz7my7fhS0UvK3za5JCOyTw4u58rwvv Personal SSH" 
+	];
     };
   };
 
@@ -34,6 +36,18 @@
     doas.enable = true;
     sudo.enable = false;
   };
+
+services.flatpak.enable = true;
+
+	services.xserver.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
+
+	environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+  elisa
+  print-manager
+];
+
 
   environment.systemPackages = builtins.attrValues {
     inherit (pkgs)

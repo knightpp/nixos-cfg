@@ -10,9 +10,9 @@
   zfs-root = {
     boot = {
       devNodes = "/dev/disk/by-id/";
-      bootDevices = [ "bootDevices_placeholder" ];
+      bootDevices = [  "nvme-Samsung_SSD_980_500GB_S64DNL0T949034V" ];
       immutable = false;
-      availableKernelModules = [ "kernelModules_placeholder" ];
+      availableKernelModules = [  "xhci_pci" "ahci" "nvme" "usbhid" "uas" "sd_mod" ];
       removableEfi = true;
       kernelParams = [ ];
       sshUnlock = {
@@ -25,7 +25,7 @@
       # read changeHostName.txt file.
       hostName = "exampleHost";
       timeZone = "Europe/Berlin";
-      hostId = "abcd1234";
+      hostId = "fcf7de2a";
     };
   };
 
