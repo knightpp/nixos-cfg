@@ -21,6 +21,14 @@
   };
   users.groups.knightpp = {};
 
+  security.rtkit.enable = true;
+services.pipewire = {
+  enable = true;
+  alsa.enable = true;
+  alsa.support32Bit = true;
+  pulse.enable = true;
+  jack.enable = true;
+};
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -42,6 +50,12 @@
     doas.enable = true;
     sudo.enable = false;
   };
+
+security.doas.extraRules = [{
+users = [ "knightpp" ];
+keepEnv = true;
+persist = true;  
+}];
 
 services.flatpak.enable = true;
 

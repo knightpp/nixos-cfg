@@ -61,7 +61,7 @@
           }));
     in {
       nixosConfigurations = {
-        nixboxHost = mkHost "nixbox" "x86_64-linux";
+        nixbox = mkHost "nixbox" "x86_64-linux";
       };
     };
 }
