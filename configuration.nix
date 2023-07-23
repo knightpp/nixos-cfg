@@ -3,7 +3,7 @@
 { pkgs, ... }: {
   # Enable NetworkManager for wireless networking,
   # You can configure networking with "nmtui" command.
-  networking.useDHCP = true;
+  networking.useDHCP = false;
   networking.networkmanager.enable = true;
 
   users.users = {
