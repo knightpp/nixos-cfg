@@ -103,6 +103,7 @@
       nushell
       fish
       nfs-utils
+      starship
       ;
     vscode = unstablePkgs.vscode;
   };
