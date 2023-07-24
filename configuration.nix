@@ -85,6 +85,7 @@
       vscode
       nushell
       fish
+      nfs-utils
       ;
   };
 
