@@ -87,4 +87,22 @@
       fish
       ;
   };
+
+  services.rpcbind.enable = true; # needed for NFS
+  systemd.mounts = [{
+    type = "nfs";
+    mountConfig = {
+      Options = "noatime";
+    };
+    what = "opi.lan:/";
+    where = "/mnt/opi";
+  }];
+
+  systemd.automounts = [{
+    wantedBy = [ "multi-user.target" ];
+    automountConfig = {
+      TimeoutIdleSec = "300";
+    };
+    where = "/mnt/opi";
+  }];
 }
