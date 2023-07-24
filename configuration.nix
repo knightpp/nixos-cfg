@@ -73,6 +73,9 @@
     print-manager
   ];
 
+  fonts.fonts = with pkgs; [
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+  ];
 
   environment.systemPackages = builtins.attrValues {
     inherit (pkgs)
