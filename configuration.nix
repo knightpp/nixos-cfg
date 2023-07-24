@@ -50,6 +50,7 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   programs.git.enable = true;
+  programs.ssh.startAgent = true;
 
   security = {
     doas.enable = true;
