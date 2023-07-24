@@ -7,6 +7,26 @@
   networking.networkmanager.enable = true;
   nixpkgs.config.allowUnfree = true;
 
+  programs = {
+    ssh.startAgent = true;
+    # TODO: move into own module, probably KDE desktop
+    ssh.askPassword = pkgs.lib.mkForce "${pkgs.ksshaskpass.out}/bin/ksshaskpass";
+  };
+
+  # Move into KDE module?
+  systemd.user.services.add_ssh_keys = {
+    script = ''
+      ssh-add $HOME/.ssh/id_ed25519
+    '';
+    wantedBy = [ "default.target" ];
+  };
+
+  environment = {
+    sessionVariables = {
+      SSH_ASKPASS_REQUIRE = "prefer";
+    };
+  };
+
   users.users = {
     root = {
       initialHashedPassword = "$6$pgzhN8I3kJ1O35mZ$dzoVn596Htt3Jc7S1ftGyRnoxHmqvNpY.ZKtN3c/j5y0K3ZlbpwbaMaA6Mw5XnuVQxrDQ0184dkMtZp98thXU1";
@@ -50,7 +70,6 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   programs.git.enable = true;
-  programs.ssh.startAgent = true;
 
   security = {
     doas.enable = true;
