@@ -10,9 +10,9 @@
   zfs-root = {
     boot = {
       devNodes = "/dev/disk/by-id/";
-      bootDevices = [  "nvme-Samsung_SSD_980_500GB_S64DNL0T949034V" ];
+      bootDevices = [ "nvme-Samsung_SSD_980_500GB_S64DNL0T949034V" ];
       immutable = false;
-      availableKernelModules = [  "xhci_pci" "ahci" "nvme" "usbhid" "uas" "sd_mod" ];
+      availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "uas" "sd_mod" ];
       removableEfi = true;
       kernelParams = [ ];
       sshUnlock = {

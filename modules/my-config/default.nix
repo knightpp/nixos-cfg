@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 let inherit (lib) types mkIf mkDefault mkOption;
-in {
+in
+{
   options.my-config = {
     template.desktop.gnome.enable = mkOption {
       description = "Enable my customized GNOME desktop";
@@ -31,9 +32,9 @@ in {
       extraGroups = [ "wheel" ];
       packages = builtins.attrValues {
         inherit (pkgs)
-          mg # emacs-like editor
-          jq # other programs
-        ;
+          mg# emacs-like editor
+          jq# other programs
+          ;
       };
       isNormalUser = true;
     };
