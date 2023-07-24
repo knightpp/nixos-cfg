@@ -1,6 +1,6 @@
 # configuration in this file is shared by all hosts
 
-{ pkgs, ... }: {
+{ pkgs, unstablePkgs, ... }: {
   # Enable NetworkManager for wireless networking,
   # You can configure networking with "nmtui" command.
   networking.useDHCP = false;
@@ -81,11 +81,11 @@
   environment.systemPackages = builtins.attrValues {
     inherit (pkgs)
       mpv
-      vscode
       nushell
       fish
       nfs-utils
       ;
+    vscode = unstablePkgs.vscode;
   };
 
   services.rpcbind.enable = true; # needed for NFS

@@ -40,7 +40,23 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "unstable": "unstable"
+      }
+    },
+    "unstable": {
+      "locked": {
+        "lastModified": 1690215363,
+        "narHash": "sha256-voEMpV0m0amVtYa7FiIZ4b1GSDyZO6Qu9XdbkE3lisA=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "503101a4cf714fa3255548af3bc0f64d1bebb27a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     }
   },

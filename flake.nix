@@ -3,16 +3,19 @@
     nixpkgs = {
       url = "github:nixos/nixpkgs/nixos-23.05";
     };
+    unstable = {
+      url = "github:nixos/nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager }:
+  outputs = { self, nixpkgs, home-manager, unstable }:
     let
       mkHost = hostName: system:
-        (({ my-config, zfs-root, pkgs, system, ... }:
+        (({ my-config, zfs-root, pkgs, unstablePkgs, system, ... }:
           nixpkgs.lib.nixosSystem {
             inherit system;
             modules = [
@@ -56,7 +59,9 @@
               }
 
               # Module 4: config shared by all hosts
-              (import ./configuration.nix { inherit pkgs; })
+              (import ./configuration.nix {
+                inherit pkgs unstablePkgs;
+              })
             ];
           })
 
@@ -67,6 +72,10 @@
             # see https://github.com/ne9z/dotfiles-flake/issues/4
             # there's a bug in 23.05 which prevents allowUnfree to work normally
             pkgs = import nixpkgs {
+              config = { allowUnfree = true; };
+              inherit system;
+            };
+            unstablePkgs = import unstable {
               config = { allowUnfree = true; };
               inherit system;
             };
