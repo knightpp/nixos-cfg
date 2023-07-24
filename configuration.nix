@@ -22,8 +22,8 @@
     };
   };
   users.groups = {
-  	knightpp = { };
-	nixoscfg = { };
+    knightpp = { };
+    nixoscfg = { };
   };
 
   security.rtkit.enable = true;
