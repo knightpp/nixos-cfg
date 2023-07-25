@@ -106,6 +106,9 @@
       fish
       nfs-utils
       starship
+      ripgrep
+      du-dust
+      fd
       ;
     vscode = unstablePkgs.vscode;
   };
