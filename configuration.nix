@@ -76,6 +76,8 @@
       ripgrep
       du-dust
       fd
+      tokei
+      fzf
       ;
   };
 
