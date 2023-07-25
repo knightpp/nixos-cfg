@@ -1,25 +1,12 @@
 # configuration in this file is shared by all hosts
 
-{ pkgs, unstablePkgs, ... }: {
+{ pkgs, ... }: {
   # Enable NetworkManager for wireless networking,
   # You can configure networking with "nmtui" command.
   networking.useDHCP = false;
   networking.networkmanager.enable = true;
   nixpkgs.config.allowUnfree = true;
 
-  programs = {
-    ssh.startAgent = true;
-    # TODO: move into own module, probably KDE desktop
-    ssh.askPassword = pkgs.lib.mkForce "${pkgs.ksshaskpass.out}/bin/ksshaskpass";
-  };
-
-  # Move into KDE module?
-  systemd.user.services.add_ssh_keys = {
-    script = ''
-      ssh-add $HOME/.ssh/id_ed25519
-    '';
-    wantedBy = [ "default.target" ];
-  };
 
   environment = {
     sessionVariables = {
@@ -46,14 +33,9 @@
     nixoscfg = { };
   };
 
+  desktop-environment.kde.enable = true;
+
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-  };
 
   programs.neovim = {
     enable = true;
@@ -84,24 +66,12 @@
     persist = true;
   }];
 
-  services.flatpak.enable = true;
-
-  services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-
-  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
-    elisa
-    print-manager
-  ];
-
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
 
   environment.systemPackages = builtins.attrValues {
     inherit (pkgs)
-      mpv
       nushell
       fish
       nfs-utils
@@ -110,7 +80,6 @@
       du-dust
       fd
       ;
-    vscode = unstablePkgs.vscode;
   };
 
   services.rpcbind.enable = true; # needed for NFS

@@ -5,8 +5,8 @@
 # all others goes to `configuration.nix` under the same directory as
 # this file. 
 
-{ system, pkgs, unstablePkgs, ... }: {
-  inherit pkgs system unstablePkgs;
+{ system, pkgs, ... }: {
+  inherit pkgs system;
   zfs-root = {
     boot = {
       devNodes = "/dev/disk/by-id/";
