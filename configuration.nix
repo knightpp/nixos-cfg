@@ -54,10 +54,12 @@
     pulse.enable = true;
     jack.enable = true;
   };
+
   programs.neovim = {
     enable = true;
     viAlias = true;
     vimAlias = true;
+    defaultEditor = true;
   };
 
   services.openssh = {
