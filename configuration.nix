@@ -1,8 +1,5 @@
 # configuration in this file is shared by all hosts
-
 { pkgs, ... }: {
-  # Enable NetworkManager for wireless networking,
-  # You can configure networking with "nmtui" command.
   networking.useDHCP = false;
   networking.networkmanager.enable = true;
   nixpkgs.config.allowUnfree = true;

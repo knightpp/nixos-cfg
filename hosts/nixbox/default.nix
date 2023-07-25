@@ -1,12 +1,4 @@
-# configuration in this file only applies to exampleHost host
-#
-# only my-config.* and zfs-root.* options can be defined in this file.
-#
-# all others goes to `configuration.nix` under the same directory as
-# this file. 
-
-{ system, pkgs, ... }: {
-  inherit pkgs system;
+{ ... }: {
   zfs-root = {
     boot = {
       devNodes = "/dev/disk/by-id/";
@@ -27,10 +19,8 @@
     };
   };
 
-  # To add more options to per-host configuration, you can create a
-  # custom configuration module, then add it here.
-  my-config = {
-    # Enable custom gnome desktop on exampleHost
-    template.desktop.gnome.enable = false;
-  };
+  # enable fn keys on nuphy keyboard
+  boot.extraModprobeConfig = ''
+    options hid_apple fnmode=0
+  '';
 }

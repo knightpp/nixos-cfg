@@ -13,7 +13,7 @@ in
         mpv
         # telegram-desktop
         ;
-      inherit (config.nixpkgs.unstable)
+      inherit (config.pkgs.unstable)
         vscode
         ;
     };

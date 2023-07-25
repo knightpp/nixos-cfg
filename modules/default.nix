@@ -1,3 +1,3 @@
 { ... }: {
-  imports = [ ./boot ./fileSystems ./networking ./my-config ./desktop-environment ];
+  imports = [ ./boot ./fileSystems ./networking ./desktop-environment ];
 }
