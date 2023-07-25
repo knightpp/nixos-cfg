@@ -16,13 +16,11 @@
       removableEfi = true;
       kernelParams = [ ];
       sshUnlock = {
-        # read sshUnlock.txt file.
         enable = false;
         authorizedKeys = [ ];
       };
     };
     networking = {
-      # read changeHostName.txt file.
       hostName = "nixbox";
       timeZone = "Europe/Kyiv";
       hostId = "fcf7de2a";

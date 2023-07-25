@@ -30,7 +30,7 @@ in
 
     programs = {
       ssh.startAgent = true;
-      ssh.askPassword = pkgs.lib.mkForce "${pkgs.ksshaskpass.out}/bin/ksshaskpass";
+      ssh.askPassword = lib.mkForce "${pkgs.ksshaskpass.out}/bin/ksshaskpass";
     };
   };
 }

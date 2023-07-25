@@ -11,8 +11,11 @@ in
     environment.systemPackages = builtins.attrValues {
       inherit (pkgs)
         mpv
+        # telegram-desktop
         ;
-      vscode = config.nixpkgs.unstable.vscode;
+      inherit (config.nixpkgs.unstable)
+        vscode
+        ;
     };
 
     services.flatpak.enable = true;
