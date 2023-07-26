@@ -129,6 +129,7 @@
         ];
         shellAbbrs = {
           gs = "git status";
+          gd = "git diff";
         };
         # HACK: without this Ctrl+R does not use plugin's version of search
         interactiveShellInit = ''
