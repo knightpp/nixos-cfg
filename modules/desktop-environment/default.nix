@@ -11,6 +11,8 @@ in
     networking.useDHCP = false;
     networking.networkmanager.enable = true;
 
+    xdg.portal.xdgOpenUsePortal = true;
+
     environment.systemPackages = [
       config.pkgs.unstable.vscode
       # pkgs.telegram-desktop
