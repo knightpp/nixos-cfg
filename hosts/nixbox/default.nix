@@ -19,6 +19,10 @@
     };
   };
 
+  boot.zfs.forceImportRoot = false;
+
+  desktop-environment.kde.enable = true;
+
   # enable fn keys on nuphy keyboard
   boot.extraModprobeConfig = ''
     options hid_apple fnmode=0

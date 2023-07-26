@@ -1,18 +1,8 @@
 # configuration in this file is shared by all hosts
 { pkgs, ... }: {
-  networking.useDHCP = false;
-  networking.networkmanager.enable = true;
   nixpkgs.config.allowUnfree = true;
 
-
-  environment = {
-    sessionVariables = {
-      SSH_ASKPASS_REQUIRE = "prefer";
-    };
-  };
-
-  desktop-environment.kde.enable = true;
-
+  # TODO: Do I need rtkit?
   security.rtkit.enable = true;
 
   services.openssh = {
@@ -20,20 +10,20 @@
     settings = { PasswordAuthentication = false; };
   };
 
-  boot.zfs.forceImportRoot = false;
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   security = {
-    doas.enable = true;
     sudo.enable = false;
-  };
 
-  security.doas.extraRules = [{
-    users = [ "knightpp" ];
-    keepEnv = true;
-    persist = true;
-  }];
+    doas = {
+      enable = true;
+      extraRules = [{
+        users = [ "knightpp" ];
+        keepEnv = true;
+        persist = true;
+      }];
+    };
+  };
 
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" ]; })

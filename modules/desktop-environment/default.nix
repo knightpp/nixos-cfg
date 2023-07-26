@@ -8,6 +8,9 @@ in
   options.desktop-environment.enable = lib.mkEnableOption "Desktop Environment";
 
   config = lib.mkIf cfg.enable {
+    networking.useDHCP = false;
+    networking.networkmanager.enable = true;
+
     environment.systemPackages = [
       config.pkgs.unstable.vscode
       # pkgs.telegram-desktop

@@ -19,6 +19,13 @@ in
       print-manager
     ];
 
+    environment = {
+      sessionVariables = {
+        # forces KDE to use wallet for ssh keys
+        SSH_ASKPASS_REQUIRE = "prefer";
+      };
+    };
+
     systemd.user.services.add_ssh_keys = {
       script = ''
         ssh-add $HOME/.ssh/id_ed25519

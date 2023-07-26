@@ -44,7 +44,7 @@
             }
 
             # Module 4: config shared by all hosts
-            ./configuration.nix
+            ./hosts/common.nix
 
             # Module 5: add nixpkgs
             (
