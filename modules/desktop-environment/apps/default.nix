@@ -8,15 +8,11 @@ in
   options.desktop-environment.apps.enable = mkEnableOption "Apps";
 
   config = mkIf cfg.enable {
-    environment.systemPackages = builtins.attrValues {
-      inherit (pkgs)
-        mpv
-        # telegram-desktop
-        ;
-      inherit (config.pkgs.unstable)
-        vscode
-        ;
-    };
+
+    environment.systemPackages = [
+      config.pkgs.unstable.vscode
+      # pkgs.telegram-desktop
+    ];
 
     services.flatpak.enable = true;
 

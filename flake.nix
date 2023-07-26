@@ -22,21 +22,19 @@
             ./modules
 
             # Module 2: entry point
-            (
-              ({ pkgs, ... }: {
-                system.configurationRevision =
-                  if (self ? rev) then
-                    self.rev
-                  else
-                    throw "refuse to build: git tree is dirty";
-                system.stateVersion = "23.05";
-                imports = [
-                  "${nixpkgs}/nixos/modules/installer/scan/not-detected.nix"
-                  # "${nixpkgs}/nixos/modules/profiles/hardened.nix"
-                  # "${nixpkgs}/nixos/modules/profiles/qemu-guest.nix"
-                ];
-              })
-            )
+            {
+              system.configurationRevision =
+                if (self ? rev) then
+                  self.rev
+                else
+                  throw "refuse to build: git tree is dirty";
+              system.stateVersion = "23.05";
+              imports = [
+                "${nixpkgs}/nixos/modules/installer/scan/not-detected.nix"
+                # "${nixpkgs}/nixos/modules/profiles/hardened.nix"
+                # "${nixpkgs}/nixos/modules/profiles/qemu-guest.nix"
+              ];
+            }
 
             # Module 3: home-manager
             home-manager.nixosModules.home-manager
@@ -73,7 +71,11 @@
               }
             )
 
+            # Module 6: host
             ./hosts/${hostName}
+
+            # Module 7: users
+            ./users
           ];
         };
     in
