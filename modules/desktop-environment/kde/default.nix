@@ -5,12 +5,10 @@ let
   inherit (lib) mkIf mkEnableOption;
 in
 {
-  imports = [ ../apps ];
-
   options.desktop-environment.kde.enable = mkEnableOption "KDE";
 
   config = mkIf cfg.enable {
-    desktop-environment.apps.enable = true;
+    desktop-environment.enable = true;
 
     services.xserver.enable = true;
     services.xserver.displayManager.sddm.enable = true;

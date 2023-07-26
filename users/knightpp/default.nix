@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
   users.users = {
     root = {
       initialHashedPassword = "$6$pgzhN8I3kJ1O35mZ$dzoVn596Htt3Jc7S1ftGyRnoxHmqvNpY.ZKtN3c/j5y0K3ZlbpwbaMaA6Mw5XnuVQxrDQ0184dkMtZp98thXU1";
@@ -57,9 +57,22 @@
     # TODO: test whether this works with NixOS modules
     news.display = "show";
 
-    xdg.userDirs = {
-      enable = true;
-      createDirectories = true;
+    xdg = {
+      userDirs = {
+        enable = true;
+        createDirectories = true;
+      };
+
+      # KDE specific hack to make it use needed locale
+      configFile = lib.mkIf config.desktop-environment.kde.enable {
+        "plasma-localerc".text = ''
+          [Formats]
+          LANG=uk_UA.UTF-8
+
+          [Translations]
+          LANGUAGE=uk_UA:en_GB:en_US
+        '';
+      };
     };
 
     programs = {
@@ -73,7 +86,7 @@
           fi
         '';
       };
-      mpv = {
+      mpv = lib.mkIf config.desktop-environment.enable {
         enable = true;
         config = {
           ao = "pipewire";
