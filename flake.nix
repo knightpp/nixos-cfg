@@ -62,12 +62,6 @@
                   config = { allowUnfree = true; };
                   inherit system;
                 });
-
-                # options.pkgs = lib.mkOption { type = optType; };
-                # config.pkgs = lib.mkDefault (import nixpkgs {
-                #   config = { allowUnfree = true; };
-                #   inherit system;
-                # });
               }
             )
 
