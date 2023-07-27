@@ -65,7 +65,7 @@
               }
             )
 
-            # NOTE: temporary workaround for flatpak
+            # HACK: temporary workaround for flatpak
             (
               { config, pkgs, ... }: {
                 system.fsPackages = [ pkgs.bindfs ];
@@ -78,7 +78,14 @@
                     };
                     aggregated = pkgs.buildEnv {
                       name = "system-fonts-and-icons";
-                      paths = [ pkgs.libsForQt5.breeze-qt5 ];
+                      paths = with pkgs;[
+                        libsForQt5.breeze-qt5
+
+                        noto-fonts
+                        noto-fonts-emoji
+                        noto-fonts-cjk-sans
+                        noto-fonts-cjk-serif
+                      ];
                       pathsToLink = [ "/share/fonts" "/share/icons" ];
                     };
                   in
