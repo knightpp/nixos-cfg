@@ -26,6 +26,10 @@
   };
 
   fonts.fonts = with pkgs; [
+    noto-fonts
+    noto-fonts-emoji
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
 
