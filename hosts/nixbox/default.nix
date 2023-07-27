@@ -19,6 +19,10 @@
     };
   };
 
+  # enables to write Japanese
+  i18n.inputMethod.enabled = "fcitx5";
+  i18n.inputMethod.fcitx5.addons = [ "fcitx5-mozc" ];
+
   environment.systemPackages = [ pkgs.nix-index ];
 
   hardware.cpu.amd.updateMicrocode = true;
