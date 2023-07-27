@@ -19,6 +19,8 @@
     };
   };
 
+  hardware.cpu.amd.updateMicrocode = true;
+
   boot.zfs.forceImportRoot = false;
 
   desktop-environment.kde.enable = true;
