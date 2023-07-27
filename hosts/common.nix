@@ -31,6 +31,7 @@
 
   environment.systemPackages = builtins.attrValues {
     inherit (pkgs)
+      file
       git
       nushell
       nfs-utils
