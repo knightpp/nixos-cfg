@@ -124,6 +124,7 @@
           flags = {
             mem_as_value = true;
             group_processes = true;
+            unnormalized_cpu = true;
           };
         };
       };
