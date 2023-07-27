@@ -25,13 +25,24 @@
     };
   };
 
-  fonts.fonts = with pkgs; [
-    noto-fonts
-    noto-fonts-emoji
-    noto-fonts-cjk-sans
-    noto-fonts-cjk-serif
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
-  ];
+  fonts = {
+    fonts = with pkgs; [
+      noto-fonts
+      noto-fonts-emoji
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    ];
+
+    fontconfig = {
+      allowBitmaps = false;
+
+      # hinting = {
+      #   style = "hintmedium";
+      #   #autohint = true;
+      # };
+    };
+  };
 
   # disable command-not-found handler for everyone since it's annoying and doesn't work with flakes
   # If you ever need it, you can use a replacement 'nix-index' from home-manager
