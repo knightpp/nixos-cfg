@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   zfs-root = {
     boot = {
       devNodes = "/dev/disk/by-id/";
@@ -18,6 +18,8 @@
       hostId = "fcf7de2a";
     };
   };
+
+  environment.systemPackages = [ pkgs.nix-index ];
 
   hardware.cpu.amd.updateMicrocode = true;
 
