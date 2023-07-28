@@ -1,5 +1,5 @@
 # configuration in this file is shared by all hosts
-{ pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
   nixpkgs.config.allowUnfree = true;
 
   # TODO: Do I need rtkit?
@@ -25,7 +25,7 @@
     };
   };
 
-  fonts = {
+  fonts = lib.mkIf config.desktop-environment.enable {
     fonts = with pkgs; [
       noto-fonts
       noto-fonts-emoji
@@ -35,12 +35,8 @@
     ];
 
     fontconfig = {
+      # seems doesn't do anything
       allowBitmaps = false;
-
-      # hinting = {
-      #   style = "hintmedium";
-      #   #autohint = true;
-      # };
     };
   };
 
