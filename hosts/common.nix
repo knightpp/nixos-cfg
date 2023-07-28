@@ -26,13 +26,16 @@
   };
 
   fonts = lib.mkIf config.desktop-environment.enable {
-    fonts = with pkgs; [
-      noto-fonts
-      noto-fonts-emoji
-      noto-fonts-cjk-sans
-      noto-fonts-cjk-serif
-      (nerdfonts.override { fonts = [ "FiraCode" ]; })
-    ];
+    fonts = builtins.attrValues {
+      inherit (pkgs)
+        noto-fonts
+        noto-fonts-emoji
+        noto-fonts-cjk-sans
+        noto-fonts-cjk-serif
+        ;
+
+      nerdfonts = pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; };
+    };
 
     fontconfig = {
       # seems doesn't do anything

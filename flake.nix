@@ -78,14 +78,15 @@
                     };
                     aggregated = pkgs.buildEnv {
                       name = "system-fonts-and-icons";
-                      paths = with pkgs;[
-                        libsForQt5.breeze-qt5
-
-                        noto-fonts
-                        noto-fonts-emoji
-                        noto-fonts-cjk-sans
-                        noto-fonts-cjk-serif
-                      ];
+                      paths = builtins.attrValues {
+                        inherit (pkgs.libsForQt5) breeze-qt5;
+                        inherit (pkgs)
+                          noto-fonts
+                          noto-fonts-emoji
+                          noto-fonts-cjk-sans
+                          noto-fonts-cjk-serif
+                          ;
+                      };
                       pathsToLink = [ "/share/fonts" "/share/icons" ];
                     };
                   in

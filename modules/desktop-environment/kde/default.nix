@@ -15,10 +15,12 @@ in
     services.xserver.desktopManager.plasma5.enable = true;
     services.xserver.desktopManager.plasma5.useQtScaling = true;
 
-    environment.plasma5.excludePackages = with pkgs.libsForQt5; [
-      elisa
-      print-manager
-    ];
+    environment.plasma5.excludePackages = builtins.attrValues {
+      inherit (pkgs.libsForQt5)
+        elisa
+        print-manager
+        ;
+    };
 
     environment = {
       sessionVariables = {
