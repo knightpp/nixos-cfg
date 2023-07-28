@@ -6,6 +6,9 @@ Bootstraped from this template repo <https://github.com/ne9z/dotfiles-flake>.
 
 ### Show changes between generations
 
+- ∅ - empty set (removed or installed)
+- ε - epsilon (no version provided)
+
 ```shell
 nix store diff-closures /nix/var/nix/profiles/system-{1,2}-link/
 ```
