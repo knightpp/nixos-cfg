@@ -35,7 +35,7 @@ in
           "${mountpoint}" = {
             device = "${dataset}";
             fsType = "zfs";
-            options = [ "X-mount.mkdir" "noatime" "commit=120" ];
+            options = [ "X-mount.mkdir" "noatime" ];
             neededForBoot = true;
           };
         }
