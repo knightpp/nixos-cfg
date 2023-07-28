@@ -44,8 +44,12 @@
   # If you ever need it, you can use a replacement 'nix-index' from home-manager
   programs.command-not-found.enable = false;
 
+  # This is needed to set fish as login shell
+  programs.fish.enable = true;
+
   environment.systemPackages = builtins.attrValues {
     inherit (pkgs)
+      fzf
       file
       git
       nushell
@@ -54,6 +58,11 @@
       du-dust
       fd
       tokei
+      ;
+    inherit (pkgs.fishPlugins) # install fish plugins system wide
+      fzf-fish
+      autopair
+      done
       ;
   };
 

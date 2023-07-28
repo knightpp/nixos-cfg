@@ -4,6 +4,7 @@
       initialHashedPassword = "$6$pgzhN8I3kJ1O35mZ$dzoVn596Htt3Jc7S1ftGyRnoxHmqvNpY.ZKtN3c/j5y0K3ZlbpwbaMaA6Mw5XnuVQxrDQ0184dkMtZp98thXU1";
     };
     knightpp = {
+      shell = pkgs.fish;
       isNormalUser = true;
       group = "knightpp";
       extraGroups = [ "nixoscfg" "networkmanager" "systemd-journal" ];
@@ -76,16 +77,19 @@
     };
 
     programs = {
-      bash = {
+      bash.enable = true;
+
+      fish = {
         enable = true;
-        initExtra = ''
-          if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" && -z $BASH_EXECUTION_STRING ]]
-          then
-          	shopt -q login_shell && LOGIN_OPTION="--login" || LOGIN_OPTION=""
-          	exec fish $LOGIN_OPTION
-          fi
+        shellAbbrs = {
+          gs = "git status";
+          gd = "git diff";
+        };
+        interactiveShellInit = ''
+          set fish_greeting
         '';
       };
+
       mpv = lib.mkIf config.desktop-environment.enable {
         enable = true;
         config = {
@@ -101,12 +105,14 @@
           demuxer-max-bytes = "80M"; # sets fast seeking
         };
       };
+
       neovim = {
         enable = true;
         viAlias = true;
         vimAlias = true;
         defaultEditor = true;
       };
+
       bat = {
         enable = true;
         config = {
@@ -118,6 +124,7 @@
           theme = "TwoDark";
         };
       };
+
       bottom = {
         enable = true;
         settings = {
@@ -128,10 +135,12 @@
           };
         };
       };
+
       broot = {
         enable = true;
         enableFishIntegration = true;
       };
+
       exa = {
         enable = true;
         enableAliases = true;
@@ -140,28 +149,7 @@
         ];
         git = true;
       };
-      fish = {
-        enable = true;
-        plugins = [
-          {
-            name = "fzf.fish";
-            src = pkgs.fetchFromGitHub {
-              owner = "PatrickF1";
-              repo = "fzf.fish";
-              rev = "9876f5f74aab7f58b0359341dc26bf4a0f2e9021";
-              sha256 = "sha256-Aqr6+DcOS3U1R8o9Mlbxszo5/Dy9viU4KbmRGXo95R8=";
-            };
-          }
-        ];
-        shellAbbrs = {
-          gs = "git status";
-          gd = "git diff";
-        };
-        # HACK: without this Ctrl+R does not use plugin's version of search
-        interactiveShellInit = ''
-          fzf_configure_bindings
-        '';
-      };
+
       git = {
         enable = true;
         difftastic.enable = true;
@@ -172,6 +160,7 @@
         userName = "Danylo Kondratiev";
         userEmail = "knightpp@proton.me";
       };
+
       starship = {
         enable = true;
         enableFishIntegration = true;
@@ -185,13 +174,16 @@
           git_metrics.disabled = true;
         };
       };
+
       tealdeer = {
         enable = true;
       };
+
       fzf = {
         enable = true;
         enableBashIntegration = false;
         enableFishIntegration = false; # I use custom fish plugin for fuzzy search
+        enableZshIntegration = false;
       };
     };
   };
