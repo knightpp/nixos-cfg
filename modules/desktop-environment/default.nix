@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, pkgs, lib, ... }:
 let
   cfg = config.desktop-environment;
 in
@@ -13,10 +13,13 @@ in
 
     xdg.portal.xdgOpenUsePortal = true;
 
-    environment.systemPackages = [
-      config.pkgs.unstable.vscode
-      # pkgs.telegram-desktop
-    ];
+    environment.systemPackages = builtins.attrValues {
+      inherit (config.pkgs.unstable) vscode;
+      # inherit (pkgs)
+      #   firefox
+      #   ;
+      # telegram-desktop
+    };
 
     services.flatpak.enable = true;
 
