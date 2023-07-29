@@ -45,7 +45,7 @@
   systemd.services."nvme-smart-log" = {
     script = ''
       set -euo pipefail
-      ${pkgs.smartmontools}/bin/smartctl --json=c -a /dev/nvme0"
+      ${pkgs.smartmontools}/bin/smartctl --json=c -a /dev/nvme0
     '';
     serviceConfig = {
       Type = "oneshot";
