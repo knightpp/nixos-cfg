@@ -31,6 +31,27 @@
 
   desktop-environment.kde.enable = true;
 
+  # To dump logs use journalctl --unit nvme-smart-log.service --output json
+  systemd.timers."nvme-smart-log" = {
+    description = "Timer to trigger NVME smart log collection on daily basis";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "daily";
+      Persistent = true;
+      Unit = "nvme-smart-log.service";
+    };
+  };
+
+  systemd.services."nvme-smart-log" = {
+    script = ''
+      set -euo pipefail
+      ${pkgs.smartmontools}/bin/smartctl --json=c -a /dev/nvme0"
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+    };
+  };
+
   # enable fn keys on nuphy keyboard
   boot.extraModprobeConfig = ''
     options hid_apple fnmode=0
