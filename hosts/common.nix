@@ -73,7 +73,7 @@
   systemd.mounts = [{
     type = "nfs";
     mountConfig = {
-      Options = "noatime";
+      Options = "noatime,nofail,noauto";
     };
     what = "opi.lan:/";
     where = "/mnt/opi";
