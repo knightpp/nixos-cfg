@@ -61,6 +61,7 @@
       du-dust
       fd
       tokei
+      smartmontools
       ;
     inherit (pkgs.fishPlugins) # install fish plugins system wide
       fzf-fish
