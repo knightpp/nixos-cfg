@@ -31,6 +31,13 @@
 
   desktop-environment.kde.enable = true;
 
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    defaultNetwork.settings.dns_enabled = true;
+    extraPackages = [ pkgs.zfs ];
+  };
+
   # To dump logs use journalctl --unit nvme-smart-log.service --output json
   systemd.timers."nvme-smart-log" = {
     description = "Timer to trigger NVME smart log collection on daily basis";
