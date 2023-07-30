@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, config, pkgs, ... }: {
   zfs-root = {
     boot = {
       devNodes = "/dev/disk/by-id/";
@@ -23,7 +23,28 @@
   i18n.inputMethod.enabled = "fcitx5";
   i18n.inputMethod.fcitx5.addons = builtins.attrValues { inherit (pkgs) fcitx5-mozc; };
 
-  environment.systemPackages = [ pkgs.nix-index ];
+  nixpkgs.config.packageOverrides = pkgs: {
+    cargo-espflash = config.pkgs.unstable.cargo-espflash.overrideAttrs (old: rec {
+      version = "git";
+      src = pkgs.fetchFromGitHub {
+        owner = "AVee";
+        repo = "espflash";
+        rev = "add_unix_tight_reset";
+        sha256 = "sha256-aNl5V/H9q1+sutTgBBrzfd6M+GeAUhZ8N78MeQE8TOk=";
+      };
+
+      cargoDeps = old.cargoDeps.overrideAttrs (_: {
+        inherit src;
+
+        outputHash = "sha256-Pu6L7pLRBDQX40I4a5u5e5ic8+ePVM4Yvgq4qSZHDMo=";
+      });
+    });
+  };
+
+  environment.systemPackages = [
+    pkgs.nix-index
+    pkgs.cargo-espflash
+  ];
 
   hardware.cpu.amd.updateMicrocode = true;
 
