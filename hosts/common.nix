@@ -12,6 +12,8 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  boot.tmp.useTmpfs = true;
+
   security = {
     sudo.enable = false;
 
