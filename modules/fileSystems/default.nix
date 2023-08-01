@@ -1,75 +1,76 @@
-{ config, lib, ... }:
-
-let
+{
+  config,
+  lib,
+  ...
+}: let
   cfg = config.zfs-root.fileSystems;
   inherit (lib) mkIf types mkDefault mkOption mkMerge mapAttrsToList;
-in
-{
+in {
   options.zfs-root.fileSystems = {
     datasets = mkOption {
       description = "Set mountpoint for datasets";
       type = types.attrsOf types.str;
-      default = { };
+      default = {};
     };
     bindmounts = mkOption {
       description = "Set mountpoint for bindmounts";
       type = types.attrsOf types.str;
-      default = { };
+      default = {};
     };
     efiSystemPartitions = mkOption {
       description = "Set mountpoint for efi system partitions";
       type = types.listOf types.str;
-      default = [ ];
+      default = [];
     };
     swapPartitions = mkOption {
       description = "Set swap partitions";
       type = types.listOf types.str;
-      default = [ ];
+      default = [];
     };
   };
 
   config.fileSystems = mkMerge (
     mapAttrsToList
-      (
-        dataset: mountpoint: {
-          "${mountpoint}" = {
-            device = "${dataset}";
-            fsType = "zfs";
-            options = [ "X-mount.mkdir" "noatime" ];
-            neededForBoot = true;
-          };
-        }
-      )
-      cfg.datasets ++
-    mapAttrsToList
-      (
-        bindsrc: mountpoint: {
-          "${mountpoint}" = {
-            device = "${bindsrc}";
-            fsType = "none";
-            options = [ "bind" "X-mount.mkdir" "noatime" ];
-          };
-        }
-      )
-      cfg.bindmounts ++
-    map
-      (
-        esp: {
-          "/boot/efis/${esp}" = {
-            device = "${config.zfs-root.boot.devNodes}${esp}";
-            fsType = "vfat";
-            options = [
-              "x-systemd.idle-timeout=1min"
-              "x-systemd.automount"
-              "noauto"
-              "nofail"
-              "noatime"
-              "X-mount.mkdir"
-            ];
-          };
-        }
-      )
-      cfg.efiSystemPartitions
+    (
+      dataset: mountpoint: {
+        "${mountpoint}" = {
+          device = "${dataset}";
+          fsType = "zfs";
+          options = ["X-mount.mkdir" "noatime"];
+          neededForBoot = true;
+        };
+      }
+    )
+    cfg.datasets
+    ++ mapAttrsToList
+    (
+      bindsrc: mountpoint: {
+        "${mountpoint}" = {
+          device = "${bindsrc}";
+          fsType = "none";
+          options = ["bind" "X-mount.mkdir" "noatime"];
+        };
+      }
+    )
+    cfg.bindmounts
+    ++ map
+    (
+      esp: {
+        "/boot/efis/${esp}" = {
+          device = "${config.zfs-root.boot.devNodes}${esp}";
+          fsType = "vfat";
+          options = [
+            "x-systemd.idle-timeout=1min"
+            "x-systemd.automount"
+            "noauto"
+            "nofail"
+            "noatime"
+            "X-mount.mkdir"
+          ];
+        };
+      }
+    )
+    cfg.efiSystemPartitions
   );
   config.swapDevices = mkDefault (map
     (swap: {

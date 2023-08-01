@@ -1,15 +1,20 @@
-{ lib, config, pkgs, ... }: {
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   zfs-root = {
     boot = {
       devNodes = "/dev/disk/by-id/";
-      bootDevices = [ "nvme-Samsung_SSD_980_500GB_S64DNL0T949034V" ];
+      bootDevices = ["nvme-Samsung_SSD_980_500GB_S64DNL0T949034V"];
       immutable = false;
-      availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "uas" "sd_mod" ];
+      availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "uas" "sd_mod"];
       removableEfi = true;
-      kernelParams = [ ];
+      kernelParams = [];
       sshUnlock = {
         enable = false;
-        authorizedKeys = [ ];
+        authorizedKeys = [];
       };
     };
     networking = {
@@ -21,7 +26,7 @@
 
   # enables to write Japanese
   i18n.inputMethod.enabled = "fcitx5";
-  i18n.inputMethod.fcitx5.addons = builtins.attrValues { inherit (pkgs) fcitx5-mozc; };
+  i18n.inputMethod.fcitx5.addons = builtins.attrValues {inherit (pkgs) fcitx5-mozc;};
 
   nixpkgs.config.packageOverrides = pkgs: {
     cargo-espflash = config.pkgs.unstable.cargo-espflash.overrideAttrs (old: rec {
@@ -56,13 +61,13 @@
     enable = true;
     dockerCompat = true;
     defaultNetwork.settings.dns_enabled = true;
-    extraPackages = [ pkgs.zfs ];
+    extraPackages = [pkgs.zfs];
   };
 
   # To dump logs use journalctl --unit nvme-smart-log.service --output json
   systemd.timers."nvme-smart-log" = {
     description = "Timer to trigger NVME smart log collection on daily basis";
-    wantedBy = [ "timers.target" ];
+    wantedBy = ["timers.target"];
     timerConfig = {
       OnCalendar = "daily";
       Persistent = true;

@@ -1,10 +1,12 @@
-{ config, pkgs, lib, ... }:
-
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   cfg = config.desktop-environment.kde;
   inherit (lib) mkIf mkEnableOption;
-in
-{
+in {
   options.desktop-environment.kde.enable = mkEnableOption "KDE";
 
   config = mkIf cfg.enable {
@@ -16,7 +18,8 @@ in
     services.xserver.desktopManager.plasma5.useQtScaling = true;
 
     environment.plasma5.excludePackages = builtins.attrValues {
-      inherit (pkgs.libsForQt5)
+      inherit
+        (pkgs.libsForQt5)
         elisa
         print-manager
         ;
@@ -33,7 +36,7 @@ in
       script = ''
         ssh-add $HOME/.ssh/id_ed25519
       '';
-      wantedBy = [ "default.target" ];
+      wantedBy = ["default.target"];
     };
 
     programs = {

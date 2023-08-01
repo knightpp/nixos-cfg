@@ -1,9 +1,12 @@
-{ config, pkgs, lib, ... }:
-let
-  cfg = config.desktop-environment;
-in
 {
-  imports = [ ./kde ];
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  cfg = config.desktop-environment;
+in {
+  imports = [./kde];
 
   options.desktop-environment.enable = lib.mkEnableOption "Desktop Environment";
 

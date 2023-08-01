@@ -1,5 +1,10 @@
 # configuration in this file is shared by all hosts
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   nixpkgs.config.allowUnfree = true;
 
   # TODO: Do I need rtkit?
@@ -7,10 +12,10 @@
 
   services.openssh = {
     enable = true;
-    settings = { PasswordAuthentication = false; };
+    settings = {PasswordAuthentication = false;};
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   boot = {
     tmp.useTmpfs = true;
@@ -22,24 +27,27 @@
 
     doas = {
       enable = true;
-      extraRules = [{
-        users = [ "knightpp" ];
-        keepEnv = true;
-        persist = true;
-      }];
+      extraRules = [
+        {
+          users = ["knightpp"];
+          keepEnv = true;
+          persist = true;
+        }
+      ];
     };
   };
 
   fonts = lib.mkIf config.desktop-environment.enable {
     fonts = builtins.attrValues {
-      inherit (pkgs)
+      inherit
+        (pkgs)
         noto-fonts
         noto-fonts-emoji
         noto-fonts-cjk-sans
         noto-fonts-cjk-serif
         ;
 
-      nerdfonts = pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; };
+      nerdfonts = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
     };
 
     fontconfig = {
@@ -56,7 +64,8 @@
   programs.fish.enable = true;
 
   environment.systemPackages = builtins.attrValues {
-    inherit (pkgs)
+    inherit
+      (pkgs)
       fzf
       file
       git
@@ -69,7 +78,8 @@
       smartmontools
       alejandra
       ;
-    inherit (pkgs.fishPlugins) # install fish plugins system wide
+    inherit
+      (pkgs.fishPlugins) # install fish plugins system wide
       fzf-fish
       autopair
       done
@@ -77,20 +87,24 @@
   };
 
   services.rpcbind.enable = true; # needed for NFS
-  systemd.mounts = [{
-    type = "nfs";
-    mountConfig = {
-      Options = "noatime,nofail,noauto";
-    };
-    what = "opi.lan:/";
-    where = "/mnt/opi";
-  }];
+  systemd.mounts = [
+    {
+      type = "nfs";
+      mountConfig = {
+        Options = "noatime,nofail,noauto";
+      };
+      what = "opi.lan:/";
+      where = "/mnt/opi";
+    }
+  ];
 
-  systemd.automounts = [{
-    wantedBy = [ "multi-user.target" ];
-    automountConfig = {
-      TimeoutIdleSec = "300";
-    };
-    where = "/mnt/opi";
-  }];
+  systemd.automounts = [
+    {
+      wantedBy = ["multi-user.target"];
+      automountConfig = {
+        TimeoutIdleSec = "300";
+      };
+      where = "/mnt/opi";
+    }
+  ];
 }
