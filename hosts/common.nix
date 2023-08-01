@@ -64,6 +64,7 @@
       fd
       tokei
       smartmontools
+      alejandra
       ;
     inherit (pkgs.fishPlugins) # install fish plugins system wide
       fzf-fish

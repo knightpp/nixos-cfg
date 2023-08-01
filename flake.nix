@@ -24,10 +24,9 @@
             # Module 2: entry point
             {
               system.configurationRevision =
-                if (self ? rev) then
-                  self.rev
-                else
-                  throw "refuse to build: git tree is dirty";
+                if (self ? rev)
+                then self.rev
+                else throw "refuse to build: git tree is dirty";
               system.stateVersion = "23.05";
               imports = [
                 "${nixpkgs}/nixos/modules/installer/scan/not-detected.nix"
@@ -110,5 +109,6 @@
       nixosConfigurations = {
         nixbox = mkHost "nixbox" "x86_64-linux";
       };
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
     };
 }
