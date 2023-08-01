@@ -46,10 +46,13 @@
     });
   };
 
-  environment.systemPackages = [
-    pkgs.nix-index
-    pkgs.cargo-espflash
-  ];
+  environment.systemPackages = builtins.attrValues {
+    inherit
+      (pkgs)
+      nix-index
+      cargo-espflash
+      ;
+  };
 
   hardware.cpu.amd.updateMicrocode = true;
 
