@@ -12,7 +12,10 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  boot.tmp.useTmpfs = true;
+  boot = {
+    tmp.useTmpfs = true;
+    kernel.sysctl."vm.swappiness" = 5;
+  };
 
   security = {
     sudo.enable = false;
