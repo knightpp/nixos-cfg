@@ -19,7 +19,12 @@
 
   boot = {
     tmp.useTmpfs = true;
-    kernel.sysctl."vm.swappiness" = 5;
+    kernel.sysctl = {
+      "vm.swappiness" = 5;
+      "vm.dirty_background_ratio" = 50;
+      "vm.dirty_ratio" = 50;
+      "vm.dirty_expire_centisecs" = 120 * 100;
+    };
   };
 
   security = {
