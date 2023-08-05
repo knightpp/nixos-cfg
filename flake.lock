@@ -25,16 +25,16 @@
       "locked": {
         "lastModified": 1691155011,
         "narHash": "sha256-O15tC0ysw+fcacEbOzrDrkVNIR+SgtArSGvpgsEqpvA=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
+        "ref": "nixos-23.05",
         "rev": "9652a97d9738d3e65cf33c0bc24429e495a7868f",
-        "type": "github"
+        "revCount": 489897,
+        "type": "git",
+        "url": "file:.nixpkgs"
       },
       "original": {
-        "owner": "nixos",
         "ref": "nixos-23.05",
-        "repo": "nixpkgs",
-        "type": "github"
+        "type": "git",
+        "url": "file:.nixpkgs"
       }
     },
     "root": {
@@ -48,16 +48,16 @@
       "locked": {
         "lastModified": 1691186842,
         "narHash": "sha256-wxBVCvZUwq+XS4N4t9NqsHV4E64cPVqQ2fdDISpjcw0=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
+        "ref": "nixos-unstable",
         "rev": "18036c0be90f4e308ae3ebcab0e14aae0336fe42",
-        "type": "github"
+        "revCount": 510561,
+        "type": "git",
+        "url": "file:.nixpkgs"
       },
       "original": {
-        "owner": "nixos",
         "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
+        "type": "git",
+        "url": "file:.nixpkgs"
       }
     }
   },
