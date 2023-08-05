@@ -93,8 +93,19 @@
     };
   };
 
-  # enable fn keys on nuphy keyboard
-  boot.extraModprobeConfig = ''
-    options hid_apple fnmode=0
+  boot.extraModprobeConfig = let
+    # enable fn keys on nuphy keyboard
+    keyboardOpts = "fnmode=0";
+    zfsOpts = [
+      "zfs_dirty_data_max_percent=50"
+      "zfs_dirty_data_max_max_percent=60"
+
+      "zfs_dirty_data_sync_percent=30"
+
+      "zfs_txg_timeout=120" # 120 seconds between commits
+    ];
+  in ''
+    options hid_apple ${keyboardOpts}
+    options zfs ${lib.strings.concatStringsSep " " zfsOpts}
   '';
 }
