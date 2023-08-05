@@ -33,5 +33,21 @@ in {
       pulse.enable = true;
       jack.enable = true;
     };
+
+    fonts = {
+      fonts = builtins.attrValues {
+        inherit
+          (pkgs)
+          noto-fonts
+          noto-fonts-emoji
+          noto-fonts-cjk-sans
+          noto-fonts-cjk-serif
+          ;
+
+        nerdfonts = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
+      };
+
+      fontconfig.allowBitmaps = false;
+    };
   };
 }

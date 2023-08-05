@@ -65,24 +65,12 @@
 
     # Provide offline documentation for home-manager
     manual.html.enable = true;
-    # TODO: test whether this works with NixOS modules
     news.display = "show";
 
     xdg = {
       userDirs = {
         enable = true;
         createDirectories = true;
-      };
-
-      # KDE specific hack to make it use needed locale
-      configFile = lib.mkIf config.desktop-environment.kde.enable {
-        "plasma-localerc".text = ''
-          [Formats]
-          LANG=uk_UA.UTF-8
-
-          [Translations]
-          LANGUAGE=uk_UA:en_GB:en_US
-        '';
       };
     };
 
@@ -98,22 +86,6 @@
         interactiveShellInit = ''
           set fish_greeting
         '';
-      };
-
-      mpv = lib.mkIf config.desktop-environment.enable {
-        enable = true;
-        config = {
-          ao = "pipewire";
-          vo = "gpu";
-          profile = "gpu-hq";
-          hwdec = "auto";
-
-          msg-color = "yes"; # color log messages on terminal
-          cache = "yes"; # uses a large seekable RAM cache even for local input.
-          # cache-secs=300 # uses extra large RAM cache (needs cache=yes to make it useful).
-          demuxer-max-back-bytes = "20M"; # sets fast seeking
-          demuxer-max-bytes = "80M"; # sets fast seeking
-        };
       };
 
       neovim = {

@@ -60,7 +60,10 @@
 
   boot.zfs.forceImportRoot = false;
 
-  desktop-environment.kde.enable = true;
+  desktop-environment.kde = {
+    enable = true;
+    user = "knightpp";
+  };
 
   virtualisation.podman = {
     enable = true;

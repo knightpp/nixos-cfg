@@ -7,7 +7,26 @@
   cfg = config.desktop-environment.kde;
   inherit (lib) mkIf mkEnableOption;
 in {
-  options.desktop-environment.kde.enable = mkEnableOption "KDE";
+  options.desktop-environment.kde = {
+    enable = mkEnableOption "KDE";
+
+    user = lib.mkOption {
+      type = lib.types.str;
+      description = "User name. Some settings should be set for user, not system";
+    };
+
+    formats = lib.mkOption {
+      type = lib.types.str;
+      default = "uk_UA.UTF-8";
+      description = "Sets formats (date, time, etc.) for KDE";
+    };
+
+    translations = lib.mkOption {
+      type = lib.types.str;
+      default = "uk_UA:en_GB:en_US";
+      description = "Sets translations for KDE";
+    };
+  };
 
   config = mkIf cfg.enable {
     desktop-environment.enable = true;
@@ -42,6 +61,34 @@ in {
     programs = {
       ssh.startAgent = true;
       ssh.askPassword = lib.mkForce "${pkgs.ksshaskpass.out}/bin/ksshaskpass";
+    };
+
+    home-manager.users."${cfg.user}" = {
+      programs = {
+        mpv = {
+          enable = true;
+          config = {
+            ao = "pipewire";
+            vo = "gpu";
+            profile = "gpu-hq";
+            hwdec = "auto";
+
+            msg-color = "yes"; # color log messages on terminal
+            cache = "yes"; # uses a large seekable RAM cache even for local input.
+            # cache-secs=300 # uses extra large RAM cache (needs cache=yes to make it useful).
+            demuxer-max-back-bytes = "20M"; # sets fast seeking
+            demuxer-max-bytes = "80M"; # sets fast seeking
+          };
+        };
+      };
+
+      xdg.configFile."plasma-localerc".text = ''
+        [Formats]
+        LANG=${cfg.formats}
+
+        [Translations]
+        LANGUAGE=${cfg.translations}
+      '';
     };
   };
 }
