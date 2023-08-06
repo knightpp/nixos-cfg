@@ -18,9 +18,12 @@ in {
 
     environment.systemPackages = builtins.attrValues {
       inherit (config.pkgs.unstable) vscode;
-      # inherit (pkgs)
-      #   firefox
-      #   ;
+      inherit
+        (pkgs)
+        firefox
+        handbrake
+        prismlauncher
+        ;
       # telegram-desktop
     };
 
