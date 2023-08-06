@@ -23,6 +23,7 @@ in {
         firefox
         handbrake
         prismlauncher
+        xclip
         ;
       # telegram-desktop
     };
