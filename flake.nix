@@ -114,6 +114,18 @@
     nixosConfigurations = {
       nixbox = mkHost "nixbox" "x86_64-linux";
     };
+
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
+
+    sync = let
+      pkgs = import nixpkgs {system = "x86_64-linux";};
+    in
+      pkgs.writeShellScriptBin "sync" ''
+        git=${pkgs.git}/bin/git
+        cd .nixpkgs/
+        $git checkout --quiet --detach HEAD
+        $git fetch upstream nixos-23.05:nixos-23.05 nixos-unstable:nixos-unstable || true
+        $git checkout --quiet -
+      '';
   };
 }
