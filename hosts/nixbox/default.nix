@@ -57,6 +57,7 @@
   };
 
   hardware.cpu.amd.updateMicrocode = true;
+  hardware.bluetooth.enable = true;
 
   boot.zfs.forceImportRoot = false;
 
