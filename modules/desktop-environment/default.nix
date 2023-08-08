@@ -22,6 +22,7 @@ in {
         (pkgs)
         firefox
         handbrake
+        obsidian
         prismlauncher
         xclip
         ;
