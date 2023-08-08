@@ -38,10 +38,9 @@
       shellAliases = {
         gs = "git status";
       };
-      # sessionPath = [
-      #  "$HOME/.local/bin"
-      #  "$HOME/go/bin"
-      # ];
+      sessionVariables = {
+        DOCKER_HOST = "unix:///var/run/user/1000/podman/podman.sock";
+      };
     };
 
     # See https://editorconfig.org/
