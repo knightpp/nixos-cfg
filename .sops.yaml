@@ -1,0 +1,7 @@
+keys:
+  - &knightpp age14gn7ttk9tk22h2at6fpx9u7d53lf60hz46h2g6se33wg8r5ygffqw72a5r
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+      - age:
+          - *knightpp

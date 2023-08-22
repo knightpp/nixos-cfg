@@ -10,22 +10,29 @@
       url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     self,
     nixpkgs,
-    home-manager,
     unstable,
+    home-manager,
+    sops-nix,
   }: let
     mkHost = hostName: system:
       nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
-          # Module 0: zfs-root
           ./modules
 
-          # Module 2: entry point
+          {
+            imports = [sops-nix.nixosModules.sops];
+          }
+
           {
             system.configurationRevision =
               if (self ? rev)
@@ -39,17 +46,14 @@
             ];
           }
 
-          # Module 3: home-manager
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
           }
 
-          # Module 4: config shared by all hosts
           ./hosts/common.nix
 
-          # Module 5: add nixpkgs
           (
             let
               inherit (nixpkgs) lib;
@@ -103,10 +107,8 @@
             }
           )
 
-          # Module 6: host
           ./hosts/${hostName}
 
-          # Module 7: users
           ./users
         ];
       };
