@@ -5,16 +5,21 @@
 }: {
   sops.defaultSopsFile = ./../../secrets/secrets.yaml;
   # This will automatically import SSH keys as age keys
-  # sops.age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
-  # This is the actual specification of the secrets.
-  sops.secrets.github_token = {
+  sops.age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+
+  sops.secrets.githubToken = {
     mode = "0440";
-    # group = config.users.groups.keys.name;
+    group = config.users.groups.keys.name;
   };
+
+  sops.secrets.nixAccessTokens = {
+    mode = "0440";
+    group = config.users.groups.keys.name;
+  };
+
   nix = {
     extraOptions = ''
-      experimental-features = nix-command flakes
-      !include ${config.sops.secrets.github_token.path}
+      !include ${config.sops.secrets.nixAccessTokens.path}
     '';
   };
 }

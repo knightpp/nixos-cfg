@@ -63,6 +63,8 @@
       tokei
       smartmontools
       alejandra
+      age
+      sops
       ;
     inherit
       (pkgs.fishPlugins) # install fish plugins system wide
