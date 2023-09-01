@@ -48,11 +48,13 @@ in {
           noto-fonts-emoji
           noto-fonts-cjk-sans
           noto-fonts-cjk-serif
+          dejavu_fonts
           ;
 
         nerdfonts = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
       };
 
+      enableDefaultFonts = false; # Fixes wrong braille symbols for graph in the bottom app
       fontconfig.allowBitmaps = false;
     };
   };
