@@ -17,6 +17,7 @@ in {
     xdg.portal.xdgOpenUsePortal = true;
 
     environment.systemPackages = builtins.attrValues {
+      inherit (pkgs.libsForQt5) elisa; # music player
       inherit (config.pkgs.unstable) vscode;
       inherit
         (pkgs)
