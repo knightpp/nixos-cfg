@@ -35,6 +35,7 @@ in {
 
     services.flatpak.enable = true;
 
+    sound.enable = true; # enables alsamixer settings to be persisted across reboots
     services.pipewire = {
       enable = true;
       alsa.enable = true;
