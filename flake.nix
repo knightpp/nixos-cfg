@@ -117,7 +117,7 @@
               repl_path = toString ./.;
               systemRepl = pkgs.writeShellScriptBin "repl" ''
                 source /etc/set-environment
-                nix repl "${repl_path}/repl.nix" "$@"
+                nix repl --file "${repl_path}/repl.nix" "$@"
               '';
             in [
               systemRepl
