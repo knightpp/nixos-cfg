@@ -16,6 +16,8 @@ in {
 
     xdg.portal.xdgOpenUsePortal = true;
 
+    programs.dconf.enable = true; # Needed for easyeffects
+
     environment.systemPackages = builtins.attrValues {
       inherit (pkgs.libsForQt5) elisa; # music player
       inherit (config.pkgs.unstable) vscode;
