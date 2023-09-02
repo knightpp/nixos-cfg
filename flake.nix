@@ -119,15 +119,24 @@
 
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
 
-    sync = let
+    diff = let
       pkgs = import nixpkgs {system = "x86_64-linux";};
     in
-      pkgs.writeShellScriptBin "sync" ''
-        git=${pkgs.git}/bin/git
-        cd .nixpkgs/
-        $git checkout --quiet --detach HEAD
-        $git fetch upstream nixos-23.05:nixos-23.05 nixos-unstable:nixos-unstable || true
-        $git checkout --quiet -
+      pkgs.writeShellScriptBin "diff" ''
+        shopt -s nullglob
+
+        generations=(/nix/var/nix/profiles/system-*-link)
+
+        last=''${generations[-1]}
+        beforeLast=''${generations[-2]}
+
+        echo "Boot system is $(readlink /nix/var/nix/profiles/system)"
+        echo "Comparing"
+        echo -e "\t''${beforeLast}"
+        echo -e "\t''${last}"
+        echo ""
+
+        nix store diff-closures "''${beforeLast}" "''${last}"
       '';
   };
 }
