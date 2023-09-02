@@ -26,6 +26,7 @@ in {
         obsidian
         prismlauncher
         xclip
+        easyeffects
         ;
       # telegram-desktop
     };
