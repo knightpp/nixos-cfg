@@ -51,7 +51,7 @@
       (pkgs)
       nix-index
       cargo-espflash
-      rnix-lsp
+      nil
       nix-init
       ;
   };
