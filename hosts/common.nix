@@ -63,6 +63,7 @@
       tokei
       smartmontools
       alejandra
+      nixpkgs-fmt
       age
       sops
       ;
