@@ -1,10 +1,5 @@
 # configuration in this file is shared by all hosts
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   nixpkgs.config.allowUnfree = true;
 
   # TODO: Do I need rtkit?
