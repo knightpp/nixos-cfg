@@ -49,7 +49,6 @@
   environment.systemPackages = builtins.attrValues {
     inherit
       (pkgs)
-      nix-index
       cargo-espflash
       nil
       nix-init

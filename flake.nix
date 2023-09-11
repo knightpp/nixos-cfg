@@ -14,6 +14,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -22,6 +26,7 @@
     unstable,
     home-manager,
     sops-nix,
+    nix-index-database,
   }: let
     mkHost = hostName: system:
       nixpkgs.lib.nixosSystem {
@@ -29,8 +34,13 @@
         modules = [
           ./modules
 
+          sops-nix.nixosModules.sops
+
           {
-            imports = [sops-nix.nixosModules.sops];
+            imports = [nix-index-database.nixosModules.nix-index];
+            config = {
+              programs.nix-index-database.comma.enable = true;
+            };
           }
 
           {
