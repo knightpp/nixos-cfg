@@ -66,6 +66,7 @@
       age
       sops
       helix
+      nixpkgs-lint
       ;
     inherit
       (pkgs.fishPlugins) # install fish plugins system wide
