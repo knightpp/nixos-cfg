@@ -87,11 +87,11 @@
         '';
       };
 
-      neovim = {
+      helix = {
         enable = true;
-        viAlias = true;
-        vimAlias = true;
-        defaultEditor = true;
+        settings = {
+          theme = "gruvbox";
+        };
       };
 
       bat = {

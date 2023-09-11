@@ -44,6 +44,10 @@
   # This is needed to set fish as login shell
   programs.fish.enable = true;
 
+  environment.sessionVariables = {
+    EDITOR = "${pkgs.helix}";
+  };
+
   environment.systemPackages = builtins.attrValues {
     inherit
       (pkgs)
@@ -61,6 +65,7 @@
       nixpkgs-fmt
       age
       sops
+      helix
       ;
     inherit
       (pkgs.fishPlugins) # install fish plugins system wide
