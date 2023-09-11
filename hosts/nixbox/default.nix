@@ -51,6 +51,7 @@
       (pkgs)
       cargo-espflash
       nil
+      nixd
       nix-init
       ;
   };
