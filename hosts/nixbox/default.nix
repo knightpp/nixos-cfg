@@ -51,9 +51,10 @@
       (pkgs)
       cargo-espflash
       nil
-      nixd
       nix-init
       ;
+
+    inherit (config.pkgs.unstable) vscode;
   };
 
   hardware.cpu.amd.updateMicrocode = true;
