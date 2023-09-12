@@ -54,7 +54,7 @@
       nix-init
       ;
 
-    inherit (config.pkgs.unstable) vscode;
+    inherit (config.pkgs.unstable) nixd;
   };
 
   hardware.cpu.amd.updateMicrocode = true;
