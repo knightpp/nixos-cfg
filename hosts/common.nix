@@ -46,6 +46,7 @@
 
   environment.sessionVariables = {
     EDITOR = "${pkgs.helix}";
+    NIX_BUILD_SHELL = "${pkgs.fish}";
   };
 
   environment.systemPackages = builtins.attrValues {
