@@ -91,6 +91,11 @@
         enable = true;
         settings = {
           theme = "gruvbox";
+          editor.cursor-shape = {
+            insert = "bar";
+            normal = "block";
+            select = "underline";
+          };
         };
       };
 
