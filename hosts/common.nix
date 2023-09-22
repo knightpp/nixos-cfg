@@ -67,6 +67,7 @@
       sops
       helix
       nixpkgs-lint
+      cachix
       ;
     inherit
       (pkgs.fishPlugins) # install fish plugins system wide
