@@ -27,6 +27,7 @@
   users.groups = {
     knightpp = {};
   };
+  nix.settings.trusted-users = ["knightpp"];
 
   home-manager.users.knightpp = {
     home = {
