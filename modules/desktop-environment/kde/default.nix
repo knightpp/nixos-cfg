@@ -45,6 +45,8 @@ in {
     };
 
     environment = {
+      systemPackages = [pkgs.libsForQt5.kmail];
+
       sessionVariables = {
         # forces KDE to use wallet for ssh keys
         SSH_ASKPASS_REQUIRE = "prefer";
