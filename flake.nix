@@ -18,6 +18,9 @@
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+    };
   };
 
   outputs = {
@@ -27,6 +30,7 @@
     home-manager,
     sops-nix,
     nix-index-database,
+    nixos-hardware,
   }: let
     mkHost = hostName: system:
       nixpkgs.lib.nixosSystem {
@@ -35,6 +39,14 @@
           ./modules
 
           sops-nix.nixosModules.sops
+
+          {
+            imports = with nixos-hardware.nixosModules; [
+              common-cpu-amd
+              common-cpu-amd-pstate
+              common-hidpi
+            ];
+          }
 
           {
             imports = [nix-index-database.nixosModules.nix-index];
