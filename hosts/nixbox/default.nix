@@ -52,6 +52,7 @@
       cargo-espflash
       nil
       nix-init
+      arion
       ;
 
     inherit (config.pkgs.unstable) nixd;
