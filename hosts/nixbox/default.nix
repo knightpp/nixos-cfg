@@ -68,11 +68,10 @@
     user = "knightpp";
   };
 
-  virtualisation.podman = {
+  virtualisation.docker = {
     enable = true;
-    dockerCompat = true;
-    defaultNetwork.settings.dns_enabled = true;
-    extraPackages = [pkgs.zfs];
+    storageDriver = "zfs";
+    enableOnBoot = false;
   };
 
   # To dump logs use journalctl --unit nvme-smart-log.service --output json

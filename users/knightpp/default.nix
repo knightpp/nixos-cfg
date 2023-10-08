@@ -15,6 +15,7 @@
         "nixoscfg"
         "networkmanager"
         "systemd-journal"
+        "docker"
         "dialout" # for serial ports (esp32)
         config.users.groups.keys.name # sops
       ];
@@ -38,9 +39,6 @@
       };
       shellAliases = {
         gs = "git status";
-      };
-      sessionVariables = {
-        DOCKER_HOST = "unix:///var/run/user/1000/podman/podman.sock";
       };
     };
 
