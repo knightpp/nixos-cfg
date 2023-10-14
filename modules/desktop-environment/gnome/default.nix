@@ -30,6 +30,8 @@ in {
       inherit
         (pkgs.gnomeExtensions)
         appindicator
+        night-theme-switcher
+        vitals
         ;
 
       inherit
