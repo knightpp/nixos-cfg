@@ -39,16 +39,16 @@
     cargo-espflash = config.pkgs.unstable.cargo-espflash.overrideAttrs (old: rec {
       version = "git";
       src = pkgs.fetchFromGitHub {
-        owner = "AVee";
+        owner = "SergioGasquez";
         repo = "espflash";
-        rev = "add_unix_tight_reset";
-        sha256 = "sha256-aNl5V/H9q1+sutTgBBrzfd6M+GeAUhZ8N78MeQE8TOk=";
+        rev = "fix/resets";
+        sha256 = "sha256-3oANUcMaP1WbTY6bEOny5MYRCBaDNJ2wrv7GcfLkyJc=";
       };
 
       cargoDeps = old.cargoDeps.overrideAttrs (_: {
         inherit src;
 
-        outputHash = "sha256-Pu6L7pLRBDQX40I4a5u5e5ic8+ePVM4Yvgq4qSZHDMo=";
+        outputHash = "sha256-DDc8VAsBfalVUcutYaO9IPNchE1U8RudnMJp+MUD464=";
       });
     });
   };
