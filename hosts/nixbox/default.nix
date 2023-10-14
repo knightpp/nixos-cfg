@@ -103,6 +103,7 @@
   programs.steam.enable = true;
 
   workarounds.flatpak.enable = true;
+  repl.enable = true;
 
   boot.extraModprobeConfig = let
     # enable fn keys on nuphy keyboard
