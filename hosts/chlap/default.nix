@@ -2,10 +2,12 @@
   modulesPath,
   lib,
   config,
+  inputs,
   ...
 }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
+    inputs.nixos-hardware.nixosModules.common-gpu-intel
   ];
 
   boot.loader.systemd-boot.enable = true;
