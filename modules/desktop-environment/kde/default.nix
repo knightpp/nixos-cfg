@@ -24,6 +24,13 @@ in {
   };
 
   config = mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = !config.desktop-environment.gnome.enable;
+        message = "KDE might conflict with Gnome";
+      }
+    ];
+
     desktop-environment.enable = true;
 
     services.xserver.enable = true;

@@ -13,6 +13,13 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = !config.desktop-environment.kde.enable;
+        message = "KDE might conflict with Gnome";
+      }
+    ];
+
     services.xserver.enable = true;
     services.xserver.displayManager.gdm.enable = true;
     services.xserver.desktopManager.gnome.enable = true;
