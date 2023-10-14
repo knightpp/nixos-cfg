@@ -102,6 +102,8 @@
     };
   };
 
+  programs.steam.enable = true;
+
   boot.extraModprobeConfig = let
     # enable fn keys on nuphy keyboard
     keyboardOpts = "fnmode=0";
