@@ -70,10 +70,8 @@
 
   boot.zfs.forceImportRoot = false;
 
-  desktop-environment.kde = {
-    enable = true;
-    user = "knightpp";
-  };
+  desktop-environment.user = "knightpp";
+  desktop-environment.kde.enable = true;
 
   virtualisation.docker = {
     enable = true;
@@ -103,6 +101,8 @@
   };
 
   programs.steam.enable = true;
+
+  workarounds.flatpak.enable = true;
 
   boot.extraModprobeConfig = let
     # enable fn keys on nuphy keyboard
