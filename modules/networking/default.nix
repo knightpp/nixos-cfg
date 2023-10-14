@@ -21,7 +21,8 @@ in {
       type = types.str;
     };
   };
-  config = {
+
+  config = lib.mkIf config.zfs-root.boot.enable {
     networking.hostId = cfg.hostId;
     time.timeZone = cfg.timeZone;
     networking = {
