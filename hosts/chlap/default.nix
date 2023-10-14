@@ -3,6 +3,7 @@
   lib,
   config,
   inputs,
+  pkgs,
   ...
 }: {
   imports = [
@@ -55,6 +56,12 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.enableRedistributableFirmware = true;
+
+  environment.systemPackages = [
+    # TODO: installing old telegram because I do not want flatpak here
+    pkgs.telegram-desktop
+    pkgs.discord
+  ];
 
   services.journald.extraConfig = ''
     Storage=volatile
