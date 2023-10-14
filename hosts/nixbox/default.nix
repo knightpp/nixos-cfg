@@ -58,7 +58,6 @@
     inherit
       (pkgs)
       cargo-espflash
-      nil
       nix-init
       arion
       ;
