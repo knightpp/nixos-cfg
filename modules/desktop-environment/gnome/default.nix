@@ -20,25 +20,33 @@ in {
       }
     ];
 
+    desktop-environment.enable = true;
+
     services.xserver.enable = true;
     services.xserver.displayManager.gdm.enable = true;
     services.xserver.desktopManager.gnome.enable = true;
 
-    environment.systemPackages = with pkgs; [gnomeExtensions.appindicator];
+    environment.systemPackages = builtins.attrValues {
+      inherit
+        (pkgs.gnomeExtensions)
+        appindicator
+        ;
+
+      inherit
+        (pkgs.gnome3)
+        gnome-tweaks
+        ;
+    };
     services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
 
-    environment.gnome.excludePackages =
-      (with pkgs; [
-        gnome-tour
-      ])
-      ++ (with pkgs.gnome; [
-        epiphany # web browser
-        geary # email reader
-        totem # video player
-        tali # poker game
-        iagno # go game
-        hitori # sudoku game
-        atomix # puzzle game
-      ]);
+    environment.gnome.excludePackages = with pkgs.gnome; [
+      epiphany # web browser
+      geary # email reader
+      totem # video player
+      tali # poker game
+      iagno # go game
+      hitori # sudoku game
+      atomix # puzzle game
+    ];
   };
 }
