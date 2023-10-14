@@ -58,8 +58,6 @@ in {
       # telegram-desktop
     };
 
-    services.flatpak.enable = true;
-
     sound.enable = true; # enables alsamixer settings to be persisted across reboots
     hardware.pulseaudio.enable = false;
     services.pipewire = {

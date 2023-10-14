@@ -103,6 +103,7 @@
   programs.steam.enable = true;
 
   workarounds.flatpak.enable = true;
+  services.flatpak.enable = true;
   repl.enable = true;
 
   boot.extraModprobeConfig = let
