@@ -1,8 +1,6 @@
 {...}: {
   imports = [
-    ./boot
-    ./fileSystems
-    ./networking
+    ./zfs
     ./desktop-environment
     ./sops
     ./nixpkgs-unstable
