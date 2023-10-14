@@ -2,8 +2,15 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }: {
+  imports = with inputs.nixos-hardware.nixosModules; [
+    common-cpu-amd
+    common-cpu-amd-pstate
+    common-hidpi
+  ];
+
   zfs-root = {
     boot = {
       devNodes = "/dev/disk/by-id/";

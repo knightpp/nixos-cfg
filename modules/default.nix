@@ -5,5 +5,8 @@
     ./networking
     ./desktop-environment
     ./sops
+    ./nixpkgs-unstable
+    ./workarounds
+    ./repl
   ];
 }

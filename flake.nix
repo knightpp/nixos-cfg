@@ -30,23 +30,16 @@
     home-manager,
     sops-nix,
     nix-index-database,
-    nixos-hardware,
-  }: let
+    ...
+  } @ inputs: let
     mkHost = hostName: system:
       nixpkgs.lib.nixosSystem {
         inherit system;
+        specialArgs = {inherit inputs;};
         modules = [
           ./modules
 
           sops-nix.nixosModules.sops
-
-          {
-            imports = with nixos-hardware.nixosModules; [
-              common-cpu-amd
-              common-cpu-amd-pstate
-              common-hidpi
-            ];
-          }
 
           {
             imports = [nix-index-database.nixosModules.nix-index];
@@ -56,6 +49,10 @@
           }
 
           {
+            # system.configurationRevision =
+            #   if self ? rev
+            #   then self.rev
+            #   else "dirty";
             system.configurationRevision =
               if (self ? rev)
               then self.rev
@@ -63,8 +60,6 @@
             system.stateVersion = "23.05";
             imports = [
               "${nixpkgs}/nixos/modules/installer/scan/not-detected.nix"
-              # "${nixpkgs}/nixos/modules/profiles/hardened.nix"
-              # "${nixpkgs}/nixos/modules/profiles/qemu-guest.nix"
             ];
           }
 
@@ -76,75 +71,9 @@
 
           ./hosts/common.nix
 
-          (
-            let
-              inherit (nixpkgs) lib;
-              optType = lib.mkOptionType {
-                name = "nixpkgs";
-                description = "An evaluation of Nixpkgs; the top level attribute set of packages";
-                check = builtins.isAttrs;
-              };
-            in {
-              options.pkgs.unstable = lib.mkOption {type = optType;};
-              config.pkgs.unstable = lib.mkDefault (import unstable {
-                config = {allowUnfree = true;};
-                inherit system;
-              });
-            }
-          )
-
-          # HACK: temporary workaround for flatpak
-          (
-            {
-              config,
-              pkgs,
-              ...
-            }: {
-              system.fsPackages = [pkgs.bindfs];
-              fileSystems = let
-                mkRoSymBind = path: {
-                  device = path;
-                  fsType = "fuse.bindfs";
-                  options = ["ro" "resolve-symlinks" "x-gvfs-hide"];
-                };
-                aggregated = pkgs.buildEnv {
-                  name = "system-fonts-and-icons";
-                  paths = builtins.attrValues {
-                    inherit (pkgs.libsForQt5) breeze-qt5;
-                    inherit
-                      (pkgs)
-                      noto-fonts
-                      noto-fonts-emoji
-                      noto-fonts-cjk-sans
-                      noto-fonts-cjk-serif
-                      ;
-                  };
-                  pathsToLink = ["/share/fonts" "/share/icons"];
-                };
-              in {
-                # Create an FHS mount to support flatpak host icons/fonts
-                "/usr/share/icons" = mkRoSymBind "${aggregated}/share/icons";
-                "/usr/share/fonts" = mkRoSymBind "${aggregated}/share/fonts";
-              };
-            }
-          )
-
           ./hosts/${hostName}
 
           ./users
-
-          ({pkgs, ...}: {
-            nix.nixPath = ["nixpkgs=${nixpkgs}"];
-            environment.systemPackages = let
-              repl_path = toString ./.;
-              systemRepl = pkgs.writeShellScriptBin "repl" ''
-                source /etc/set-environment
-                nix repl --file "${repl_path}/repl.nix" "$@"
-              '';
-            in [
-              systemRepl
-            ];
-          })
         ];
       };
   in {
