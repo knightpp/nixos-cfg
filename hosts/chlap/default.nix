@@ -16,11 +16,20 @@
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/32eebb90-869f-436b-acbe-86cbed1d6cfb";
     fsType = "f2fs";
+    options = [
+      "noatime"
+      "lazytime"
+      "compress_algorithm=zstd:6"
+      "compress_chksum"
+      "atgc"
+      "gc_merge"
+    ];
   };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/5672-4E76";
     fsType = "vfat";
+    options = ["noatime"];
   };
 
   swapDevices = [
