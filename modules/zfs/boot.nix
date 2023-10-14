@@ -5,15 +5,11 @@
   ...
 }: let
   cfg = config.zfs-root.boot;
-  inherit (lib) mkIf types mkDefault mkOption mkMerge strings;
+  inherit (lib) mkIf types mkDefault mkOption mkMerge strings mkEnableOption;
   inherit (builtins) head toString map tail;
 in {
   options.zfs-root.boot = {
-    enable = mkOption {
-      description = "Enable root on ZFS support";
-      type = types.bool;
-      default = true;
-    };
+    enable = mkEnableOption "root on ZFS support";
     devNodes = mkOption {
       description = "Specify where to discover ZFS pools";
       type = types.str;

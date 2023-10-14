@@ -13,6 +13,7 @@
 
   zfs-root = {
     boot = {
+      enable = true;
       devNodes = "/dev/disk/by-id/";
       bootDevices = ["nvme-Samsung_SSD_980_500GB_S64DNL0T949034V"];
       immutable = false;
