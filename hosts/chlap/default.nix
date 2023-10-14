@@ -8,17 +8,6 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  nix = {
-    settings = {
-      extra-substituters = [
-        "https://knightpp.cachix.org"
-      ];
-      extra-trusted-public-keys = [
-        "knightpp.cachix.org-1:tl+q+NEKQoEhs/z77QP+fb+ZdcNTzCkwZaCllSzbLwI="
-      ];
-    };
-  };
-
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.availableKernelModules = ["xhci_pci" "uas" "sd_mod" "sdhci_pci"];
