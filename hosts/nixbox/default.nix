@@ -4,7 +4,9 @@
   pkgs,
   inputs,
   ...
-}: {
+}: let
+  ffmpeg-full = pkgs.ffmpeg.override {ffmpegVariant = "full";};
+in {
   imports = with inputs.nixos-hardware.nixosModules; [
     common-cpu-amd
     common-cpu-amd-pstate
@@ -55,6 +57,8 @@
   };
 
   environment.systemPackages = builtins.attrValues {
+    inherit ffmpeg-full;
+
     inherit
       (pkgs)
       cargo-espflash
