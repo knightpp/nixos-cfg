@@ -13,6 +13,14 @@ in {
     common-hidpi
   ];
 
+  nix = {
+    settings = {
+      extra-substituters = [
+        "ssh://nix-ssh@chlap.lan"
+      ];
+    };
+  };
+
   zfs-root = {
     boot = {
       enable = true;
