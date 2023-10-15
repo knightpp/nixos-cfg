@@ -21,7 +21,6 @@
     fsType = "f2fs";
     options = [
       "noatime"
-      "lazytime"
       "compress_algorithm=zstd:6"
       "compress_chksum"
       "atgc"
