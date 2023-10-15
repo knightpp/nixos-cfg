@@ -26,6 +26,7 @@
       "compress_chksum"
       "atgc"
       "gc_merge"
+      "commit=300"
     ];
   };
 
