@@ -40,7 +40,7 @@
 
   nix = {
     settings = {
-      extra-substituters = [
+      substituters = [
         "ssh://nix-ssh@nixbox.lan"
       ];
     };

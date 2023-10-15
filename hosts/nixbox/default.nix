@@ -15,7 +15,7 @@ in {
 
   nix = {
     settings = {
-      extra-substituters = [
+      substituters = [
         "ssh://nix-ssh@chlap.lan"
       ];
     };
