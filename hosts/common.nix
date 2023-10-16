@@ -15,6 +15,14 @@ in {
   nix = {
     settings.experimental-features = ["nix-command" "flakes"];
 
+    # connect-timeout and fallback are needed when some sibstituters become offline, so
+    # we won't wait indefinitely and fail.
+    extraOptions = ''
+      connect-timeout = 1
+      log-lines = 25
+      fallback = true
+    '';
+
     sshServe = {
       enable = true;
       protocol = "ssh-ng";
