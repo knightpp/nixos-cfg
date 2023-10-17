@@ -6,5 +6,6 @@
     ./nixpkgs-unstable
     ./workarounds
     ./repl
+    ./nix-serve.nix
   ];
 }

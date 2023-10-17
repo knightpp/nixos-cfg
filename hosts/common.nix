@@ -1,7 +1,5 @@
 # configuration in this file is shared by all hosts
-{pkgs, ...}: let
-  keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG86t/Sa1mUjJtz7my7fhS0UvK3za5JCOyTw4u58rwvv Personal SSH"];
-in {
+{pkgs, ...}: {
   nixpkgs.config.allowUnfree = true;
 
   # TODO: Do I need rtkit?
@@ -10,6 +8,11 @@ in {
   services.openssh = {
     enable = true;
     settings = {PasswordAuthentication = false;};
+  };
+
+  modules.nix-serve = {
+    enable = true;
+    hostNames = ["chlap" "nixbox"];
   };
 
   nix = {
@@ -22,16 +25,6 @@ in {
       log-lines = 25
       fallback = true
     '';
-
-    sshServe = {
-      enable = true;
-      protocol = "ssh-ng";
-      keys = keys;
-    };
-
-    settings = {
-      extra-trusted-public-keys = keys;
-    };
   };
 
   boot = {

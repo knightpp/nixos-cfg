@@ -38,14 +38,6 @@
     {device = "/dev/disk/by-uuid/81e64caa-fee9-4ba1-91d1-d1823a7ed60a";}
   ];
 
-  nix = {
-    settings = {
-      substituters = [
-        "ssh://nix-ssh@nixbox.lan"
-      ];
-    };
-  };
-
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
