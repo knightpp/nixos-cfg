@@ -32,8 +32,6 @@ in {
       AuthenticationMethods publickey
     '';
 
-    # flake.nixosConfigurations.chlap.config.networking.hostName
-
     nix = let
       protocol = "ssh-ng";
     in {
