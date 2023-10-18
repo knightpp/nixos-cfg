@@ -15,6 +15,8 @@
     hostNames = ["chlap" "nixbox"];
   };
 
+  networking.networkmanager.wifi.backend = "iwd";
+
   nix = {
     settings.experimental-features = ["nix-command" "flakes"];
 
