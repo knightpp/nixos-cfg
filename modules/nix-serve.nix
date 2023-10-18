@@ -4,14 +4,17 @@
   ...
 }: let
   cfg = config.modules.nix-serve;
+  self = config.networking.hostName;
+  hostNames = builtins.filter (x: x != self) cfg.hostNames;
 in {
   options.modules.nix-serve = {
     enable = lib.mkEnableOption "Nix serve";
 
-    keys = lib.mkOption {
-      description = "SSH public keys";
-      type = lib.types.nonEmptyListOf lib.types.str;
-      default = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAB+Ic2tILAPaNb6Kxzl8NypY9hZ/yANQ3izUzhh8yGd nix-ssh"];
+    # TODO: rework to accept hosts option like: { host1 = "pubkeyy"; host2 = "pubkey"; } ?
+    pubKey = lib.mkOption {
+      description = "SSH public key";
+      type = lib.types.str;
+      default = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAB+Ic2tILAPaNb6Kxzl8NypY9hZ/yANQ3izUzhh8yGd nix-ssh";
     };
 
     hostNames = lib.mkOption {
@@ -32,23 +35,41 @@ in {
       AuthenticationMethods publickey
     '';
 
+    programs.ssh = {
+      knownHosts = builtins.map (host:
+        lib.attrsets.setAttrByPath ["${host}.lan"] {
+          publicKey = cfg.pubKey;
+        })
+      hostNames;
+
+      extraConfig =
+        lib
+        .concatLines
+        (builtins
+          .map (host: ''
+            Host ${host}
+              HostName ${host}.lan
+              User nix-ssh
+
+              IdentitiesOnly yes
+              IdentityFile ${config.sops.secrets.ssh-key.path}
+            Host *
+          '')
+          hostNames);
+    };
+
     nix = let
       protocol = "ssh-ng";
     in {
       sshServe = {
         enable = true;
         protocol = protocol;
-        keys = cfg.keys;
+        keys = [cfg.pubKey];
       };
 
       settings = {
-        extra-trusted-public-keys = cfg.keys;
-        substituters = let
-          self = config.networking.hostName;
-          hostNames = builtins.filter (x: x != self) cfg.hostNames;
-          urls = map (x: "${protocol}://nix-ssh@${x}.lan") hostNames;
-        in
-          urls;
+        extra-trusted-public-keys = [cfg.pubKey];
+        substituters = map (x: "${protocol}://nix-ssh@${x}.lan") hostNames;
       };
     };
   };
