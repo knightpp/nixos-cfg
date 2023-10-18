@@ -29,6 +29,7 @@ in {
 
     services.openssh.extraConfig = ''
       HostKey ${config.sops.secrets.ssh-key.path}
+      AuthenticationMethods publickey
     '';
 
     # flake.nixosConfigurations.chlap.config.networking.hostName
