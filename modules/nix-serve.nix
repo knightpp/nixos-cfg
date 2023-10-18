@@ -34,7 +34,7 @@ in {
     # flake.nixosConfigurations.chlap.config.networking.hostName
 
     nix = let
-      protocol = "";
+      protocol = "ssh-ng";
     in {
       sshServe = {
         enable = true;
