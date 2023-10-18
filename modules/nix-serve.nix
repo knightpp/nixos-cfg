@@ -36,11 +36,9 @@ in {
     '';
 
     programs.ssh = {
-      knownHosts = builtins.map (host:
-        lib.attrsets.setAttrByPath ["${host}.lan"] {
-          publicKey = cfg.pubKey;
-        })
-      hostNames;
+      knownHosts = lib.attrsets.genAttrs (map (h: "${h}.lan") hostNames) (_: {
+        publicKey = cfg.pubKey;
+      });
 
       extraConfig =
         lib
