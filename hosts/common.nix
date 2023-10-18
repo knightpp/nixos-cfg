@@ -22,10 +22,13 @@
 
     # connect-timeout and fallback are needed when some sibstituters become offline, so
     # we won't wait indefinitely and fail.
+    # see https://jackson.dev/post/nix-reasonable-defaults/
     extraOptions = ''
       connect-timeout = 1
       log-lines = 25
       fallback = true
+      auto-optimise-store = true
+      keep-outputs = true
     '';
   };
 
