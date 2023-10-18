@@ -33,10 +33,12 @@ in {
 
     # flake.nixosConfigurations.chlap.config.networking.hostName
 
-    nix = {
+    nix = let
+      protocol = "";
+    in {
       sshServe = {
         enable = true;
-        protocol = "ssh-ng";
+        protocol = protocol;
         keys = cfg.keys;
       };
 
@@ -45,7 +47,7 @@ in {
         substituters = let
           self = config.networking.hostName;
           hostNames = builtins.filter (x: x != self) cfg.hostNames;
-          urls = map (x: "ssh://nix-ssh@${x}.lan") hostNames;
+          urls = map (x: "${protocol}://nix-ssh@${x}.lan") hostNames;
         in
           urls;
       };
