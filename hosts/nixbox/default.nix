@@ -64,6 +64,7 @@ in {
       cargo-espflash
       nix-init
       arion
+      lutris
       ;
 
     inherit (config.pkgs.unstable) nixd;
