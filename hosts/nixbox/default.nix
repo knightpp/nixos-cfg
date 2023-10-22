@@ -56,19 +56,26 @@ in {
     });
   };
 
-  environment.systemPackages = builtins.attrValues {
-    inherit ffmpeg-full;
+  environment.systemPackages = let
+    lutris = config.pkgs.unstable.lutris.override {
+      extraPkgs = pkgs: [
+        pkgs.wget
+      ];
+    };
+  in
+    builtins.attrValues {
+      inherit ffmpeg-full;
+      inherit lutris;
 
-    inherit
-      (pkgs)
-      cargo-espflash
-      nix-init
-      arion
-      lutris
-      ;
+      inherit
+        (pkgs)
+        cargo-espflash
+        nix-init
+        arion
+        ;
 
-    inherit (config.pkgs.unstable) nixd;
-  };
+      inherit (config.pkgs.unstable) nixd;
+    };
 
   hardware.cpu.amd.updateMicrocode = true;
   hardware.bluetooth.enable = true;
