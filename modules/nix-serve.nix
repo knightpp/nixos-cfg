@@ -24,16 +24,11 @@ in {
 
   config = lib.mkIf cfg.enable {
     sops.secrets.ssh-key = {
-      mode = "0400";
+      mode = "0440";
       owner = config.users.users.nix-ssh.name;
-      group = config.users.users.nix-ssh.group;
+      group = config.users.groups.keys.name;
       sopsFile = ./../secrets/nix-serve-ssh-key.yaml;
     };
-
-    services.openssh.extraConfig = ''
-      HostKey ${config.sops.secrets.ssh-key.path}
-      AuthenticationMethods publickey
-    '';
 
     programs.ssh = {
       # Note: publicKey is not pubKey
@@ -58,7 +53,7 @@ in {
     };
 
     nix = let
-      protocol = "ssh-ng";
+      protocol = "ssh";
     in {
       sshServe = {
         enable = true;
