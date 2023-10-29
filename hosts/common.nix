@@ -31,7 +31,6 @@
       log-lines = 25
       fallback = true
       auto-optimise-store = true
-      keep-outputs = true
     '';
   };
 
