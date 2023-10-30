@@ -45,6 +45,7 @@ in {
               HostName ${host}.lan
               User nix-ssh
 
+              AddKeysToAgent yes
               IdentitiesOnly yes
               IdentityFile ${config.sops.secrets.ssh-key.path}
             Host *
