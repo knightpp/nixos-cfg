@@ -13,6 +13,14 @@
     };
   };
 
+  programs.ssh = {
+    extraConfig = ''
+      Host *.lan
+        Hostname *.lan
+        ForwardAgent yes
+      Host *
+    '';
+  };
   modules.nix-serve = {
     enable = true;
     hostNames = ["chlap" "nixbox"];
