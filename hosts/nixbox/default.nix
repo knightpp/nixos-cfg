@@ -115,6 +115,7 @@ in {
   programs.steam.enable = true;
 
   workarounds.flatpak.enable = true;
+  workarounds.steam.enable = true;
   services.flatpak.enable = true;
   repl.enable = true;
 
