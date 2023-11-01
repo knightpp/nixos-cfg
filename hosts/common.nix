@@ -16,7 +16,6 @@
   programs.ssh = {
     extraConfig = ''
       Host *.lan
-        Hostname *.lan
         ForwardAgent yes
       Host *
     '';
