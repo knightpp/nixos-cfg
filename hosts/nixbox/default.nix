@@ -39,21 +39,29 @@ in {
   i18n.inputMethod.fcitx5.addons = builtins.attrValues {inherit (pkgs) fcitx5-mozc;};
 
   nixpkgs.config.packageOverrides = pkgs: {
-    cargo-espflash = config.pkgs.unstable.cargo-espflash.overrideAttrs (old: rec {
-      version = "git";
-      src = pkgs.fetchFromGitHub {
-        owner = "SergioGasquez";
-        repo = "espflash";
-        rev = "fix/resets";
-        sha256 = "sha256-3oANUcMaP1WbTY6bEOny5MYRCBaDNJ2wrv7GcfLkyJc=";
-      };
-
-      cargoDeps = old.cargoDeps.overrideAttrs (_: {
-        inherit src;
-
-        outputHash = "sha256-DDc8VAsBfalVUcutYaO9IPNchE1U8RudnMJp+MUD464=";
+    cargo-espflash =
+      config
+      .pkgs
+      .unstable
+      .cargo-espflash
+      .override (old: {
+        rustPlatform =
+          old.rustPlatform
+          // {
+            buildRustPackage = args:
+              old.rustPlatform.buildRustPackage (args
+                // {
+                  version = "git";
+                  src = pkgs.fetchFromGitHub {
+                    owner = "SergioGasquez";
+                    repo = "espflash";
+                    rev = "fix/resets";
+                    sha256 = "sha256-eSj+NX2yhYqKakR6jhng88uXLheiLJj4fibxyCMzfFs=";
+                  };
+                  cargoHash = "sha256-/xK5vb819QrOg/y6u/pFPsQbsbMJiApK6fKyeYuKO/0=";
+                });
+          };
       });
-    });
   };
 
   environment.systemPackages = let
