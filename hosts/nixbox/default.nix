@@ -71,10 +71,13 @@ in {
         (pkgs)
         cargo-espflash
         nix-init
-        arion
+        kicad-small
         ;
 
-      inherit (config.pkgs.unstable) nixd;
+      inherit
+        (config.pkgs.unstable)
+        librepcb
+        ;
     };
 
   hardware.cpu.amd.updateMicrocode = true;
@@ -102,21 +105,11 @@ in {
     };
   };
 
-  systemd.services."nvme-smart-log" = {
-    script = ''
-      set -euo pipefail
-      ${pkgs.smartmontools}/bin/smartctl --json=c -a /dev/nvme0
-    '';
-    serviceConfig = {
-      Type = "oneshot";
-    };
-  };
-
   programs.steam.enable = true;
+  services.flatpak.enable = true;
 
   workarounds.flatpak.enable = true;
   workarounds.steam.enable = true;
-  services.flatpak.enable = true;
   repl.enable = true;
 
   boot.extraModprobeConfig = let

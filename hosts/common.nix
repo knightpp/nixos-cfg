@@ -98,7 +98,7 @@
       nixpkgs-lint
       cachix
       nil
-      kicad-small
+      nurl
       ;
     inherit
       (pkgs.fishPlugins) # install fish plugins system wide
