@@ -79,7 +79,6 @@ in {
         (pkgs)
         cargo-espflash
         nix-init
-        kicad-small
         ;
 
       inherit
