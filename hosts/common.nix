@@ -110,6 +110,7 @@
       ;
   };
 
+  hardware.keyboard.zsa.enable = true;
   services.rpcbind.enable = true; # needed for NFS
   systemd.mounts = [
     {
