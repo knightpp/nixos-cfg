@@ -53,12 +53,12 @@ in {
                 // {
                   version = "git";
                   src = pkgs.fetchFromGitHub {
-                    owner = "SergioGasquez";
+                    owner = "esp-rs";
                     repo = "espflash";
-                    rev = "fix/resets";
-                    sha256 = "sha256-eSj+NX2yhYqKakR6jhng88uXLheiLJj4fibxyCMzfFs=";
+                    rev = "main";
+                    sha256 = "sha256-NkB841QWBP32lXvzpCOoX04YDnhHvNS9RjkNAtJbuSI=";
                   };
-                  cargoHash = "sha256-/xK5vb819QrOg/y6u/pFPsQbsbMJiApK6fKyeYuKO/0=";
+                  cargoHash = "sha256-NxtGAgPKsoVF77tJfVQHstljpW1ZaptOk0fa3L+HCaQ=";
                 });
           };
       });
