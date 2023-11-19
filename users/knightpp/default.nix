@@ -16,6 +16,7 @@
         "networkmanager"
         "systemd-journal"
         "docker"
+        "plugdev" # probably for qmk keyboards
         "dialout" # for serial ports (esp32)
         config.users.groups.keys.name # sops
       ];
@@ -27,6 +28,7 @@
   };
   users.groups = {
     knightpp = {};
+    plugdev = {};
   };
   nix.settings.trusted-users = ["knightpp"];
 
