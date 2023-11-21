@@ -7,5 +7,6 @@
     ./workarounds
     ./repl
     ./nix-serve.nix
+    ./zsa-udev-rules.nix
   ];
 }
