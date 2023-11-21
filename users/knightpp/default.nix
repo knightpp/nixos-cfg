@@ -100,10 +100,10 @@
           # Colemak DH helix keys
           keys = {
             normal = {
-              n = "move_char_left";
-              e = "move_line_down";
-              i = "move_line_up";
-              o = "move_char_right";
+              m = "move_char_left";
+              n = "move_line_down";
+              e = "move_line_up";
+              i = "move_char_right";
 
               h = "insert_mode";
               H = "insert_at_line_start";
@@ -123,21 +123,21 @@
               };
 
               space.w = {
-                n = "jump_view_left";
-                e = "jump_view_down";
-                i = "jump_view_up";
-                o = "jump_view_right";
+                m = "jump_view_left";
+                n = "jump_view_down";
+                e = "jump_view_up";
+                i = "jump_view_right";
               };
 
               "C-w" = {
-                n = "jump_view_left";
-                e = "jump_view_down";
+                m = "jump_view_left";
+                n = "jump_view_down";
                 E = "join_selections";
                 "A-E" = "join_selections_space";
-                i = "jump_view_up";
+                e = "jump_view_up";
                 I = "keep_selections";
                 "A-I" = "remove_selections";
-                o = "jump_view_right";
+                i = "jump_view_right";
               };
 
               z = {
@@ -151,15 +151,11 @@
               };
             };
 
-            insert = {
-              "A-x" = "normal_mode"; # Maps Alt-X to enter normal mode
-            };
-
             select = {
-              n = "move_char_left";
-              e = "move_line_down";
-              i = "move_line_up";
-              o = "move_char_right";
+              m = "move_char_left";
+              n = "move_line_down";
+              e = "move_line_up";
+              i = "move_char_right";
               h = "insert_mode";
               H = "insert_at_line_start";
               l = "open_below";
