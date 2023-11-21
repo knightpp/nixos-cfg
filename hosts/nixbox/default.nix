@@ -101,17 +101,6 @@ in {
     enableOnBoot = false;
   };
 
-  # To dump logs use journalctl --unit nvme-smart-log.service --output json
-  systemd.timers."nvme-smart-log" = {
-    description = "Timer to trigger NVME smart log collection on daily basis";
-    wantedBy = ["timers.target"];
-    timerConfig = {
-      OnCalendar = "daily";
-      Persistent = true;
-      Unit = "nvme-smart-log.service";
-    };
-  };
-
   programs.steam = {
     enable = true;
 
