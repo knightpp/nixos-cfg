@@ -133,9 +133,4 @@
       where = "/mnt/opi";
     }
   ];
-
-  # TODO: remove this after some time
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-24.8.6"
-  ];
 }

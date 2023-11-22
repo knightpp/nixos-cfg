@@ -3,7 +3,6 @@
   lib,
   config,
   inputs,
-  pkgs,
   ...
 }: {
   imports = [
@@ -56,12 +55,6 @@
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.enableRedistributableFirmware = true;
   services.xserver.xkbModel = "chromebook"; # TODO: Verify that it affects something
-
-  environment.systemPackages = [
-    # TODO: installing old telegram because I do not want flatpak here
-    pkgs.telegram-desktop
-    pkgs.discord
-  ];
 
   services.journald.extraConfig = ''
     Storage=volatile

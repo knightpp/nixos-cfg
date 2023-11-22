@@ -46,16 +46,21 @@ in {
 
     environment.systemPackages = builtins.attrValues {
       inherit (pkgs.libsForQt5) elisa; # music player
-      inherit (config.pkgs.unstable) vscode;
+      inherit
+        (config.pkgs.unstable)
+        vscode
+        obsidian
+        telegram-desktop
+        ;
       inherit
         (pkgs)
         firefox
+        discord
+        calibre
         handbrake
-        obsidian
         xclip
         easyeffects
         ;
-      # telegram-desktop
     };
 
     sound.enable = true; # enables alsamixer settings to be persisted across reboots
