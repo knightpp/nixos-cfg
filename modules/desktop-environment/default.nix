@@ -83,7 +83,10 @@ in {
           noto-fonts-cjk-serif
           dejavu_fonts
           ;
-
+        inherit
+          (config.pkgs.unstable)
+          monaspace
+          ;
         nerdfonts = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
       };
 
