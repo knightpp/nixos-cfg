@@ -157,6 +157,7 @@ in {
         handbrake
         xclip
         easyeffects
+        workrave
         ;
     };
 
