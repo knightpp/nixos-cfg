@@ -34,6 +34,103 @@ in {
             demuxer-max-bytes = "80M"; # sets fast seeking
           };
         };
+
+        alacritty = {
+          enable = true;
+          settings = {
+            import = ["${config.pkgs.unstable.alacritty-theme}/gruvbox_dark.yaml"];
+            live_config_reload = false;
+            window.resize_increments = false;
+            font = {
+              size = 14;
+            };
+            selection.save_to_clipboard = true;
+            key_bindings = let
+              mode = mode: entries: map (x: x // {mode = mode;}) entries;
+            in
+              mode "Vi|~Search" [
+                {
+                  action = "Up";
+                  key = "E";
+                }
+                {
+                  action = "Down";
+                  key = "N";
+                }
+                {
+                  action = "Left";
+                  key = "M";
+                }
+                {
+                  action = "Right";
+                  key = "I";
+                }
+
+                {
+                  action = "WordLeft";
+                  key = "B";
+                }
+                {
+                  action = "WordRight";
+                  key = "W";
+                }
+                {
+                  action = "WordLeftEnd";
+                  key = "B";
+                  mods = "Shift";
+                }
+                {
+                  action = "WordRightEnd";
+                  key = "W";
+                  mods = "Shift";
+                }
+
+                {
+                  action = "Bracket";
+                  key = "Key5";
+                  mods = "Shift";
+                }
+
+                {
+                  action = "ToggleNormalSelection";
+                  key = "V";
+                }
+                {
+                  action = "ToggleLineSelection";
+                  key = "V";
+                  mods = "Shift";
+                }
+                {
+                  action = "ToggleBlockSelection";
+                  key = "V";
+                  mods = "Control";
+                }
+
+                {
+                  action = "SearchNext";
+                  key = "J";
+                }
+                {
+                  action = "SearchPrevious";
+                  key = "K";
+                }
+
+                {
+                  action = "Open";
+                  key = "O";
+                }
+
+                {
+                  action = "ToggleViMode";
+                  key = "H";
+                }
+                {
+                  action = "ScrollToBottom";
+                  key = "H";
+                }
+              ];
+          };
+        };
       };
     };
 
