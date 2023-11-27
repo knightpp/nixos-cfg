@@ -27,6 +27,8 @@
 
   networking.networkmanager.wifi.backend = "iwd";
 
+  services.udev.packages = [pkgs.picoprobe-udev-rules];
+
   nix = {
     settings.experimental-features = ["nix-command" "flakes"];
 
