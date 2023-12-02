@@ -172,7 +172,7 @@ in {
     };
 
     fonts = {
-      fonts = builtins.attrValues {
+      packages = builtins.attrValues {
         inherit
           (pkgs)
           noto-fonts
@@ -188,7 +188,7 @@ in {
         nerdfonts = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
       };
 
-      enableDefaultFonts = false; # Fixes wrong braille symbols for graph in the bottom app
+      enableDefaultPackages = false; # Fixes wrong braille symbols for graph in the bottom app
       fontconfig.allowBitmaps = false;
     };
   };

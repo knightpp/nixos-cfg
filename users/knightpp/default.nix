@@ -197,7 +197,7 @@
         enableFishIntegration = true;
       };
 
-      exa = {
+      eza = {
         enable = true;
         enableAliases = true;
         extraOptions = [
