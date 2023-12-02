@@ -45,14 +45,14 @@
           }
 
           {
-            # system.configurationRevision =
-            #   if self ? rev
-            #   then self.rev
-            #   else "dirty";
             system.configurationRevision =
-              if (self ? rev)
+              if self ? rev
               then self.rev
-              else throw "refuse to build: git tree is dirty";
+              else "dirty";
+            # system.configurationRevision =
+            #   if (self ? rev)
+            #   then self.rev
+            #   else throw "refuse to build: git tree is dirty";
             system.stateVersion = "23.11";
             imports = [
               "${nixpkgs}/nixos/modules/installer/scan/not-detected.nix"
