@@ -52,8 +52,8 @@ in {
                   src = pkgs.fetchFromGitHub {
                     owner = "esp-rs";
                     repo = "espflash";
-                    rev = "main";
-                    sha256 = "sha256-NkB841QWBP32lXvzpCOoX04YDnhHvNS9RjkNAtJbuSI=";
+                    rev = "71d7a630275965d47219048c371702bc587de152";
+                    sha256 = "sha256-zF8rtjSRu7BBg4tRw3rvAXEzmAbW4lF6xBT5Teh2wFI=";
                   };
                   cargoHash = "sha256-NxtGAgPKsoVF77tJfVQHstljpW1ZaptOk0fa3L+HCaQ=";
                 });
