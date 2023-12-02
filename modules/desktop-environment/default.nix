@@ -38,7 +38,7 @@ in {
         alacritty = {
           enable = true;
           settings = {
-            import = ["${config.pkgs.unstable.alacritty-theme}/gruvbox_dark.yaml"];
+            import = ["${pkgs.alacritty-theme}/gruvbox_dark.yaml"];
             live_config_reload = false;
             window.resize_increments = false;
             font = {
@@ -144,13 +144,10 @@ in {
     environment.systemPackages = builtins.attrValues {
       inherit (pkgs.libsForQt5) elisa; # music player
       inherit
-        (config.pkgs.unstable)
+        (pkgs)
         vscode
         obsidian
         telegram-desktop
-        ;
-      inherit
-        (pkgs)
         firefox
         discord
         calibre
@@ -180,9 +177,6 @@ in {
           noto-fonts-cjk-sans
           noto-fonts-cjk-serif
           dejavu_fonts
-          ;
-        inherit
-          (config.pkgs.unstable)
           monaspace
           ;
         nerdfonts = pkgs.nerdfonts.override {fonts = ["FiraCode"];};

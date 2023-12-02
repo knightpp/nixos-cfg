@@ -40,9 +40,7 @@ in {
 
   nixpkgs.config.packageOverrides = pkgs: {
     cargo-espflash =
-      config
-      .pkgs
-      .unstable
+      pkgs
       .cargo-espflash
       .override (old: {
         rustPlatform =
@@ -65,7 +63,7 @@ in {
   };
 
   environment.systemPackages = let
-    lutris = config.pkgs.unstable.lutris.override {
+    lutris = pkgs.lutris.override {
       extraPkgs = pkgs: [
         pkgs.wget
       ];
@@ -78,11 +76,8 @@ in {
       inherit
         (pkgs)
         cargo-espflash
+        blender
         nix-init
-        ;
-
-      inherit
-        (config.pkgs.unstable)
         librepcb
         ;
     };
