@@ -76,6 +76,7 @@ in {
         (pkgs)
         cargo-espflash
         blender
+        cura
         nix-init
         librepcb
         ;
