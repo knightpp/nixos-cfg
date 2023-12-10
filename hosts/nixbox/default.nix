@@ -65,6 +65,7 @@ in {
     lutris = pkgs.lutris.override {
       extraPkgs = pkgs: [
         pkgs.wget
+        pkgs.wineWowPackages.stable
       ];
     };
   in
