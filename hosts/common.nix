@@ -103,6 +103,7 @@
       cachix
       nil
       nurl
+      gparted
       ;
     inherit
       (pkgs.fishPlugins) # install fish plugins system wide
