@@ -5,6 +5,15 @@
   ...
 }: let
   cfg = config.desktop-environment;
+
+  cura5 = pkgs.appimageTools.wrapType2 rec {
+    name = "cura5";
+    version = "5.6.0";
+    src = pkgs.fetchurl {
+      url = "https://github.com/Ultimaker/Cura/releases/download/${version}/UltiMaker-Cura-${version}-linux-X64.AppImage";
+      hash = "sha256-EHiWoNpLKHPzv6rZrtNgEr7y//iVcRYeV/TaCn8QpEA=";
+    };
+  };
 in {
   imports = [./kde ./gnome];
 
@@ -140,8 +149,8 @@ in {
     xdg.portal.xdgOpenUsePortal = true;
 
     programs.dconf.enable = true; # Needed for easyeffects
-
     environment.systemPackages = builtins.attrValues {
+      inherit cura5;
       inherit (pkgs.libsForQt5) elisa; # music player
       inherit
         (pkgs)
