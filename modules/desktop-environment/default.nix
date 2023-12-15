@@ -145,6 +145,7 @@ in {
       inherit (pkgs.libsForQt5) elisa; # music player
       inherit
         (pkgs)
+        appimage-run
         vscode
         obsidian
         telegram-desktop
