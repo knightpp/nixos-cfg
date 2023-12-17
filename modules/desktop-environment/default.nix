@@ -146,6 +146,7 @@ in {
       inherit
         (pkgs)
         appimage-run
+        prusa-slicer
         vscode
         obsidian
         telegram-desktop
