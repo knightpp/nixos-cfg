@@ -228,5 +228,10 @@ in {
       enableDefaultPackages = false; # Fixes wrong braille symbols for graph in the bottom app
       fontconfig.allowBitmaps = false;
     };
+
+    # TODO: remove me after fix
+    nixpkgs.config.permittedInsecurePackages = [
+      "electron-25.9.0"
+    ];
   };
 }
