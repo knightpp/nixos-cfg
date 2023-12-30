@@ -144,7 +144,6 @@ in {
     environment.systemPackages = builtins.attrValues {
       superslicer = pkgs.callPackage ./../../pkgs/superslicer.nix {};
 
-      inherit (pkgs.libsForQt5) elisa; # music player
       inherit
         (pkgs)
         appimage-run
