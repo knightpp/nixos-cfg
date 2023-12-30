@@ -141,65 +141,26 @@ in {
 
     programs.dconf.enable = true; # Needed for easyeffects
 
-    environment.systemPackages = let
-      superslicer = let
-        version = "2.5.59.5";
-      in
-        pkgs.appimageTools.wrapType2 {
-          name = "superslicer";
-          src = pkgs.fetchurl {
-            url = "https://github.com/supermerill/SuperSlicer/releases/download/${version}/SuperSlicer-ubuntu_18.04-${version}.AppImage";
-            hash = "sha256-ykeMUEMGKeNZN7QAWagJQzZumSOXvYNyCSt36vzYPIo=";
-          };
-        };
+    environment.systemPackages = builtins.attrValues {
+      superslicer = pkgs.callPackage ./../../pkgs/superslicer.nix {};
 
-      superslicerFixed = pkgs.writeScriptBin "superslicer" ''
-        #! ${pkgs.bash}/bin/bash
-        # AppImage version of Cura loses current working directory and treats all paths relateive to $HOME.
-        # So we convert each of the files passed as argument to an absolute path.
-        # This fixes use cases like `cd /path/to/my/files; cura mymodel.stl anothermodel.stl`.
-        # args=()
-        # for a in "$@"; do
-        #   if [ -e "$a" ]; then
-        #     a="$(realpath "$a")"
-        #   fi
-        #   args+=("$a")
-        # done
-        # exec "${superslicer}/bin/superslicer" "''${args[@]}"
-
-        export LANGUAGE="en_US"
-        export LOCALE="en_US.UTF-8"
-        export LANG=""
-        exec "${superslicer}/bin/superslicer" "$@"
-      '';
-      superslicerDesktopItem = pkgs.makeDesktopItem {
-        name = "SuperSlicer";
-        desktopName = "SuperSlicer";
-        exec = "${superslicerFixed}/bin/superslicer";
-        terminal = false;
-      };
-    in
-      builtins.attrValues {
-        superslicer = superslicerFixed;
-        inherit superslicerDesktopItem;
-
-        inherit (pkgs.libsForQt5) elisa; # music player
-        inherit
-          (pkgs)
-          appimage-run
-          prusa-slicer
-          vscode
-          obsidian
-          telegram-desktop
-          firefox
-          discord
-          calibre
-          handbrake
-          xclip
-          easyeffects
-          workrave
-          ;
-      };
+      inherit (pkgs.libsForQt5) elisa; # music player
+      inherit
+        (pkgs)
+        appimage-run
+        prusa-slicer
+        vscode
+        obsidian
+        telegram-desktop
+        firefox
+        discord
+        calibre
+        handbrake
+        xclip
+        easyeffects
+        workrave
+        ;
+    };
 
     sound.enable = true; # enables alsamixer settings to be persisted across reboots
     hardware.pulseaudio.enable = false;
