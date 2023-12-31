@@ -33,6 +33,11 @@
         "application/prs.wavefront-obj"
         "application/x-amf"
       ];
+      categories = [
+        "Graphics"
+        "3DGraphics"
+        "Engineering"
+      ];
       inherit icon;
     };
 in
