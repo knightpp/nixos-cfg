@@ -25,7 +25,14 @@
       desktopName = "Prusa slicer";
       exec = "${prusaslicerFixed}/bin/prusa-slicer";
       terminal = false;
-      mimeTypes = ["model/stl" "text/x.gcode"];
+      mimeTypes = [
+        "model/stl"
+        "text/x.gcode"
+        "model/3mf"
+        "application/vnd.ms-3mfdocument"
+        "application/prs.wavefront-obj"
+        "application/x-amf"
+      ];
       inherit icon;
     };
 in
