@@ -3,6 +3,7 @@
   lib,
   config,
   inputs,
+  pkgs,
   ...
 }: {
   imports = [
@@ -65,4 +66,11 @@
     # high journald CPU usage. Usually happens after sleep.
     "raydium_i2c_ts"
   ];
+
+  environment.systemPackages = builtins.attrValues {
+    inherit
+      (pkgs)
+      dmidecode # bios script dependency
+      ;
+  };
 }
