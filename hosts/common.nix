@@ -104,6 +104,8 @@
       nil
       nurl
       gparted
+      usbutils
+      pciutils
       ;
     inherit
       (pkgs.fishPlugins) # install fish plugins system wide
