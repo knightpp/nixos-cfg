@@ -21,7 +21,7 @@
     fsType = "f2fs";
     options = [
       "noatime"
-      "compress_algorithm=zstd:6"
+      "compress_algorithm=zstd"
       "compress_chksum"
       "atgc"
       "gc_merge"
