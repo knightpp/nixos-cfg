@@ -17,7 +17,7 @@
   boot.kernelModules = ["kvm-intel"];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/32eebb90-869f-436b-acbe-86cbed1d6cfb";
+    device = "/dev/disk/by-uuid/47ab68c7-9ac1-458b-badc-6e878475a8bd";
     fsType = "f2fs";
     options = [
       "noatime"
@@ -29,13 +29,13 @@
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/5672-4E76";
+    device = "/dev/disk/by-uuid/C369-82DD";
     fsType = "vfat";
     options = ["noatime"];
   };
 
   swapDevices = [
-    {device = "/dev/disk/by-uuid/81e64caa-fee9-4ba1-91d1-d1823a7ed60a";}
+    {device = "/dev/disk/by-uuid/69c6f53c-7b80-4451-afe9-fbe63c9d4088";}
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
