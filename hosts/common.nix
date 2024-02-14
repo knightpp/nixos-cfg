@@ -124,8 +124,8 @@
       mountConfig = {
         Options = "noatime,nofail,noauto";
       };
-      what = "opi.lan:/";
-      where = "/mnt/opi";
+      what = "alta.lan:/media";
+      where = "/mnt/media";
     }
   ];
 
@@ -135,7 +135,7 @@
       automountConfig = {
         TimeoutIdleSec = "300";
       };
-      where = "/mnt/opi";
+      where = "/mnt/media";
     }
   ];
 }
