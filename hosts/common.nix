@@ -21,7 +21,7 @@
     '';
   };
   modules.nix-serve = {
-    enable = true;
+    enable = false;
     hostNames = ["chlap" "nixbox"];
   };
 
