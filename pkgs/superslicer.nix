@@ -6,12 +6,12 @@
   makeDesktopItem,
   buildEnv,
 }: let
-  version = "2.5.59.7";
+  version = "2.5.59.8";
   superslicer = appimageTools.wrapType2 {
     name = "superslicer";
     src = fetchurl {
       url = "https://github.com/supermerill/SuperSlicer/releases/download/${version}/SuperSlicer-ubuntu_18.04-${version}.AppImage";
-      hash = "sha256-8gnsZZlXW/RYWVmeIhWix5LbtS8InPalv9xZEjuh8Rk=";
+      hash = "sha256-EEHvdwdSXLvntIZsUfelskA6ywpifO/gVBriu78H3G8=";
     };
   };
 
