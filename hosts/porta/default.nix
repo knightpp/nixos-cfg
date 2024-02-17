@@ -1,4 +1,9 @@
-{...}: {
+{inputs, ...}: {
+  imports = with inputs.nixos-hardware.nixosModules; [
+    common-cpu-intel
+    common-gpu-intel
+  ];
+
   boot.initrd.availableKernelModules = ["xhci_pci" "nvme" "usbhid" "usb_storage" "uas" "sd_mod" "rtsx_pci_sdmmc"];
   boot.initrd.kernelModules = ["dm-snapshot"];
 
