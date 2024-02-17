@@ -22,7 +22,7 @@
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/34c6c316-152e-475d-baf7-8d0863e17cd5";
     fsType = "btrfs";
-    options = ["subvol=@root,compress-force=zstd:4,discard=async"];
+    options = ["subvol=@root,compress-force=zstd:4,discard=async,noatime"];
   };
 
   fileSystems."/boot" = {
@@ -33,6 +33,9 @@
   swapDevices = [
     {device = "/dev/disk/by-uuid/5f9e81d8-0e89-45b2-b468-5f850b18dd08";}
   ];
+
+  networking.hostName = "porta";
+  time.timeZone = "Europe/Kyiv";
 
   hardware.cpu.intel.updateMicrocode = true;
   hardware.cpu.amd.updateMicrocode = true;
