@@ -25,7 +25,7 @@
     options = ["subvol=@root,compress-force=zstd:4,discard=async,noatime"];
   };
 
-  fileSystems."/boot" = {
+  fileSystems."/boot/efi" = {
     device = "/dev/disk/by-uuid/21C4-69AC";
     fsType = "vfat";
   };
