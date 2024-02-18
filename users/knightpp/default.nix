@@ -135,6 +135,11 @@
         difftastic.enable = true;
         extraConfig = {
           init.defaultbranch = "main";
+          rerere.enabled = true;
+          column.ui = "auto";
+          branch.sort = "-commiterdate";
+          fetch.writeCommitGraph = true;
+          core.fsmonitor = true;
         };
 
         userName = "Danylo Kondratiev";
