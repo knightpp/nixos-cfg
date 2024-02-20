@@ -137,7 +137,7 @@
           init.defaultbranch = "main";
           rerere.enabled = true;
           column.ui = "auto";
-          branch.sort = "-commiterdate";
+          branch.sort = "-committerdate";
           fetch.writeCommitGraph = true;
           core.fsmonitor = true;
         };
