@@ -13,25 +13,25 @@
 
   boot.initrd.luks.devices = {
     crypted = {
-      device = "/dev/disk/by-partuuid/3dd7a06d-e146-4989-bc50-a9e17789304e";
+      device = "/dev/disk/by-partuuid/df652d07-8e6e-49c3-956c-627b22081c82";
       allowDiscards = true; # Used if primary device is a SSD
       preLVM = true;
     };
   };
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/34c6c316-152e-475d-baf7-8d0863e17cd5";
+    device = "/dev/disk/by-uuid/379dba30-67ad-45ef-9736-345c498a5e16";
     fsType = "btrfs";
     options = ["subvol=@root,compress-force=zstd:4,discard=async,noatime"];
   };
 
   fileSystems."/boot/efi" = {
-    device = "/dev/disk/by-uuid/21C4-69AC";
+    device = "/dev/disk/by-partuuid/0d863ef0-7710-416c-9844-6a4fa9639f73";
     fsType = "vfat";
   };
 
   swapDevices = [
-    {device = "/dev/disk/by-uuid/5f9e81d8-0e89-45b2-b468-5f850b18dd08";}
+    {device = "/dev/disk/by-uuid/22d6f7dc-dac6-4a3a-a466-ce8d8c6bd779";}
   ];
 
   networking.hostName = "porta";
