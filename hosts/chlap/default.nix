@@ -11,6 +11,8 @@
     inputs.nixos-hardware.nixosModules.common-gpu-intel
   ];
 
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.availableKernelModules = ["xhci_pci" "uas" "sd_mod" "sdhci_pci"];
