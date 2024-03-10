@@ -6,6 +6,7 @@
   imports = with inputs.nixos-hardware.nixosModules; [
     common-cpu-intel
     common-gpu-intel
+    common-gpu-nvidia-disable
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
