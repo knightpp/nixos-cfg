@@ -115,6 +115,12 @@
       ;
   };
 
+  i18n.supportedLocales = map (x: x + "/UTF-8") [
+    "en_US.UTF-8"
+    "en_GB.UTF-8"
+    "uk_UA.UTF-8"
+  ];
+
   modules.zsa-udev-rules.enable = true;
   hardware.keyboard.zsa.enable = false; # the rules does not include Voyager, have to hardcode newer rules
   services.rpcbind.enable = true; # needed for NFS
