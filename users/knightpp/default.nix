@@ -35,10 +35,6 @@
   home-manager.users.knightpp = {
     home = {
       stateVersion = config.system.stateVersion;
-      language = {
-        base = "uk_UA.UTF-8";
-        messages = "en_US.UTF-8";
-      };
       shellAliases = {
         gs = "git status";
       };
