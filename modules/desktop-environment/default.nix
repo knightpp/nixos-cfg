@@ -147,6 +147,7 @@ in {
 
       inherit
         (pkgs)
+        anki-bin
         appimage-run
         vscode
         obsidian
