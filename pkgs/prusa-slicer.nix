@@ -7,7 +7,7 @@
   version = "2.7.3";
   ts = "202403280945";
   prusaslicer = appimageTools.wrapType2 {
-    name = "superslicer";
+    name = "prusaslicer";
     src = fetchurl {
       url = "https://github.com/prusa3d/PrusaSlicer/releases/download/version_${version}/PrusaSlicer-${version}+linux-x64-GTK3-${ts}.AppImage";
       hash = "sha256-w0ISxBRSHdI/lr/JTLrKAFcjbElCPl47nT17l1q0ZJI=";
