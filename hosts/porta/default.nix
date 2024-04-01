@@ -60,4 +60,5 @@
   workarounds.flatpak.enable = true;
 
   repl.enable = true;
+  custom.nixpkgs-unstable.enable = true;
 }
