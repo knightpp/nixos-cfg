@@ -143,10 +143,10 @@ in {
 
     environment.systemPackages = builtins.attrValues {
       superslicer = pkgs.callPackage ./../../pkgs/superslicer.nix {};
+      prusaslicer = pkgs.callPackage ./../../pkgs/prusa-slicer.nix {};
 
       inherit
         (pkgs)
-        prusa-slicer
         anki-bin
         appimage-run
         vscode
