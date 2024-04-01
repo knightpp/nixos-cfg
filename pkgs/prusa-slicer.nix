@@ -23,7 +23,7 @@
     makeDesktopItem {
       name = "PrusaSlicer";
       desktopName = "PrusaSlicer";
-      exec = "${prusaslicer}/bin/prusa-slicer";
+      exec = "${prusaslicer}/bin/prusaslicer";
       terminal = false;
       mimeTypes = [
         "model/stl"
