@@ -4,13 +4,13 @@
   makeDesktopItem,
   buildEnv,
 }: let
-  version = "2.7.3";
-  ts = "202403280945";
+  version = "2.7.4";
+  ts = "202404050928";
   prusaslicer = appimageTools.wrapType2 {
     name = "prusaslicer";
     src = fetchurl {
       url = "https://github.com/prusa3d/PrusaSlicer/releases/download/version_${version}/PrusaSlicer-${version}+linux-x64-GTK3-${ts}.AppImage";
-      hash = "sha256-w0ISxBRSHdI/lr/JTLrKAFcjbElCPl47nT17l1q0ZJI=";
+      hash = "sha256-t6ZahjacqLyT9ZzFUyB/XNJLod2rc6Rb2jNSI0apWoQ=";
     };
   };
 
