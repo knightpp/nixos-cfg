@@ -50,6 +50,9 @@
   desktop-environment.user = "knightpp";
   desktop-environment.gnome.enable = true;
 
+  programs.steam = {enable = true;};
+  workarounds.steam.enable = true;
+
   virtualisation.docker = {
     enable = true;
     storageDriver = "btrfs";
