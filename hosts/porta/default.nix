@@ -49,7 +49,17 @@
   desktop-environment.user = "knightpp";
   desktop-environment.gnome.enable = true;
 
-  programs.steam = {enable = true;};
+  programs.steam = {
+    enable = true;
+
+    package = pkgs.steam.override {
+      extraPkgs = pkgs:
+        with pkgs; [
+          gamescope
+          mangohud
+        ];
+    };
+  };
   workarounds.steam.enable = true;
 
   virtualisation.docker = {
