@@ -81,6 +81,7 @@
         };
         interactiveShellInit = ''
           set fish_greeting
+          atuin init fish | source
         '';
       };
 

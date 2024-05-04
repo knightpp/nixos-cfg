@@ -84,6 +84,7 @@
   environment.systemPackages = builtins.attrValues {
     inherit
       (pkgs)
+      atuin
       fzf
       file
       git
