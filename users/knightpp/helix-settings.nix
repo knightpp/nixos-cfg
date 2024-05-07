@@ -68,10 +68,10 @@
       H = "insert_at_line_start";
       l = "open_below";
       L = "open_above";
-      f = "move_next_word_end";
-      F = "move_next_long_word_end";
+      k = "move_next_word_end";
+      K = "move_next_long_word_end";
       j = "search_next";
-      k = "search_prev";
+      J = "search_prev";
     };
   };
 }
