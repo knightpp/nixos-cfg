@@ -68,8 +68,8 @@
       H = "insert_at_line_start";
       l = "open_below";
       L = "open_above";
-      k = "move_next_word_end";
-      K = "move_next_long_word_end";
+      f = "move_next_word_end";
+      F = "move_next_long_word_end";
       j = "search_next";
       J = "search_prev";
     };
