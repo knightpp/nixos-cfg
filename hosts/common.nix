@@ -107,6 +107,16 @@
       gparted
       usbutils
       pciutils
+      # GO
+      
+      go
+      go-tools
+      gopls
+      delve
+      gomodifytags
+      # Rust
+      
+      rustup
       ;
     inherit
       (pkgs.fishPlugins) # install fish plugins system wide
