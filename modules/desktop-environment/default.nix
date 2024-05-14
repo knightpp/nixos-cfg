@@ -6,7 +6,7 @@
 }: let
   cfg = config.desktop-environment;
 in {
-  imports = [./kde ./gnome];
+  imports = [./kde ./gnome ./hyprland];
 
   options.desktop-environment = {
     enable = lib.mkEnableOption "Desktop Environment";
