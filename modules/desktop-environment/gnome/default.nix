@@ -33,6 +33,8 @@ in {
       '';
     };
 
+    # hint electron apps to use wayland:
+    environment.sessionVariables.NIXOS_OZONE_WL = "1";
     environment.systemPackages = builtins.attrValues {
       inherit
         (pkgs.gnomeExtensions)
