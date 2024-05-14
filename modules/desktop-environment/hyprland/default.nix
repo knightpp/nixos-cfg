@@ -33,6 +33,8 @@ in {
         tofi # launcher minimalistic
         rofi-wayland # launcher popular
         ;
+
+      inherit (pkgs.libsForQt5) polkit-kde-agent; # Auth agent
     };
 
     nix.settings = {
