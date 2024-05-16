@@ -47,7 +47,7 @@
   hardware.bluetooth.enable = true;
 
   desktop-environment.user = "knightpp";
-  desktop-environment.hyprland.enable = true;
+  desktop-environment.gnome.enable = true;
 
   programs.steam = {
     enable = true;
@@ -60,7 +60,7 @@
         ];
     };
   };
-  # workarounds.steam.enable = true;
+  workarounds.steam.enable = true;
 
   virtualisation.docker = {
     enable = true;
