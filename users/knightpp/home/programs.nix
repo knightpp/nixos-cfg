@@ -91,9 +91,7 @@
 
   fzf = {
     enable = true;
-    enableBashIntegration = false;
     enableFishIntegration = false; # I use custom fish plugin for fuzzy search
-    enableZshIntegration = false;
   };
 
   fd = {
@@ -104,4 +102,6 @@
   gh.enable = true;
 
   ripgrep.enable = true;
+
+  atuin.enable = true;
 }
