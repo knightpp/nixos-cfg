@@ -1,5 +1,11 @@
 {
-  bash.enable = true;
+  bash = {
+    enable = true;
+    initExtra = ''
+      shopt -q login_shell && LOGIN_OPTION="--login" || LOGIN_OPTION=""
+      exec fish $LOGIN_OPTION
+    '';
+  };
 
   fish = {
     enable = true;
