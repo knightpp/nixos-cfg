@@ -84,25 +84,14 @@
   environment.systemPackages = builtins.attrValues {
     inherit
       (pkgs)
-      atuin
-      fzf
       file
-      git
-      nushell
       nfs-utils
-      ripgrep
-      du-dust
-      fd
-      tokei
       smartmontools
-      alejandra
       nixpkgs-fmt
       age
       sops
-      helix
       nixpkgs-lint
       cachix
-      nil
       nurl
       gparted
       usbutils
@@ -117,12 +106,6 @@
       # Rust
       
       rustup
-      ;
-    inherit
-      (pkgs.fishPlugins) # install fish plugins system wide
-      fzf-fish
-      autopair
-      done
       ;
   };
 

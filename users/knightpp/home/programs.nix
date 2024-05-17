@@ -3,14 +3,20 @@
 
   fish = {
     enable = true;
+
     shellAbbrs = {
       gs = "git status";
       gd = "git diff";
     };
+
     interactiveShellInit = ''
       set fish_greeting
       atuin init fish | source
     '';
+
+    functions = {
+      gitignore = "curl -sL https://www.gitignore.io/api/$argv";
+    };
   };
 
   helix = {
@@ -90,4 +96,13 @@
     enableFishIntegration = false; # I use custom fish plugin for fuzzy search
     enableZshIntegration = false;
   };
+
+  fd = {
+    enable = true;
+    ignores = ["vendor/" ".git/" "node_modules/"];
+  };
+
+  gh.enable = true;
+
+  ripgrep.enable = true;
 }

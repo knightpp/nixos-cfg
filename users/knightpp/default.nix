@@ -38,7 +38,11 @@
       shellAliases = {
         gs = "git status";
       };
+
+      packages = import ./home/packages.nix pkgs;
     };
+
+    programs = import ./home/programs.nix;
 
     # See https://editorconfig.org/
     editorconfig = {
@@ -69,7 +73,5 @@
         createDirectories = true;
       };
     };
-
-    programs = import ./home/programs.nix;
   };
 }
