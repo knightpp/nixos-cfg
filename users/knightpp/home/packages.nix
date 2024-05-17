@@ -1,4 +1,5 @@
-pkgs: {
+pkgs:
+builtins.attrValues {
   inherit
     (pkgs)
     du-dust
