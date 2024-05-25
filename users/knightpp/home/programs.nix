@@ -100,10 +100,11 @@
     enableFishIntegration = false; # I use custom fish plugin for fuzzy search
   };
 
-  fd = {
-    enable = true;
-    ignores = ["vendor/" ".git/" "node_modules/"];
-  };
+  # not yet available in 23.11
+  # fd = {
+  #   enable = true;
+  #   ignores = ["vendor/" ".git/" "node_modules/"];
+  # };
 
   gh.enable = true;
 
