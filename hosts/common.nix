@@ -84,6 +84,7 @@
   environment.systemPackages = builtins.attrValues {
     inherit
       (pkgs)
+      git # this should be in system packages since nix depends on i/*  */t
       file
       nfs-utils
       smartmontools
