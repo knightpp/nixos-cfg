@@ -84,6 +84,7 @@
   environment.systemPackages = builtins.attrValues {
     inherit
       (pkgs)
+      compsize # check btrfs compression
       git # this should be in system packages since nix depends on i/*  */t
       file
       nfs-utils
