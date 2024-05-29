@@ -115,7 +115,6 @@
     "uk_UA.UTF-8"
   ];
 
-  custom.nixbuild.enable = true;
   modules.zsa-udev-rules.enable = true;
   hardware.keyboard.zsa.enable = false; # the rules does not include Voyager, have to hardcode newer rules
   services.rpcbind.enable = true; # needed for NFS
