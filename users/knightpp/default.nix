@@ -39,6 +39,10 @@
         gs = "git status";
       };
 
+      sessionVariables = {
+        EDITOR = "hx";
+      };
+
       packages = import ./home/packages.nix pkgs;
     };
 

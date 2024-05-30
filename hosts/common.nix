@@ -27,8 +27,6 @@
 
   networking.networkmanager.wifi.backend = "iwd";
 
-  services.udev.packages = [pkgs.picoprobe-udev-rules];
-
   nix = {
     settings.experimental-features = ["nix-command" "flakes"];
 
@@ -68,18 +66,9 @@
     };
   };
 
-  hardware.keyboard.qmk.enable = true;
-
   # disable command-not-found handler for everyone since it's annoying and doesn't work with flakes
   # If you ever need it, you can use a replacement 'nix-index' from home-manager
   programs.command-not-found.enable = false;
-
-  # This is needed to set fish as login shell
-  programs.fish.enable = true;
-
-  environment.sessionVariables = {
-    EDITOR = "${pkgs.helix}/bin/hx";
-  };
 
   environment.systemPackages = builtins.attrValues {
     inherit
@@ -88,26 +77,11 @@
       git # this should be in system packages since nix depends on i/*  */t
       file
       nfs-utils
-      smartmontools
-      nixpkgs-fmt
       age
       sops
-      nixpkgs-lint
-      cachix
-      nurl
       gparted
       usbutils
       pciutils
-      # GO
-      
-      go
-      go-tools
-      gopls
-      delve
-      gomodifytags
-      # Rust
-      
-      rustup
       ;
   };
 
@@ -117,8 +91,11 @@
     "uk_UA.UTF-8"
   ];
 
+  services.udev.packages = [pkgs.picoprobe-udev-rules];
+  hardware.keyboard.qmk.enable = true;
   modules.zsa-udev-rules.enable = true;
   hardware.keyboard.zsa.enable = false; # the rules does not include Voyager, have to hardcode newer rules
+
   services.rpcbind.enable = true; # needed for NFS
   systemd.mounts = [
     {
