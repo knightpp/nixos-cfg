@@ -42,7 +42,7 @@
       packages = import ./home/packages.nix pkgs;
     };
 
-    programs = import ./home/programs.nix;
+    programs = import ./home/programs.nix pkgs;
 
     # See https://editorconfig.org/
     editorconfig = {
