@@ -1,9 +1,12 @@
-{
+pkgs: {
   bash = {
     enable = true;
-    initExtra = ''
-      shopt -q login_shell && LOGIN_OPTION="--login" || LOGIN_OPTION=""
-      exec fish $LOGIN_OPTION
+    interactiveShellInit = ''
+      if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+      then
+        shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+        exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+      fi
     '';
   };
 
@@ -99,11 +102,10 @@
     enableFishIntegration = false; # I use custom fish plugin for fuzzy search
   };
 
-  # not yet available in 23.11
-  # fd = {
-  #   enable = true;
-  #   ignores = ["vendor/" ".git/" "node_modules/"];
-  # };
+  fd = {
+    enable = true;
+    ignores = ["vendor/" ".git/" "node_modules/"];
+  };
 
   gh.enable = true;
 

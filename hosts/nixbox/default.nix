@@ -11,72 +11,42 @@ in {
     common-cpu-amd-pstate
     common-hidpi
   ];
-
-  zfs-root = {
-    boot = {
-      enable = true;
-      devNodes = "/dev/disk/by-id/";
-      bootDevices = ["nvme-Samsung_SSD_980_500GB_S64DNL0T949034V"];
-      immutable = false;
-      availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "uas" "sd_mod"];
-      removableEfi = true;
-      kernelParams = [];
-      sshUnlock = {
-        enable = false;
-        authorizedKeys = [];
-      };
-    };
-    networking = {
-      hostName = "nixbox";
-      timeZone = "Europe/Kyiv";
-      hostId = "fcf7de2a";
-    };
+  
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/ff53c09a-c690-4548-a2ae-f9c292c6c69e";
+    fsType = "btrfs";
+    options = ["subvol=@root,compress-force=zstd:4,noatime,commit=120"];
   };
+  
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/ff53c09a-c690-4548-a2ae-f9c292c6c69e";
+    fsType = "btrfs";
+    options = ["subvol=@home,compress-force=zstd:4,noatime,commit=120"];
+  };
+
+  fileSystems."/boot/efi" = {
+    device = "/dev/disk/by-uuid/490B-481B";
+    fsType = "vfat";
+  };
+  
+  networking.hostName = "nixbox";
+  time.timeZone = "Europe/Kyiv";
+
+  desktop-environment.user = "knightpp";
+  desktop-environment.gnome.enable = true;
 
   # enables to write Japanese
   i18n.inputMethod.enabled = "fcitx5";
   i18n.inputMethod.fcitx5.addons = builtins.attrValues {inherit (pkgs) fcitx5-mozc;};
 
-  nixpkgs.config.packageOverrides = pkgs: {
-    cargo-espflash =
-      pkgs
-      .cargo-espflash
-      .override (old: {
-        rustPlatform =
-          old.rustPlatform
-          // {
-            buildRustPackage = args:
-              old.rustPlatform.buildRustPackage (args
-                // {
-                  version = "git";
-                  src = pkgs.fetchFromGitHub {
-                    owner = "esp-rs";
-                    repo = "espflash";
-                    rev = "71d7a630275965d47219048c371702bc587de152";
-                    sha256 = "sha256-zF8rtjSRu7BBg4tRw3rvAXEzmAbW4lF6xBT5Teh2wFI=";
-                  };
-                  cargoHash = "sha256-NxtGAgPKsoVF77tJfVQHstljpW1ZaptOk0fa3L+HCaQ=";
-                });
-          };
-      });
-  };
-
-  environment.systemPackages = let
-    lutris = pkgs.lutris.override {
-      extraPkgs = pkgs: [
-        pkgs.wget
-        pkgs.wineWowPackages.stable
-      ];
-    };
-  in
-    builtins.attrValues {
+  environment.systemPackages = builtins.attrValues {
       inherit ffmpeg-full;
-      inherit lutris;
 
       inherit
         (pkgs)
-        cargo-espflash
-        blender
         nix-init
         librepcb
         ;
@@ -85,14 +55,9 @@ in {
   hardware.cpu.amd.updateMicrocode = true;
   hardware.bluetooth.enable = true;
 
-  boot.zfs.forceImportRoot = false;
-
-  desktop-environment.user = "knightpp";
-  desktop-environment.kde.enable = true;
-
   virtualisation.docker = {
     enable = true;
-    storageDriver = "zfs";
+    storageDriver = "btrfs";
     enableOnBoot = false;
   };
 
@@ -112,20 +77,4 @@ in {
   workarounds.flatpak.enable = true;
   workarounds.steam.enable = true;
   repl.enable = true;
-
-  boot.extraModprobeConfig = let
-    # enable fn keys on nuphy keyboard
-    keyboardOpts = "fnmode=0";
-    zfsOpts = [
-      "zfs_dirty_data_max_percent=50"
-      "zfs_dirty_data_max_max_percent=60"
-
-      "zfs_dirty_data_sync_percent=30"
-
-      "zfs_txg_timeout=120" # 120 seconds between commits
-    ];
-  in ''
-    options hid_apple ${keyboardOpts}
-    options zfs ${lib.strings.concatStringsSep " " zfsOpts}
-  '';
 }
