@@ -1,5 +1,4 @@
 {
-  lib,
   pkgs,
   inputs,
   ...
@@ -11,7 +10,7 @@ in {
     common-cpu-amd-pstate
     common-hidpi
   ];
-  
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
@@ -20,7 +19,7 @@ in {
     fsType = "btrfs";
     options = ["subvol=@root,compress-force=zstd:4,noatime,commit=120"];
   };
-  
+
   fileSystems."/home" = {
     device = "/dev/disk/by-uuid/ff53c09a-c690-4548-a2ae-f9c292c6c69e";
     fsType = "btrfs";
@@ -31,7 +30,7 @@ in {
     device = "/dev/disk/by-uuid/490B-481B";
     fsType = "vfat";
   };
-  
+
   networking.hostName = "nixbox";
   time.timeZone = "Europe/Kyiv";
 
@@ -43,14 +42,8 @@ in {
   i18n.inputMethod.fcitx5.addons = builtins.attrValues {inherit (pkgs) fcitx5-mozc;};
 
   environment.systemPackages = builtins.attrValues {
-      inherit ffmpeg-full;
-
-      inherit
-        (pkgs)
-        nix-init
-        librepcb
-        ;
-    };
+    inherit ffmpeg-full;
+  };
 
   hardware.cpu.amd.updateMicrocode = true;
   hardware.bluetooth.enable = true;
@@ -72,9 +65,6 @@ in {
         ];
     };
   };
-  services.flatpak.enable = true;
 
-  workarounds.flatpak.enable = true;
-  workarounds.steam.enable = true;
   repl.enable = true;
 }

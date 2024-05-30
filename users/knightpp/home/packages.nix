@@ -6,6 +6,7 @@ builtins.attrValues {
     tokei
     alejandra
     nil
+    nix-init
     ;
 
   inherit

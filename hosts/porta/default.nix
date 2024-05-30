@@ -60,7 +60,6 @@
         ];
     };
   };
-  workarounds.steam.enable = true;
 
   virtualisation.docker = {
     enable = true;
