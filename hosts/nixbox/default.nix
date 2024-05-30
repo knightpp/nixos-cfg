@@ -1,4 +1,5 @@
 {
+  modulesPath,
   pkgs,
   inputs,
   ...
@@ -6,10 +7,15 @@
   ffmpeg-full = pkgs.ffmpeg.override {ffmpegVariant = "full";};
 in {
   imports = with inputs.nixos-hardware.nixosModules; [
+    (modulesPath + "/installer/scan/not-detected.nix")
+
     common-cpu-amd
     common-cpu-amd-pstate
     common-hidpi
   ];
+
+  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usbhid"];
+  boot.kernelParams = ["acpi=force"]; # this should fix poweroff
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
