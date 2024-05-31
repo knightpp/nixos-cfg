@@ -43,19 +43,8 @@ in {
   desktop-environment.user = "knightpp";
   desktop-environment.gnome.enable = true;
 
-  # enables to write Japanese
-  i18n.inputMethod.enabled = "fcitx5";
-  i18n.inputMethod.fcitx5.addons = builtins.attrValues {inherit (pkgs) fcitx5-mozc;};
-  environment.sessionVariables = {
-    XMODIFIERS = "@im=fcitx";
-    QT_IM_MODULE = "fcitx";
-    GTK_IM_MODULE = "fcitx";
-  };
-
   environment.systemPackages = builtins.attrValues {
     inherit ffmpeg-full;
-
-    inherit (pkgs.gnomeExtensions) kimpanel; # this is for fcitx5
   };
 
   hardware.cpu.amd.updateMicrocode = true;
