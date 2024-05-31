@@ -99,7 +99,7 @@
         echo -e "\t''${last}"
         echo ""
 
-        nix store diff-closures "''${beforeLast}" "''${last}"
+        ${pkgs.nvd}/bin/nvd diff "''${beforeLast}" "''${last}"
       '';
   };
 }
