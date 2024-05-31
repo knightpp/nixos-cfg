@@ -11,6 +11,8 @@ in {
 
     common-cpu-amd
     common-cpu-amd-pstate
+    common-cpu-amd-zenpower
+    common-gpu-amd
     common-hidpi
   ];
 
