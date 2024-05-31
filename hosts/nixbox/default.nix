@@ -15,7 +15,7 @@ in {
   ];
 
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usbhid"];
-  boot.kernelParams = ["acpi=force"]; # this should fix poweroff
+  boot.kernelParams = ["apm=power_off"]; # this should fix poweroff
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
