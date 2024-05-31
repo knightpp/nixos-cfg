@@ -13,12 +13,24 @@
     };
   };
 
-  programs.ssh = {
-    extraConfig = ''
-      Host *.lan
-        ForwardAgent yes
-      Host *
-    '';
+  programs = {
+    # disable command-not-found handler for everyone since it's annoying and doesn't work with flakes
+    # If you ever need it, you can use a replacement 'nix-index' from home-manager
+    command-not-found.enable = false;
+
+    # fancier nix command
+    nh = {
+      enable = true;
+      flake = "/etc/nixos";
+    };
+
+    ssh = {
+      extraConfig = ''
+        Host *.lan
+          ForwardAgent yes
+        Host *
+      '';
+    };
   };
   modules.nix-serve = {
     enable = false;
@@ -65,10 +77,6 @@
       ];
     };
   };
-
-  # disable command-not-found handler for everyone since it's annoying and doesn't work with flakes
-  # If you ever need it, you can use a replacement 'nix-index' from home-manager
-  programs.command-not-found.enable = false;
 
   environment.systemPackages = builtins.attrValues {
     inherit
