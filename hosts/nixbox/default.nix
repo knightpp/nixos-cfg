@@ -16,8 +16,10 @@ in {
     common-hidpi
   ];
 
+  hardware.amdgpu.opencl = false; # this is config for common-gpu-amd, I probably don't need to waste additional 4G
+
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usbhid"];
-  boot.kernelPackages = pkgs.linuxPackages_latest; # this should fix poweroff
+  boot.kernelPackages = pkgs.linuxPackages_latest; # Kernel 6.9.2 fixed poweroff
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
