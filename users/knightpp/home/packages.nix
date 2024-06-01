@@ -9,6 +9,9 @@ builtins.attrValues {
     nix-init
     nurl # generates nix fetcher expressions based on url
     
+    # linker and C/C++ compiler
+    
+    gcc
     # zig
     
     zig
