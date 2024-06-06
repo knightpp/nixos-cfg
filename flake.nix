@@ -99,7 +99,7 @@
         echo -e "\t''${last}"
         echo ""
 
-        ${pkgs.nvd}/bin/nvd diff "''${last}" "''${beforeLast}"
+        ${pkgs.nvd}/bin/nvd diff "''${beforeLast}" "''${last}"
       '';
   };
 }
