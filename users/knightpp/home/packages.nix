@@ -12,6 +12,7 @@ builtins.attrValues {
     # linker and C/C++ compiler
     
     gcc
+    gdb
     # zig
     
     zig
