@@ -8,16 +8,13 @@
   # Colemak DH helix keys
   keys = {
     normal = {
-      m = "move_char_left";
-      n = "move_line_down";
-      e = "move_line_up";
-      i = "move_char_right";
+      m = "move_char_left"; # h
+      n = "move_visual_line_down"; # j
+      e = "move_visual_line_up"; # k
+      i = "move_char_right"; # l
 
       h = "insert_mode";
       H = "insert_at_line_start";
-
-      l = "open_below";
-      L = "open_above";
 
       f = "move_next_word_end";
       F = "move_next_long_word_end";
@@ -60,16 +57,17 @@
     };
 
     select = {
-      m = "move_char_left";
-      n = "move_line_down";
-      e = "move_line_up";
-      i = "move_char_right";
+      m = "move_char_left"; # h
+      n = "move_visual_line_down"; # j
+      e = "move_visual_line_up"; # k
+      i = "move_char_right"; # l
+
       h = "insert_mode";
       H = "insert_at_line_start";
-      l = "open_below";
-      L = "open_above";
+
       f = "move_next_word_end";
       F = "move_next_long_word_end";
+
       j = "search_next";
       J = "search_prev";
     };
