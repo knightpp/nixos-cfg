@@ -1,11 +1,9 @@
 keys:
   - &knightpp age14gn7ttk9tk22h2at6fpx9u7d53lf60hz46h2g6se33wg8r5ygffqw72a5r
-  - &nixbox age18dfj5378jvds2akd96dn4zv50pwwjr6cpgazy6halkzgh4vqlg7qq2usg9
-  - &chlap age16n5nukw84vtmufc06n7ypc53w22g7ufg8crlzdjfkqqhkluwguzqlrwfz8
+  - &nixbox age1p54nu6hnjsmyjhtcx79zrq3q2ey9x6zpavy7cdesxhhfy90y2p8szlnq6h
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
           - *knightpp
           - *nixbox
-          - *chlap
