@@ -20,3 +20,25 @@ nix repl
 #nix-repl> :lf .
 #nix-repl> nixosConfigurations.<host>.config.services ...
 ```
+
+## Sops
+
+### Generate age key from SSH
+
+```shell
+mkdir -p ~/.config/sops/age/
+nix-shell -p ssh-to-age --run "ssh-to-age -private-key -i ~/.ssh/personal >> ~/.config/sops/age/keys.txt"
+nix-shell -p ssh-to-age --run "ssh-to-age -private-key -i /etc/ssh/ssh_host_ed25519_key >> ~/.config/sops/age/keys.txt"
+```
+
+### Age private key to public
+
+```shell
+age-keygen -y ~/.config/sops/age/keys.txt
+```
+
+### Edit encrypted file
+
+```shell
+sops ./secrets/secrets.yaml
+```
