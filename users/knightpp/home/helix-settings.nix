@@ -23,8 +23,8 @@
       J = "search_prev";
 
       g = {
-        n = "goto_line_start";
-        o = "goto_line_end";
+        m = "goto_line_start";
+        i = "goto_line_end";
       };
 
       space.w = {
@@ -46,12 +46,12 @@
       };
 
       z = {
-        e = "scroll_down";
+        n = "scroll_down";
         i = "scroll_up";
       };
 
       Z = {
-        e = "scroll_down";
+        n = "scroll_down";
         i = "scroll_up";
       };
     };
