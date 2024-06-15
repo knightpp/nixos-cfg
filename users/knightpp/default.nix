@@ -32,49 +32,13 @@
   nix.settings.trusted-users = ["knightpp"];
 
   home-manager.users.knightpp = {
-    home = {
-      stateVersion = config.system.stateVersion;
-      shellAliases = {
-        gs = "git status";
-      };
+    imports = [./home/knightpp.nix];
 
-      sessionVariables = {
-        EDITOR = "hx";
-      };
+    home.stateVersion = config.system.stateVersion;
 
-      packages = import ./home/packages.nix pkgs;
-    };
-
-    programs = import ./home/programs.nix pkgs;
-
-    # See https://editorconfig.org/
-    editorconfig = {
+    xdg.userDirs = {
       enable = true;
-      settings = {
-        "*" = {
-          charset = "utf-8";
-          end_of_line = "lf";
-          trim_trailing_whitespace = true;
-          insert_final_newline = true;
-          max_line_width = 100;
-          indent_style = "space";
-          indent_size = 4;
-        };
-        "*.go" = {
-          indent_style = "tab";
-        };
-      };
-    };
-
-    # Provide offline documentation for home-manager
-    manual.html.enable = true;
-    news.display = "show";
-
-    xdg = {
-      userDirs = {
-        enable = true;
-        createDirectories = true;
-      };
+      createDirectories = true;
     };
   };
 }

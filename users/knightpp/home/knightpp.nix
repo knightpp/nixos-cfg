@@ -1,0 +1,191 @@
+{pkgs, ...}: {
+  home = {
+    sessionVariables = {
+      # EDITOR = "hx"; # configured with "defaultEditor"
+    };
+
+    packages = builtins.attrValues {
+      inherit
+        (pkgs)
+        du-dust
+        tokei
+        alejandra
+        nil
+        nix-init
+        nurl # generates nix fetcher expressions based on url
+        
+        # linker and C/C++ compiler
+        
+        gcc
+        gdb
+        # zig
+        
+        zig
+        zls
+        # GO
+        
+        go
+        go-tools
+        gopls
+        delve
+        gomodifytags
+        # Rust
+        
+        rustup
+        ;
+
+      inherit
+        (pkgs.fishPlugins) # install fish plugins system wide
+        fzf-fish
+        autopair
+        done
+        ;
+    };
+  };
+
+  programs = {
+    bash = {
+      enable = true;
+      enableVteIntegration = true;
+
+      initExtra = ''
+        if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+        then
+          shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+          exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+        fi
+      '';
+    };
+
+    fish = {
+      enable = true;
+
+      shellAbbrs = {
+        gs = "git status";
+        gd = "git diff";
+      };
+
+      interactiveShellInit = ''
+        set fish_greeting
+      '';
+
+      functions = {
+        gitignore = "curl -sL https://www.gitignore.io/api/$argv";
+      };
+    };
+
+    helix = {
+      enable = true;
+      defaultEditor = true;
+      settings = import ./helix-settings.nix;
+    };
+
+    bat = {
+      enable = true;
+      config = {
+        map-syntax = [
+          "*.jenkinsfile:Groovy"
+          "*.props:Java Properties"
+        ];
+        pager = "less -FR";
+        theme = "TwoDark";
+      };
+    };
+
+    bottom = {
+      enable = true;
+      settings = {
+        flags = {
+          mem_as_value = true;
+          group_processes = true;
+          unnormalized_cpu = true;
+        };
+      };
+    };
+
+    eza = {
+      enable = true;
+      extraOptions = [
+        "--group-directories-first"
+      ];
+      git = true;
+    };
+
+    git = {
+      enable = true;
+      difftastic.enable = true;
+      extraConfig = {
+        init.defaultbranch = "main";
+        rerere.enabled = true;
+        column.ui = "auto";
+        branch.sort = "-committerdate";
+        fetch.writeCommitGraph = true;
+        core.fsmonitor = true;
+      };
+
+      userName = "Danylo Kondratiev";
+      userEmail = "knightpp@proton.me";
+    };
+
+    starship = {
+      enable = true;
+      enableFishIntegration = true;
+      settings = {
+        add_newline = false;
+        gcloud.disabled = true;
+        character = {
+          success_symbol = "[λ](bold green)";
+          error_symbol = "[λ](bold red)";
+        };
+        git_metrics.disabled = true;
+      };
+    };
+
+    tealdeer = {
+      enable = true;
+    };
+
+    fzf = {
+      enable = true;
+      enableBashIntegration = false;
+      enableFishIntegration = false;
+    };
+
+    fd = {
+      enable = true;
+      ignores = ["vendor/" ".git/" "node_modules/"];
+    };
+
+    gh.enable = true;
+
+    ripgrep.enable = true;
+
+    atuin = {
+      enable = true;
+      enableBashIntegration = false;
+    };
+  };
+
+  # See https://editorconfig.org/
+  editorconfig = {
+    enable = true;
+    settings = {
+      "*" = {
+        charset = "utf-8";
+        end_of_line = "lf";
+        trim_trailing_whitespace = true;
+        insert_final_newline = true;
+        max_line_width = 100;
+        indent_style = "space";
+        indent_size = 4;
+      };
+      "*.go" = {
+        indent_style = "tab";
+      };
+    };
+  };
+
+  # Provide offline documentation for home-manager
+  manual.html.enable = true;
+  news.display = "show";
+}
