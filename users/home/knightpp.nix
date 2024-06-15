@@ -12,6 +12,7 @@
         alejandra
         nil
         nix-init
+        nvd # nix differ
         nurl # generates nix fetcher expressions based on url
         
         # linker and C/C++ compiler
