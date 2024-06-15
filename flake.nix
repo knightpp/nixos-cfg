@@ -70,7 +70,7 @@
 
           ./hosts/${hostName}
 
-          ./users
+          ./users/knightpp.nix
         ];
       };
   in {
