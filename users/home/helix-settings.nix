@@ -27,6 +27,7 @@
         i = "goto_line_end";
       };
 
+      # Minor Match Mode
       t = {
         t = "match_brackets";
         s = "surround_add";
@@ -71,6 +72,17 @@
 
       j = "extend_search_next";
       J = "extend_search_prev";
+
+      # TODO: extract into variable?
+      # Minor Match Mode
+      t = {
+        t = "match_brackets";
+        s = "surround_add";
+        r = "surround_replace";
+        d = "surround_delete";
+        e = "select_textobject_around";
+        n = "select_textobject_inner";
+      };
     };
   };
 }
