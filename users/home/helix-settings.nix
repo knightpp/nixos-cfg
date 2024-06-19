@@ -13,7 +13,7 @@
 
     lsp = {
       display-messages = true;
-      display-inlay-hints = true;
+      # display-inlay-hints = true; # didn't work with Go
     };
 
     indent-guides = {
