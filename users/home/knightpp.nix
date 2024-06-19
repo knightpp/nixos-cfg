@@ -79,6 +79,20 @@
       enable = true;
       defaultEditor = true;
       settings = import ./helix-settings.nix;
+      ignores = ["vendor" "node_modules"];
+
+      languages.language = [
+        {
+          name = "nix";
+          auto-format = true;
+          formatter.command = "${pkgs.alejandra}/bin/alejandra";
+        }
+        {
+          name = "go";
+          auto-format = true;
+          formatter.command = "${pkgs.gofumpt}/bin/gofumpt";
+        }
+      ];
     };
 
     bat = {

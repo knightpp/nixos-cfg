@@ -1,9 +1,32 @@
 {
   theme = "gruvbox";
-  editor.cursor-shape = {
-    insert = "bar";
-    normal = "block";
-    select = "underline";
+  editor = {
+    cursor-shape = {
+      insert = "bar";
+      normal = "block";
+      select = "underline";
+    };
+
+    middle-click-paste = false;
+    auto-save = true;
+    text-width = 100;
+
+    lsp = {
+      display-messages = true;
+      display-inlay-hints = true;
+    };
+
+    indent-guides = {
+      render = true;
+      character = "╎"; # Some characters that work well: "▏", "┆", "┊", "⸽"
+      skip-levels = 1;
+    };
+
+    soft-wrap = {
+      enable = true;
+      # max-wrap = 25; # increase value to reduce forced mid-word wrapping
+      # max-indent-retain = 0;
+    };
   };
   # Colemak DH helix keys
   keys = {
