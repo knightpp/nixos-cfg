@@ -1,7 +1,7 @@
 {
   inputs = {
     nixpkgs = {
-      url = "github:nixos/nixpkgs?ref=nixos-24.05";
+      url = "github:nixos/nixpkgs?ref=nixos-24.05-small"; # use nixos-24.05-small to get faster updates
     };
     home-manager = {
       url = "github:nix-community/home-manager?ref=release-24.05";
