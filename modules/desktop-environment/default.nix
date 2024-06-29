@@ -142,7 +142,7 @@ in {
     programs.dconf.enable = true; # Needed for easyeffects
 
     environment.systemPackages = builtins.attrValues {
-      superslicer = pkgs.callPackage ./../../pkgs/superslicer.nix {};
+      # superslicer = pkgs.callPackage ./../../pkgs/superslicer.nix {};
       prusaslicer = pkgs.callPackage ./../../pkgs/prusa-slicer.nix {};
 
       inherit
@@ -150,7 +150,6 @@ in {
         anki-bin
         appimage-run
         vscode
-        obsidian
         telegram-desktop
         firefox
         discord

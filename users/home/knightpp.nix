@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   home = {
     sessionVariables = {
-      # EDITOR = "hx"; # configured with "defaultEditor"
+      EDITOR = "hx"; # also configured with "defaultEditor"
     };
 
     packages = builtins.attrValues {
