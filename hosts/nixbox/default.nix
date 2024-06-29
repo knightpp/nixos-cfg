@@ -56,7 +56,6 @@ in {
     storageDriver = "btrfs";
     enableOnBoot = false;
   };
-  virtualisation.waydroid.enable = true; # android emulator
 
   programs.steam = {
     enable = true;
