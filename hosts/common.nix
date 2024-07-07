@@ -18,12 +18,6 @@
     # If you ever need it, you can use a replacement 'nix-index' from home-manager
     command-not-found.enable = false;
 
-    # fancier nix command
-    nh = {
-      enable = true;
-      flake = "/etc/nixos";
-    };
-
     ssh = {
       extraConfig = ''
         Host *.lan
@@ -60,6 +54,9 @@
       "vm.dirty_background_ratio" = 50;
       "vm.dirty_ratio" = 50;
       "vm.dirty_expire_centisecs" = 120 * 100;
+      # QUIC increase UDP buffer size
+      "net.core.rmem_max" = 7500000;
+      "net.core.wmem_max" = 7500000;
     };
   };
 
