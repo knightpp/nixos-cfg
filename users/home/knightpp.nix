@@ -178,6 +178,7 @@
     atuin = {
       enable = true;
       enableBashIntegration = false;
+      flags = ["--disable-up-arrow"];
     };
   };
 
