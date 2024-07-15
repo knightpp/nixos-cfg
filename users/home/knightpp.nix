@@ -23,6 +23,7 @@
         
         zig
         zls
+        lldb # DAP
         # GO
         
         go
@@ -91,6 +92,10 @@
           name = "go";
           auto-format = true;
           formatter.command = "${pkgs.gofumpt}/bin/gofumpt";
+        }
+        {
+          name = "elixir";
+          diagnostic-severity = "Hint";
         }
       ];
     };
