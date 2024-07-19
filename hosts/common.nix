@@ -55,8 +55,8 @@
       "vm.dirty_ratio" = 50;
       "vm.dirty_expire_centisecs" = 120 * 100;
       # QUIC increase UDP buffer size
-      "net.core.rmem_max" = 7500000;
-      "net.core.wmem_max" = 7500000;
+      # "net.core.rmem_max" = 7500000;
+      # "net.core.wmem_max" = 7500000;
     };
   };
 
