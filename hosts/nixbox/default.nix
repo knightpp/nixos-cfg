@@ -15,6 +15,8 @@ in {
     common-hidpi
   ];
 
+  boot.binfmt.emulatedSystems = ["aarch64-linux"]; # Cross compilation for conduwuit
+
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usbhid"];
   boot.kernelPackages = pkgs.linuxPackages_latest; # Kernel 6.9.2 fixed poweroff
 
