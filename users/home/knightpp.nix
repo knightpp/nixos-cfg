@@ -14,6 +14,7 @@
         nix-init
         nvd # nix differ
         nurl # generates nix fetcher expressions based on url
+        nix-output-monitor # nom
         
         # linker and C/C++ compiler
         

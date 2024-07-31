@@ -36,6 +36,8 @@
       e = "move_visual_line_up"; # k
       i = "move_char_right"; # l
 
+      l = "no_op";
+
       h = "insert_mode";
       H = "insert_at_line_start";
 
@@ -46,8 +48,25 @@
       J = "search_prev";
 
       g = {
-        m = "goto_line_start";
+        m = "goto_first_nonwhitespace";
+        M = "goto_line_start";
         i = "goto_line_end";
+        n = "goto_last_line";
+        e = "goto_file_start";
+
+        l = "goto_next_buffer";
+        u = "goto_previous_buffer";
+
+        t = "goto_type_definition";
+
+        w = "no_op";
+        y = "no_op";
+        s = "no_op";
+        k = "no_op";
+        j = "no_op";
+        c = "no_op";
+        b = "no_op";
+        h = "no_op";
       };
 
       # Minor Match Mode
