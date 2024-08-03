@@ -17,14 +17,6 @@
     # disable command-not-found handler for everyone since it's annoying and doesn't work with flakes
     # If you ever need it, you can use a replacement 'nix-index' from home-manager
     command-not-found.enable = false;
-
-    ssh = {
-      extraConfig = ''
-        Host *.lan
-          ForwardAgent yes
-        Host *
-      '';
-    };
   };
   modules.nix-serve = {
     enable = false;
