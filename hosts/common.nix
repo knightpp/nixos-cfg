@@ -79,6 +79,7 @@
       gparted
       usbutils
       pciutils
+      fractal # matrix client
       ;
   };
 
