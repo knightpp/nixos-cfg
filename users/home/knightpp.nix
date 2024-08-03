@@ -35,6 +35,10 @@
         # Rust
         
         rustup
+        # Elixir
+        
+        elixir
+        elixir-ls
         ;
 
       inherit
