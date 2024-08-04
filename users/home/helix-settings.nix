@@ -101,7 +101,7 @@
 
       # see https://github.com/helix-editor/helix/discussions/2542#discussioncomment-2959010
       # run linter/lsp on ESC
-      esc = ["collapse_selection" ":w"];
+      esc = ["collapse_selection" ":u"];
     };
 
     select = {
@@ -131,12 +131,12 @@
       };
 
       # run linter/lsp on ESC
-      esc = ["collapse_selection" "normal_mode" ":w"];
+      esc = ["collapse_selection" "normal_mode" ":u"];
     };
 
     insert = {
       # run linter/lsp on ESC
-      esc = ["normal_mode" ":w"];
+      esc = ["normal_mode" ":u"];
     };
   };
 }
