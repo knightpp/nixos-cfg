@@ -13,7 +13,7 @@
 
     lsp = {
       display-messages = true;
-      # display-inlay-hints = true; # didn't work with Go
+      display-inlay-hints = true;
     };
 
     indent-guides = {
@@ -98,6 +98,10 @@
         n = "scroll_down";
         i = "scroll_up";
       };
+
+      # see https://github.com/helix-editor/helix/discussions/2542#discussioncomment-2959010
+      # run linter/lsp on ESC
+      esc = ["collapse_selection" ":w"];
     };
 
     select = {
@@ -125,6 +129,14 @@
         e = "select_textobject_around";
         n = "select_textobject_inner";
       };
+
+      # run linter/lsp on ESC
+      esc = ["collapse_selection" "normal_mode" ":w"];
+    };
+
+    insert = {
+      # run linter/lsp on ESC
+      esc = ["normal_mode" ":w"];
     };
   };
 }

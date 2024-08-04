@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   home = {
     sessionVariables = {
-      EDITOR = "hx"; # also configured with "defaultEditor"
+      EDITOR = "${pkgs.helix}/bin/hx"; # also can be configured with "defaultEditor", but does not work
     };
 
     packages = builtins.attrValues {
@@ -83,26 +83,37 @@
 
     helix = {
       enable = true;
-      defaultEditor = true;
+      defaultEditor = false;
       settings = import ./helix-settings.nix;
       ignores = ["vendor" "node_modules"];
 
-      languages.language = [
-        {
-          name = "nix";
-          auto-format = true;
-          formatter.command = "${pkgs.alejandra}/bin/alejandra";
-        }
-        {
-          name = "go";
-          auto-format = true;
-          formatter.command = "${pkgs.gofumpt}/bin/gofumpt";
-        }
-        {
-          name = "elixir";
-          diagnostic-severity = "Hint";
-        }
-      ];
+      languages = {
+        # see https://github.com/helix-editor/helix/blob/master/languages.toml
+        language-server.elixir-ls = {
+          config = {
+            elixirLS.autoBuild = true;
+            elixirLS.dialyzerEnabled = true;
+            elixirLS.suggestSpecs = true;
+          };
+        };
+        language = [
+          {
+            name = "nix";
+            auto-format = true;
+            formatter.command = "${pkgs.alejandra}/bin/alejandra";
+          }
+          {
+            name = "go";
+            auto-format = true;
+            formatter.command = "${pkgs.gofumpt}/bin/gofumpt";
+          }
+          {
+            name = "elixir";
+            auto-format = true;
+            diagnostic-severity = "Hint";
+          }
+        ];
+      };
     };
 
     bat = {
