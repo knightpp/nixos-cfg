@@ -1,6 +1,5 @@
 {...}: {
   imports = [
-    ./zfs
     ./desktop-environment
     ./sops
     ./workarounds

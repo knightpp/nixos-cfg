@@ -76,10 +76,8 @@
       nfs-utils
       age
       sops
-      gparted
       usbutils
       pciutils
-      fractal # matrix client
       ;
   };
 
