@@ -15,7 +15,7 @@
         nvd # nix differ
         nurl # generates nix fetcher expressions based on url
         nix-output-monitor # nom
-        
+        gitui
         # linker and C/C++ compiler
         
         gcc
@@ -89,11 +89,24 @@
 
       languages = {
         # see https://github.com/helix-editor/helix/blob/master/languages.toml
-        language-server.elixir-ls = {
-          config = {
-            elixirLS.autoBuild = true;
-            elixirLS.dialyzerEnabled = true;
-            elixirLS.suggestSpecs = true;
+        language-server = {
+          elixir-ls = {
+            config = {
+              elixirLS.autoBuild = true;
+              elixirLS.dialyzerEnabled = true;
+              elixirLS.suggestSpecs = true;
+            };
+          };
+
+          gopls = {
+            assignVariableTypes = false;
+            compositeLiteralFields = false;
+            constantValues = false;
+            functionTypeParameters = false;
+            parameterNames = false;
+            rangeVariableTypes = false;
+
+            staticcheck = false;
           };
         };
         language = [
