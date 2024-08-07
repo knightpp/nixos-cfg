@@ -36,6 +36,9 @@
       e = "move_visual_line_up"; # k
       i = "move_char_right"; # l
 
+      N = "add_newline_below";
+      E = "add_newline_above";
+
       l = "no_op";
 
       h = "insert_mode";
@@ -128,6 +131,14 @@
         d = "surround_delete";
         e = "select_textobject_around";
         n = "select_textobject_inner";
+      };
+
+      g = {
+        m = "goto_first_nonwhitespace";
+        M = "goto_line_start";
+        i = "goto_line_end";
+        n = "goto_last_line";
+        e = "goto_file_start";
       };
 
       # run linter/lsp on ESC
