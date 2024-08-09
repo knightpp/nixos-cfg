@@ -46,7 +46,7 @@ in {
 
     environment.systemPackages = builtins.attrValues {
       # superslicer = pkgs.callPackage ./../../pkgs/superslicer.nix {};
-      prusaslicer = pkgs.callPackage ./../../pkgs/prusa-slicer.nix {};
+      # prusaslicer = pkgs.callPackage ./../../pkgs/prusa-slicer.nix {};
 
       inherit
         (pkgs)
