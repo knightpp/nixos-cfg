@@ -85,13 +85,15 @@
       k = "join_selections";
       K = "join_selections_space";
 
-      space.w = {
-        m = "jump_view_left";
-        n = "jump_view_down";
-        e = "jump_view_up";
-        i = "jump_view_right";
+      space = {
+        F = "file_picker_in_current_buffer_directory";
+        w = {
+          m = "jump_view_left";
+          n = "jump_view_down";
+          e = "jump_view_up";
+          i = "jump_view_right";
+        };
       };
-
       z = {
         n = "scroll_down";
         i = "scroll_up";
