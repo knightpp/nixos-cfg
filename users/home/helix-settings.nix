@@ -39,8 +39,6 @@
       N = "add_newline_below";
       E = "add_newline_above";
 
-      l = "no_op";
-
       h = "insert_mode";
       H = "insert_at_line_start";
 
@@ -49,6 +47,9 @@
 
       j = "search_next";
       J = "search_prev";
+
+      l = "extend_search_next";
+      L = "extend_search_prev";
 
       g = {
         m = "goto_first_nonwhitespace";
