@@ -61,7 +61,7 @@ in {
         easyeffects
         workrave
         gparted
-        fractal # matrix client
+        element-desktop
         ;
     };
 
