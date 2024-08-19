@@ -39,6 +39,7 @@
         
         elixir
         elixir-ls
+        lexical
         ;
 
       inherit
@@ -108,6 +109,10 @@
 
             staticcheck = false;
           };
+
+          lexical = {
+            command = "${pkgs.lexical}/bin/lexical";
+          };
         };
         language = [
           {
@@ -124,6 +129,11 @@
             name = "elixir";
             auto-format = true;
             diagnostic-severity = "Hint";
+            language-servers = ["lexical"];
+          }
+          {
+            name = "heex";
+            language-servers = ["lexical"];
           }
         ];
       };
