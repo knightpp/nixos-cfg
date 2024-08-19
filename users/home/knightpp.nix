@@ -224,6 +224,16 @@
       enableBashIntegration = false;
       flags = ["--disable-up-arrow"];
     };
+
+    direnv = {
+      enable = true;
+
+      enableBashIntegration = false;
+      enableNushellIntegration = false;
+      enableZshIntegration = false;
+
+      nix-direnv.enable = true;
+    };
   };
 
   # See https://editorconfig.org/
