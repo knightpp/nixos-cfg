@@ -59,6 +59,8 @@ in {
     enableOnBoot = false;
   };
 
+  modules.users.knightpp.enable = true;
+
   programs.steam = {
     enable = true;
 

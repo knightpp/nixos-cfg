@@ -61,6 +61,8 @@
     };
   };
 
+  modules.users.knightpp.enable = true;
+
   virtualisation.docker = {
     enable = true;
     storageDriver = "btrfs";
