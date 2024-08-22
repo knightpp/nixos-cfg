@@ -100,14 +100,23 @@
           };
 
           gopls = {
-            assignVariableTypes = false;
-            compositeLiteralFields = false;
-            constantValues = false;
-            functionTypeParameters = false;
-            parameterNames = false;
-            rangeVariableTypes = false;
+            config = {
+              "ui.documentation.hints" = {
+                assignVariableTypes = false;
+                compositeLiteralFields = false;
+                constantValues = false;
+                functionTypeParameters = false;
+                parameterNames = false;
+                rangeVariableTypes = false;
+              };
 
-            staticcheck = false;
+              "ui.diagnostic.staticcheck" = true;
+              "ui.diagnostic.analyses" = {
+                useany = true;
+                unusedvariable = true;
+              };
+              "formatting.gofumpt" = true;
+            };
           };
 
           lexical = {
@@ -123,7 +132,7 @@
           {
             name = "go";
             auto-format = true;
-            formatter.command = "${pkgs.gofumpt}/bin/gofumpt";
+            # formatter.command = "${pkgs.gofumpt}/bin/gofumpt";
           }
           {
             name = "elixir";
