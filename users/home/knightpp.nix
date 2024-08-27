@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   home = {
     sessionVariables = {
       EDITOR = "${pkgs.helix}/bin/hx"; # also can be configured with "defaultEditor", but does not work
@@ -245,7 +249,7 @@
 
     go = {
       enable = true;
-      package = pkgs.go_1_23;
+      package = lib.mkDefault pkgs.go_1_23;
     };
   };
 
