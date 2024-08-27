@@ -27,7 +27,6 @@
         lldb # DAP
         # GO
         
-        go
         go-tools
         gopls
         delve
@@ -242,6 +241,13 @@
       enableZshIntegration = false;
 
       nix-direnv.enable = true;
+    };
+
+    programs = {
+      go = {
+        enable = true;
+        package = pkgs.go_1_23;
+      };
     };
   };
 
