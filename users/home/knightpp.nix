@@ -247,10 +247,7 @@
       nix-direnv.enable = true;
     };
 
-    go = {
-      enable = true;
-      package = lib.mkDefault pkgs.go_1_23;
-    };
+    go = {enable = true;};
   };
 
   # See https://editorconfig.org/
