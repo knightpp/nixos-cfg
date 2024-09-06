@@ -62,15 +62,16 @@
         u = "goto_previous_buffer";
 
         t = "goto_type_definition";
+        s = "goto_implementation";
 
         w = "no_op";
         y = "no_op";
-        s = "no_op";
         k = "no_op";
         j = "no_op";
         c = "no_op";
         b = "no_op";
         h = "no_op";
+        p = "no_op";
       };
 
       # Minor Match Mode
