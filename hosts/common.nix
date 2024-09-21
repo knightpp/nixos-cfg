@@ -78,6 +78,7 @@
       sops
       usbutils
       pciutils
+      inotify-tools
       ;
   };
 
