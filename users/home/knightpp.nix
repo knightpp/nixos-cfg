@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   home = {
     sessionVariables = {
       EDITOR = "${pkgs.helix}/bin/hx"; # also can be configured with "defaultEditor", but does not work
@@ -89,7 +85,7 @@
       enable = true;
       defaultEditor = false;
       settings = import ./helix-settings.nix;
-      ignores = ["vendor" "node_modules"];
+      ignores = ["vendor" "node_modules" "_build"];
 
       languages = {
         # see https://github.com/helix-editor/helix/blob/master/languages.toml
