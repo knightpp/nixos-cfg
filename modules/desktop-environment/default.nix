@@ -52,7 +52,6 @@ in {
         (pkgs)
         anki-bin
         appimage-run
-        telegram-desktop
         firefox
         discord
         calibre
