@@ -47,6 +47,12 @@ in {
     environment.systemPackages = builtins.attrValues {
       # superslicer = pkgs.callPackage ./../../pkgs/superslicer.nix {};
       # prusaslicer = pkgs.callPackage ./../../pkgs/prusa-slicer.nix {};
+      heroic = pkgs.heroic.override {
+        extraPkgs = pkgs: [
+          pkgs.gamescope
+          pkgs.mangohud
+        ];
+      };
 
       inherit
         (pkgs)
@@ -55,7 +61,6 @@ in {
         firefox
         discord
         calibre
-        heroic
         handbrake
         xclip
         easyeffects
