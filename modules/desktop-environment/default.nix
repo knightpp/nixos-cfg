@@ -55,6 +55,7 @@ in {
         firefox
         discord
         calibre
+        heroic
         handbrake
         xclip
         easyeffects
