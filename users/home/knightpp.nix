@@ -188,6 +188,7 @@
         branch.sort = "-committerdate";
         fetch.writeCommitGraph = true;
         core.fsmonitor = true;
+        push.autoSetupRemote = true;
       };
 
       userName = "Danylo Kondratiev";
