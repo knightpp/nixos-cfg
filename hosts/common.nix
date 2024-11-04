@@ -79,6 +79,7 @@
       usbutils
       pciutils
       inotify-tools
+      distrobox
       ;
   };
 
