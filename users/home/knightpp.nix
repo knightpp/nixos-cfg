@@ -190,6 +190,11 @@
         core.fsmonitor = true;
         push.autoSetupRemote = true;
       };
+      lfs.enable = true;
+
+      aliases = {
+        co = "checkout";
+      };
 
       userName = "Danylo Kondratiev";
       userEmail = "knightpp@proton.me";
