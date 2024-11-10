@@ -67,6 +67,7 @@ in {
         workrave
         gparted
         element-desktop
+        rawtherapee
         ;
     };
 
