@@ -70,6 +70,7 @@
       shellAbbrs = {
         gs = "git status";
         gd = "git diff";
+        gu = "gitui";
       };
 
       interactiveShellInit = ''
