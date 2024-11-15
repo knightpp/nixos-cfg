@@ -45,7 +45,7 @@ in {
     environment.systemPackages = builtins.attrValues {
       inherit
         (pkgs)
-        newsflash
+        papers
         ;
 
       inherit
@@ -75,6 +75,7 @@ in {
       iagno # go game
       hitori # sudoku game
       atomix # puzzle game
+      evince # document viewer replaced by papers
     ];
   };
 }
