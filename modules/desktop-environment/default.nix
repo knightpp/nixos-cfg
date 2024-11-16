@@ -68,6 +68,7 @@ in {
         gparted
         element-desktop
         rawtherapee
+        signal-desktop
         ;
     };
 
