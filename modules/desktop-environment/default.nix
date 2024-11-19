@@ -56,7 +56,6 @@ in {
 
       inherit
         (pkgs)
-        anki-bin
         appimage-run
         firefox
         discord
