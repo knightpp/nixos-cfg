@@ -72,12 +72,12 @@ in {
         ;
     };
 
-    sound.enable = true; # enables alsamixer settings to be persisted across reboots
+    hardware.alsa.enablePersistence = true; # enables alsamixer settings to be persisted across reboots
     hardware.pulseaudio.enable = false;
     services.pipewire = {
       enable = true;
       alsa.enable = true;
-      alsa.support32Bit = false;
+      # alsa.support32Bit = false; # steam sets this to true
       pulse.enable = true;
       jack.enable = true;
     };

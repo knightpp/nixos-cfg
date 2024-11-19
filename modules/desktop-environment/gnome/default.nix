@@ -26,7 +26,8 @@ in {
     services.xserver.displayManager.gdm.enable = true;
     services.xserver.desktopManager.gnome = {
       enable = true;
-      extraGSettingsOverridePackages = [pkgs.gnome.mutter];
+      extraGSettingsOverridePackages = [pkgs.mutter];
+      # enable fractional scaling in gnome
       extraGSettingsOverrides = ''
         [org.gnome.mutter]
         experimental-features=['scale-monitor-framebuffer']
@@ -46,11 +47,8 @@ in {
       inherit
         (pkgs)
         papers
-        ;
-
-      inherit
-        (pkgs.gnome)
         polari
+        gnome-tweaks
         ;
 
       inherit
@@ -59,15 +57,10 @@ in {
         night-theme-switcher
         vitals
         ;
-
-      inherit
-        (pkgs.gnome3)
-        gnome-tweaks
-        ;
     };
-    services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
+    services.udev.packages = with pkgs; [gnome-settings-daemon];
 
-    environment.gnome.excludePackages = with pkgs.gnome; [
+    environment.gnome.excludePackages = with pkgs; [
       epiphany # web browser
       geary # email reader
       totem # video player
