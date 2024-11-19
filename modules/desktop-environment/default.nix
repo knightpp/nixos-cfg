@@ -60,7 +60,8 @@ in {
         appimage-run
         firefox
         discord
-        calibre
+        # calibre # calibre is not passing a test, wait for https://github.com/NixOS/nixpkgs/pull/356515 in nixos-24.11 branch
+        
         handbrake
         xclip
         easyeffects
