@@ -17,25 +17,20 @@
         nix-output-monitor # nom
         gitui
         # linker and C/C++ compiler
-        
         gcc
         gdb
         # zig
-        
         zig
         zls
         lldb # DAP
         # GO
-        
         go-tools
         gopls
         delve
         gomodifytags
         # Rust
-        
         rustup
         # Elixir
-        
         elixir
         elixir-ls
         lexical
@@ -164,9 +159,10 @@
       enable = true;
       settings = {
         flags = {
-          mem_as_value = true;
+          process_memory_as_value = true;
           group_processes = true;
           unnormalized_cpu = true;
+          enable_cache_memory = true;
         };
       };
     };
