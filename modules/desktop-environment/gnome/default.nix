@@ -56,7 +56,6 @@ in {
         (pkgs.gnomeExtensions)
         appindicator
         night-theme-switcher
-        vitals
         ;
     };
     services.udev.packages = with pkgs; [gnome-settings-daemon];
