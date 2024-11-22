@@ -47,8 +47,9 @@ in {
       inherit
         (pkgs)
         papers
-        polari
+        polari # IRC chat
         gnome-tweaks
+        tuba # fediverse/mastodon GTK client
         ;
 
       inherit
