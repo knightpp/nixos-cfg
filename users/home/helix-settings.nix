@@ -96,6 +96,12 @@
           i = "jump_view_right";
         };
       };
+
+      x = "extend_line_below";
+      X = "extend_line_above";
+      T = "extend_line_below";
+      S = "extend_line_above";
+
       z = {
         n = "scroll_down";
         i = "scroll_up";
