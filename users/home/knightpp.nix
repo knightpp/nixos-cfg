@@ -208,6 +208,7 @@
           error_symbol = "[λ](bold red)";
         };
         git_metrics.disabled = true;
+        sudo.disabled = false;
       };
     };
 
