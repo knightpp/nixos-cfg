@@ -69,6 +69,7 @@ in {
         element-desktop
         rawtherapee
         signal-desktop
+        rquickshare
         ;
     };
 
