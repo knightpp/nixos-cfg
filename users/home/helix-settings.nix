@@ -29,7 +29,16 @@
     };
   };
   # Colemak DH helix keys
-  keys = {
+  keys = let
+    minorMatchMode = {
+      t = "match_brackets";
+      s = "surround_add";
+      r = "surround_replace";
+      d = "surround_delete";
+      e = "select_textobject_around";
+      n = "select_textobject_inner";
+    };
+  in {
     normal = {
       m = "move_char_left"; # h
       n = "move_visual_line_down"; # j
@@ -74,15 +83,7 @@
         p = "no_op";
       };
 
-      # Minor Match Mode
-      t = {
-        t = "match_brackets";
-        s = "surround_add";
-        r = "surround_replace";
-        d = "surround_delete";
-        e = "select_textobject_around";
-        n = "select_textobject_inner";
-      };
+      t = minorMatchMode;
 
       k = "join_selections";
       K = "join_selections_space";
@@ -132,16 +133,7 @@
       j = "extend_search_next";
       J = "extend_search_prev";
 
-      # TODO: extract into variable?
-      # Minor Match Mode
-      t = {
-        t = "match_brackets";
-        s = "surround_add";
-        r = "surround_replace";
-        d = "surround_delete";
-        e = "select_textobject_around";
-        n = "select_textobject_inner";
-      };
+      t = minorMatchMode;
 
       g = {
         m = "goto_first_nonwhitespace";
