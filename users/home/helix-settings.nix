@@ -104,8 +104,23 @@
       S = "extend_line_above";
 
       z = {
-        n = "scroll_down";
-        i = "scroll_up";
+        c = "no_op";
+        b = "no_op";
+        i = "no_op";
+        k = "no_op";
+        j = "no_op";
+        up = "no_op";
+        down = "no_op";
+        C-u = "no_op";
+        C-d = "no_op";
+
+        s = "align_view_top";
+        t = "align_view_bottom";
+        g = "align_view_middle";
+        r = "align_view_middle";
+
+        n = "page_down";
+        e = "page_up";
       };
 
       Z = {
