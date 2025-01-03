@@ -3,6 +3,7 @@
     sessionVariables = {
       EDITOR = "${pkgs.helix}/bin/hx"; # also can be configured with "defaultEditor", but does not work
     };
+    sessionPath = ["$HOME/.local/bin"];
 
     packages = builtins.attrValues {
       inherit
