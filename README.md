@@ -42,3 +42,11 @@ age-keygen -y ~/.config/sops/age/keys.txt
 ```shell
 sops ./secrets/secrets.yaml
 ```
+
+### When token expires
+
+```fish
+# export NIX_CONFIG=... # in bash
+set -x NIX_CONFIG 'access-tokens = github.com=working_access_token'
+# now nix commands won't fail
+```
