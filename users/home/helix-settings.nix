@@ -7,6 +7,12 @@
       select = "underline";
     };
 
+    # see https://helix-editor.com/news/release-25-01-highlights/
+    end-of-line-diagnostics = "hint";
+    inline-diagnostics = {
+      cursor-line = "hint";
+    };
+
     middle-click-paste = false;
     auto-save = true;
     text-width = 100;
