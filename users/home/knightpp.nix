@@ -133,7 +133,7 @@
           {
             name = "elixir";
             auto-format = true;
-            diagnostic-severity = "Hint";
+            diagnostic-severity = "hint";
             language-servers = ["lexical"];
           }
           {
