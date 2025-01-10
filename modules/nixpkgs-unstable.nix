@@ -20,7 +20,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    custom.nixpkgs-unstable.pkgs = lib.mkDefault (import inputs.unstable {
+    custom.nixpkgs-unstable.pkgs = lib.mkDefault (import inputs.nixpkgs-unstable {
       config = {allowUnfree = true;};
       inherit (pkgs) system;
     });

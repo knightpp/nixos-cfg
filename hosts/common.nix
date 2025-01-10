@@ -24,6 +24,10 @@
     hostNames = ["chlap" "nixbox"];
   };
 
+  custom.nixpkgs-unstable = {
+    enable = true;
+  };
+
   networking.networkmanager.wifi.backend = "iwd";
 
   nix = {

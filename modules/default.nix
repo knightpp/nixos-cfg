@@ -8,5 +8,6 @@
     ./zsa-udev-rules.nix
     ./nixpkgs-unstable.nix
     ./nixbuild.nix
+    ./overlay.nix
   ];
 }
