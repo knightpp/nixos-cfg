@@ -74,7 +74,9 @@ in {
         ;
     };
 
-    hardware.alsa.enablePersistence = true; # enables alsamixer settings to be persisted across reboots
+    # this was removed in https://github.com/NixOS/nixpkgs/pull/337345
+    # hardware.alsa.enablePersistence = true; # enables alsamixer settings to be persisted across reboots
+
     hardware.pulseaudio.enable = false;
     services.pipewire = {
       enable = true;
