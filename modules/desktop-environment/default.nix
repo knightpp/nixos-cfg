@@ -70,6 +70,7 @@ in {
         rawtherapee
         signal-desktop
         rquickshare
+        ghostty
         ;
     };
 
