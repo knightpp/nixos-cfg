@@ -50,3 +50,14 @@ sops ./secrets/secrets.yaml
 set -x NIX_CONFIG 'access-tokens = github.com=working_access_token'
 # now nix commands won't fail
 ```
+
+## Maintenance
+
+### Clean up space
+
+It's important to run `nix-collect-garbage` as user to remove stale data in `~/.local/state/home-manager/`.
+
+```shell
+nix-collect-garbage -d
+doas nix-collect-garbage -d
+```
