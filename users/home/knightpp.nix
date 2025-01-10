@@ -33,7 +33,6 @@
         rustup
         # Elixir
         elixir
-        elixir-ls
         lexical
         ;
 
