@@ -17,6 +17,7 @@
         nurl # generates nix fetcher expressions based on url
         nix-output-monitor # nom
         gitui
+        jujutsu # better git
         # linker and C/C++ compiler
         gcc
         gdb
