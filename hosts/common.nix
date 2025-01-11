@@ -64,7 +64,7 @@
       enable = true;
       extraRules = [
         {
-          users = ["knightpp"];
+          users = ["knightpp" "potato"];
           keepEnv = true;
           persist = true;
         }

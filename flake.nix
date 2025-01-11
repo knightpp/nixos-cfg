@@ -81,6 +81,7 @@
       nixbox = mkHost "nixbox" "x86_64-linux";
       chlap = mkHost "chlap" "x86_64-linux";
       porta = mkHost "porta" "x86_64-linux";
+      potato = mkHost "potato" "aarch64-linux";
     };
 
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
