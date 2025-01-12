@@ -58,7 +58,9 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG86t/Sa1mUjJtz7my7fhS0UvK3za5JCOyTw4u58rwvv Personal SSH"
     ];
   };
+
   modules.users.knightpp.enable = true;
+  modules.home-manager.tools.interactive = false;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
