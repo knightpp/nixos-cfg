@@ -39,15 +39,6 @@
         modules = [
           ./modules
 
-          sops-nix.nixosModules.sops
-
-          {
-            imports = [nix-index-database.nixosModules.nix-index];
-            config = {
-              programs.nix-index-database.comma.enable = true;
-            };
-          }
-
           {
             system.configurationRevision =
               if self ? rev
@@ -58,22 +49,13 @@
             #   then self.rev
             #   else throw "refuse to build: git tree is dirty";
             system.stateVersion = "24.11";
-            imports = [
-              "${nixpkgs}/nixos/modules/installer/scan/not-detected.nix"
-            ];
-          }
-
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
           }
 
           ./hosts/common.nix
 
           ./hosts/${hostName}
 
-          ./users/knightpp.nix
+          ./users
         ];
       };
   in {

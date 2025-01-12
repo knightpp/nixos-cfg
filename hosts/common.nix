@@ -1,5 +1,20 @@
 # configuration in this file is shared by all hosts
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [
+    "${inputs.nixpkgs}/nixos/modules/installer/scan/not-detected.nix"
+    inputs.sops-nix.nixosModules.sops
+    inputs.home-manager.nixosModules.home-manager
+    inputs.nix-index-database.nixosModules.nix-index
+  ];
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  programs.nix-index-database.comma.enable = true;
+
   nixpkgs.config.allowUnfree = true;
 
   # TODO: Do I need rtkit?
@@ -76,7 +91,7 @@
     inherit
       (pkgs)
       compsize # check btrfs compression
-      git # this should be in system packages since nix depends on i/*  */t
+      git # this should be in system packages since nix depends on it
       file
       nfs-utils
       age
