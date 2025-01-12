@@ -1,6 +1,7 @@
 {
   lib,
   modulesPath,
+  config,
   ...
 }: {
   imports = [
@@ -59,8 +60,22 @@
     ];
   };
 
-  modules.users.knightpp.enable = true;
-  modules.home-manager.tools.interactive = false;
+  home-manager.users.potato = {
+    imports = [
+      ../../hm
+      {
+        modules.home-manager.tools.enable = true;
+        modules.home-manager.tools.interactive = false;
+      }
+    ];
+
+    home.stateVersion = config.system.stateVersion;
+
+    xdg.userDirs = {
+      enable = true;
+      createDirectories = true;
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
