@@ -2,8 +2,11 @@
   lib,
   modulesPath,
   config,
+  pkgs,
   ...
-}: {
+}: let
+  ffmpeg-full = pkgs.ffmpeg.override {ffmpegVariant = "full";};
+in {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -77,26 +80,91 @@
     };
   };
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  services.nextcloud = {
+    enable = true;
+    hostName = "nextcloud.knightpp.cc";
+    package = pkgs.nextcloud30;
 
-  # services.openssh.enable = true;
+    maxUploadSize = "100M";
+    phpOptions = {
+      memory_limit = lib.mkForce "512M";
+    };
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+    settings = {
+      trusted_domains = ["potato.lan"]; # allow LAN access
+      enabledPreviewProviders =
+        [
+          "OC\\Preview\\BMP"
+          "OC\\Preview\\GIF"
+          "OC\\Preview\\JPEG"
+          "OC\\Preview\\Krita"
+          "OC\\Preview\\MarkDown"
+          "OC\\Preview\\MP3"
+          "OC\\Preview\\OpenDocument"
+          "OC\\Preview\\PNG"
+          "OC\\Preview\\TXT"
+          "OC\\Preview\\XBitmap"
+        ]
+        ++ [
+          "OC\\Preview\\HEIC"
+          "OC\\Preview\\Movie"
+        ];
+    };
 
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
+    config = {
+      dbtype = "sqlite";
+      dbpassFile = config.sops.secrets.nextcloudDBPass.path;
+      adminpassFile = config.sops.secrets.nextcloudDBAdminPass.path;
+
+      objectstore.s3 = {
+        enable = true;
+        bucket = "nextcloud";
+        autocreate = false;
+        key = "81f89e149bb085ffbff0f6ca3e38f8ef";
+        secretFile = config.sops.secrets.nextcloudSecretAccessKey.path;
+        region = "auto";
+        hostname = "b6aeb9f8660a6c7ad4c310bc8b63ebb9.r2.cloudflarestorage.com";
+      };
+    };
+  };
+  sops.secrets = let
+    nextcloud =
+      lib.genAttrs [
+        "nextcloudSecretAccessKey"
+        "nextcloudDBPass"
+        "nextcloudDBAdminPass"
+      ] (_: {
+        mode = "0400";
+        owner = config.users.users.nextcloud.name;
+      });
+    cloudflare = {
+      cloudflared-potato-creds = {
+        mode = "0400";
+        owner = config.users.users.cloudflared.name;
+      };
+    };
+  in
+    lib.mkMerge [
+      nextcloud
+      cloudflare
+    ];
+  networking.firewall = {
+    allowedTCPPorts = [80];
+  };
+
+  services.cloudflared = {
+    enable = true;
+    tunnels = {
+      potato = {
+        credentialsFile = config.sops.secrets.cloudflared-potato-creds.path;
+        default = "http_status:404";
+      };
+    };
+  };
+
+  environment.systemPackages = builtins.attrValues {
+    inherit ffmpeg-full;
+  };
 
   system.stateVersion = "24.11";
 }

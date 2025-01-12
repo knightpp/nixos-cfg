@@ -72,6 +72,4 @@ in {
         ];
     };
   };
-
-  repl.enable = true;
 }

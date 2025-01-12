@@ -9,5 +9,6 @@
     ./nixpkgs-unstable.nix
     ./nixbuild.nix
     ./overlay.nix
+    ./nixpath.nix
   ];
 }

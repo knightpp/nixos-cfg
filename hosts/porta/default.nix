@@ -71,6 +71,4 @@
 
   services.flatpak.enable = true;
   workarounds.flatpak.enable = true;
-
-  repl.enable = true;
 }
