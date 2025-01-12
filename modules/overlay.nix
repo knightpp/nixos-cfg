@@ -3,9 +3,9 @@
   lib,
   ...
 }: let
-  pkgsUnstable = config.custom.nixpkgs-unstable.pkgs;
+  pkgsUnstable = config.modules.nixpkgs-unstable.pkgs;
 in {
-  config = lib.mkIf config.custom.nixpkgs-unstable.enable {
+  config = lib.mkIf config.modules.nixpkgs-unstable.enable {
     nixpkgs.overlays = [
       (final: prev: {
         helix = pkgsUnstable.helix;

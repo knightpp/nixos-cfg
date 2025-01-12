@@ -28,36 +28,23 @@
     };
   };
 
-  programs.adb.enable = true;
   programs = {
     # disable command-not-found handler for everyone since it's annoying and doesn't work with flakes
     # If you ever need it, you can use a replacement 'nix-index' from home-manager
     command-not-found.enable = false;
-  };
-  modules.nix-serve = {
-    enable = false;
-    hostNames = ["chlap" "nixbox"];
+    adb.enable = true;
   };
 
-  custom.nixpkgs-unstable = {
-    enable = true;
+  modules = {
+    nixpkgs-unstable.enable = true;
+    local-nas.mount = true;
+    nix-serve = {
+      enable = false;
+      hostNames = ["chlap" "nixbox"];
+    };
   };
 
   networking.networkmanager.wifi.backend = "iwd";
-
-  nix = {
-    settings.experimental-features = ["nix-command" "flakes"];
-
-    # connect-timeout and fallback are needed when some sibstituters become offline, so
-    # we won't wait indefinitely and fail.
-    # see https://jackson.dev/post/nix-reasonable-defaults/
-    extraOptions = ''
-      connect-timeout = 1
-      log-lines = 25
-      fallback = true
-      auto-optimise-store = true
-    '';
-  };
 
   boot = {
     tmp.useTmpfs = true;
@@ -113,26 +100,4 @@
   hardware.keyboard.qmk.enable = true;
   modules.zsa-udev-rules.enable = true;
   hardware.keyboard.zsa.enable = false; # the rules does not include Voyager, have to hardcode newer rules
-
-  services.rpcbind.enable = true; # needed for NFS
-  systemd.mounts = [
-    {
-      type = "nfs";
-      mountConfig = {
-        Options = "noatime,nofail,noauto";
-      };
-      what = "alta.lan:/media";
-      where = "/mnt/media";
-    }
-  ];
-
-  systemd.automounts = [
-    {
-      wantedBy = ["multi-user.target"];
-      automountConfig = {
-        TimeoutIdleSec = "300";
-      };
-      where = "/mnt/media";
-    }
-  ];
 }

@@ -10,5 +10,7 @@
     ./nixbuild.nix
     ./overlay.nix
     ./nixpath.nix
+    ./local-nas.nix
+    ./nix-settings.nix
   ];
 }
