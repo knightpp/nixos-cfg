@@ -96,10 +96,7 @@ in {
 
     home.stateVersion = config.system.stateVersion;
 
-    xdg.userDirs = {
-      enable = true;
-      createDirectories = true;
-    };
+    xdg.userDirs.createDirectories = false;
   };
 
   services.nextcloud = {
