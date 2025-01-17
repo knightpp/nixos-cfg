@@ -20,13 +20,35 @@ in {
   boot.kernelModules = [];
   boot.extraModulePackages = [];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
-    fsType = "ext4";
-    options = [
-      "noatime"
-      "commit=120"
-    ];
+  fileSystems = let
+    mkPorta = opts: {
+      device = "/dev/disk/by-uuid/431ca128-2dcf-40b3-9e99-eef11689a03d";
+      fsType = "btrfs";
+      label = "porta";
+      options =
+        [
+          "nofail"
+          "x-systemd.automount"
+          "x-systemd.device-timeout=15s"
+          "x-systemd.mount-timeout=15s"
+          "ssd"
+          "noatime"
+          "commit=120"
+        ]
+        ++ opts;
+    };
+  in {
+    "/" = {
+      device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
+      fsType = "ext4";
+      options = [
+        "noatime"
+        "commit=120"
+      ];
+    };
+
+    "/storage/porta/main" = mkPorta ["subvol=@main"];
+    "/storage/porta/transmission" = mkPorta ["subvol=@transmission"];
   };
 
   swapDevices = [
@@ -160,6 +182,51 @@ in {
         default = "http_status:404";
       };
     };
+  };
+
+  services = {
+    flood = {
+      enable = true;
+      openFirewall = true;
+      host = "0.0.0.0";
+      extraArgs = [
+        "--truser=transmission"
+        "--trpass=transmission"
+        "--trurl=http://127.0.0.1:9091/transmission/rpc"
+        "--allowedpath=/storage/porta/transmission"
+      ];
+    };
+
+    transmission = let
+      home = "/storage/porta/transmission";
+    in {
+      enable = true;
+      settings = {
+        download-dir = "${home}/downloads";
+        incomplete-dir = "${home}/incomplete";
+        incomplete-dir-enabled = false;
+        encryption = 2; # require
+        message-level = 3; # warn
+        peer-limit-global = 5000;
+        peer-limit-per-torrent = 500;
+        peer-port = 51413;
+        rpc-port = 9091;
+        trash-original-torrent-files = true;
+        rpc-username = "transmission";
+        rpc-password = "transmission";
+      };
+
+      openPeerPorts = true;
+      performanceNetParameters = true;
+
+      home = home;
+
+      package = pkgs.transmission_4;
+    };
+  };
+  systemd.services.transmission = {
+    after = ["storage-porta-transmission.automount"];
+    requires = ["storage-porta-transmission.automount"];
   };
 
   environment.systemPackages = builtins.attrValues {

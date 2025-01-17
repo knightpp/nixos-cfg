@@ -87,6 +87,7 @@
       pciutils
       inotify-tools
       distrobox
+      btrfs-progs
       ;
   };
 
