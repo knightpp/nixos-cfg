@@ -126,6 +126,11 @@
   modules = {
     users.knightpp.enable = true;
 
+    cloudflared = {
+      enable = true;
+      tunnel = "alta";
+    };
+
     transmission = {
       enable = true;
       home = "/storage/porta/transmission";
