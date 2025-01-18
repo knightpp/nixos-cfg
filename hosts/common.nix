@@ -2,6 +2,7 @@
 {
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   imports = [
@@ -96,6 +97,9 @@
     "en_GB.UTF-8"
     "uk_UA.UTF-8"
   ];
+
+  time.timeZone = "Europe/Kyiv";
+  i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
 
   services.udev.packages = [pkgs.picoprobe-udev-rules];
   hardware.keyboard.qmk.enable = true;

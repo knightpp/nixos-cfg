@@ -41,7 +41,6 @@ in {
   };
 
   networking.hostName = "nixbox";
-  time.timeZone = "Europe/Kyiv";
 
   desktop-environment.user = "knightpp";
   desktop-environment.gnome.enable = true;
@@ -52,6 +51,8 @@ in {
 
   hardware.cpu.amd.updateMicrocode = true;
   hardware.bluetooth.enable = true;
+
+  i18n.defaultLocale = "uk_UA.UTF-8";
 
   virtualisation.docker = {
     enable = true;

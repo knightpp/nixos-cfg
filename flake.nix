@@ -40,6 +40,11 @@
           ./modules
 
           {
+            networking.hostName = hostName;
+            nixpkgs.hostPlatform = system;
+          }
+
+          {
             system.configurationRevision =
               if self ? rev
               then self.rev

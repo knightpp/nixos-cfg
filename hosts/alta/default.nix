@@ -74,12 +74,10 @@
         before = ["docker.service"];
       }
     ];
+
     automounts = let
       mkAutoMount = where: {
         where = where;
-        # automountConfig = {
-        #   ExtraOptions = "noatime,commit=120,ssd";
-        # };
         wantedBy = ["multi-user.target"];
       };
     in
@@ -103,20 +101,10 @@
     }
   ];
 
-  networking.useDHCP = lib.mkDefault true;
-  networking.hostName = "alta"; # TODO: move into module
-  time.timeZone = "Europe/Kyiv";
-  i18n.defaultLocale = "en_US.UTF-8";
-  nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
-
   services.journald.extraConfig = ''
     Storage=volatile
     RuntimeMaxUse=64M
   '';
-
-  networking.wireless.enable = false;
-  hardware.pulseaudio.enable = false;
-  services.pipewire.enable = false;
 
   virtualisation.docker = {
     enable = true;

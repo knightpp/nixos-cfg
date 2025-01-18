@@ -40,20 +40,9 @@
     {device = "/dev/disk/by-uuid/69c6f53c-7b80-4451-afe9-fbe63c9d4088";}
   ];
 
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
-
-  networking.hostName = "chlap";
-  time.timeZone = "Europe/Kyiv";
-  i18n.defaultLocale = "uk_UA.UTF-8";
-
   desktop-environment.user = "knightpp";
   desktop-environment.gnome.enable = true;
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.enableRedistributableFirmware = true;
   services.xserver.xkbModel = "chromebook"; # TODO: Verify that it affects something
