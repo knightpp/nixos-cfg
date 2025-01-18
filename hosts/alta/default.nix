@@ -19,16 +19,6 @@
         "commit=120"
       ];
     };
-
-    "/storage/ssd" = {
-      device = "/dev/disk/by-uuid/cbd8666a-11b5-4fc0-928f-be955eaacb4e";
-      fsType = "btrfs";
-      options = [
-        "nofail"
-        "noatime"
-        "commit=120"
-      ];
-    };
   };
 
   systemd = {
@@ -62,21 +52,46 @@
         options = "nofail,ssd,noatime,commit=120,subvol=@swap";
         type = "btrfs";
       }
+      {
+        where = "/storage/ssd/mastodon";
+        what = "/dev/disk/by-uuid/cbd8666a-11b5-4fc0-928f-be955eaacb4e";
+        type = "btrfs";
+        options = "nofail,ssd,noatime,commit=120,subvol=@mastodon";
+        before = ["docker.service"];
+      }
+      {
+        where = "/storage/ssd/matrix";
+        what = "/dev/disk/by-uuid/cbd8666a-11b5-4fc0-928f-be955eaacb4e";
+        type = "btrfs";
+        options = "nofail,ssd,noatime,commit=120,subvol=@matrix";
+        before = ["docker.service"];
+      }
+      {
+        where = "/storage/ssd/readeck";
+        what = "/dev/disk/by-uuid/cbd8666a-11b5-4fc0-928f-be955eaacb4e";
+        type = "btrfs";
+        options = "nofail,ssd,noatime,commit=120,subvol=@readeck";
+        before = ["docker.service"];
+      }
     ];
     automounts = let
-      mkPortaAutomount = where: {
+      mkAutoMount = where: {
         where = where;
         # automountConfig = {
         #   ExtraOptions = "noatime,commit=120,ssd";
         # };
         wantedBy = ["multi-user.target"];
       };
-    in [
-      (mkPortaAutomount "/storage/porta/transmission")
-      (mkPortaAutomount "/var/lib/private/flood")
-      (mkPortaAutomount "/var/lib/docker")
-      (mkPortaAutomount "/swap")
-    ];
+    in
+      map mkAutoMount [
+        "/storage/porta/transmission"
+        "/var/lib/private/flood"
+        "/var/lib/docker"
+        "/swap"
+        "/storage/ssd/mastodon"
+        "/storage/ssd/matrix"
+        "/storage/ssd/readeck"
+      ];
   };
 
   swapDevices = [
