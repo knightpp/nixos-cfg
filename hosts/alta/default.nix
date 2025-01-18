@@ -30,21 +30,18 @@
         what = device;
         options = "nofail,ssd,noatime,commit=120,subvol=@transmission";
         type = "btrfs";
-        before = ["transmission.service"];
       }
       {
         where = "/var/lib/private/flood";
         what = device;
         options = "nofail,ssd,noatime,commit=120,subvol=@flood";
         type = "btrfs";
-        before = ["flood.service"];
       }
       {
         where = "/var/lib/docker";
         what = device;
         options = "nofail,ssd,noatime,commit=120,subvol=@docker";
         type = "btrfs";
-        before = ["docker.service"];
       }
       {
         where = "/swap";
@@ -57,21 +54,18 @@
         what = "/dev/disk/by-uuid/cbd8666a-11b5-4fc0-928f-be955eaacb4e";
         type = "btrfs";
         options = "nofail,ssd,noatime,commit=120,subvol=@mastodon";
-        before = ["docker.service"];
       }
       {
         where = "/storage/ssd/matrix";
         what = "/dev/disk/by-uuid/cbd8666a-11b5-4fc0-928f-be955eaacb4e";
         type = "btrfs";
         options = "nofail,ssd,noatime,commit=120,subvol=@matrix";
-        before = ["docker.service"];
       }
       {
         where = "/storage/ssd/readeck";
         what = "/dev/disk/by-uuid/cbd8666a-11b5-4fc0-928f-be955eaacb4e";
         type = "btrfs";
         options = "nofail,ssd,noatime,commit=120,subvol=@readeck";
-        before = ["docker.service"];
       }
     ];
 
@@ -86,9 +80,6 @@
         "/var/lib/private/flood"
         "/var/lib/docker"
         "/swap"
-        "/storage/ssd/mastodon"
-        "/storage/ssd/matrix"
-        "/storage/ssd/readeck"
       ];
   };
 
@@ -100,6 +91,22 @@
       ];
     }
   ];
+
+  systemd.services.docker.unitConfig = {
+    # TODO: remove this when I get rid of docker
+    RequiresMountsFor = lib.strings.concatStringsSep " " [
+      "/storage/ssd/mastodon"
+      "/storage/ssd/matrix"
+      "/storage/ssd/readeck"
+      "/var/lib/docker"
+    ];
+  };
+  systemd.services.transmission.unitConfig = {
+    RequiresMountsFor = "/storage/porta/transmission";
+  };
+  systemd.services.flood.unitConfig = {
+    RequiresMountsFor = "/var/lib/private/flood";
+  };
 
   services.journald.extraConfig = ''
     Storage=volatile
