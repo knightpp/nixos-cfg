@@ -3,13 +3,13 @@
   lib,
   ...
 }: let
-  cfg = config.modules.users;
+  cfg = config.modules.users.knightpp;
 in {
   options = {
     modules.users.knightpp.enable = lib.mkEnableOption "knightpp";
   };
 
-  config = lib.mkIf cfg.knightpp.enable {
+  config = lib.mkIf cfg.enable {
     users.users = {
       knightpp = {
         isNormalUser = true;
@@ -47,8 +47,8 @@ in {
       home.stateVersion = config.system.stateVersion;
 
       xdg.userDirs = {
-        enable = true;
-        createDirectories = true;
+        enable = lib.mkDefault true;
+        createDirectories = false;
       };
     };
   };

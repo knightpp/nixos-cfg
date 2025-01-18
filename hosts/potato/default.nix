@@ -106,6 +106,4 @@
 
     local-nas.mount = lib.mkForce false;
   };
-
-  system.stateVersion = "24.11";
 }

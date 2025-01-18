@@ -76,6 +76,11 @@ in {
     systemd.services.transmission = {
       after = cfg.systemd.after;
       requires = cfg.systemd.requires;
+      serviceConfig = {
+        RestartSec = "15";
+        RestartMaxDelaySec = "120";
+        Restart = "on-failure";
+      };
     };
   };
 }
