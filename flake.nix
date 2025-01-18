@@ -64,6 +64,7 @@
       chlap = mkHost "chlap" "x86_64-linux";
       porta = mkHost "porta" "x86_64-linux";
       potato = mkHost "potato" "aarch64-linux";
+      alta = mkHost "alta" "aarch64-linux";
     };
 
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
