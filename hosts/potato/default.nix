@@ -100,7 +100,7 @@ in {
   };
 
   services.nextcloud = {
-    enable = true;
+    enable = false;
     hostName = "nextcloud.knightpp.cc";
     package = pkgs.nextcloud30;
 
