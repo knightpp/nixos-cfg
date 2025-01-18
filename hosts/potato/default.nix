@@ -2,11 +2,8 @@
   lib,
   modulesPath,
   config,
-  pkgs,
   ...
-}: let
-  ffmpeg-full = pkgs.ffmpeg.override {ffmpegVariant = "full";};
-in {
+}: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -106,11 +103,9 @@ in {
       systemd.after = ["storage-porta-transmission.automount"];
       systemd.requires = ["storage-porta-transmission.automount"];
     };
-  };
 
-  # environment.systemPackages = builtins.attrValues {
-  #   inherit ffmpeg-full;
-  # };
+    local-nas.mount = lib.mkForce false;
+  };
 
   system.stateVersion = "24.11";
 }
