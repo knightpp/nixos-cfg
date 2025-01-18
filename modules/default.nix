@@ -12,5 +12,8 @@
     ./nixpath.nix
     ./local-nas.nix
     ./nix-settings.nix
+    ./nextcloud.nix
+    ./cloudflared.nix
+    ./transmission.nix
   ];
 }
