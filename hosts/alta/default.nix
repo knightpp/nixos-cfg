@@ -2,6 +2,7 @@
   lib,
   modulesPath,
   config,
+  pkgs,
   ...
 }: {
   imports = [
@@ -10,6 +11,7 @@
 
   boot.loader.grub.enable = false;
   boot.loader.generic-extlinux-compatible.enable = true;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   fileSystems = {
     "/" = {
