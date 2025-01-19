@@ -1,6 +1,7 @@
 {
   lib,
   modulesPath,
+  config,
   ...
 }: {
   imports = [
@@ -30,6 +31,14 @@
         what = device;
         options = "nofail,ssd,noatime,commit=120,subvol=@transmission";
         type = "btrfs";
+      }
+      {
+        where = "/export/downloads";
+        what = "/storage/porta/transmission/downloads";
+        options = "bind";
+        unitConfig = {
+          RequiresMountsFor = "/storage/porta/transmission";
+        };
       }
       {
         where = "/var/lib/private/flood";
@@ -76,6 +85,7 @@
       };
     in
       map mkAutoMount [
+        "/export/downloads"
         "/storage/porta/transmission"
         "/var/lib/private/flood"
         "/var/lib/docker"
@@ -116,6 +126,50 @@
   virtualisation.docker = {
     enable = true;
     storageDriver = "btrfs";
+  };
+
+  services.nfs.server = {
+    enable = true;
+    createMountPoints = true;
+    extraNfsdConfig = ''
+      port = 2049
+      UDP = no
+      TCP = yes
+      vers3 = no
+    '';
+    exports = let
+      commonOpts = [
+        "insecure"
+        "rw"
+        "async"
+        "all_squash" # use anon uid,gid for any operation
+      ];
+      rootOpts = lib.strings.concatStringsSep "," ([
+          "crossmnt"
+          "fsid=root"
+          "anonuid=${toString config.users.users.nfsclient.uid}"
+          "anongid=${toString config.users.groups.nfsclient.gid}"
+        ]
+        ++ commonOpts);
+      downloadsOpts = lib.strings.concatStringsSep "," ([
+          "mp=/storage/porta/transmission"
+          "anonuid=${toString config.users.users.transmission.uid}"
+          "anongid=${toString config.users.groups.transmission.gid}"
+        ]
+        ++ commonOpts);
+    in ''
+      /export 192.168.0.0/24(${rootOpts}) fdee:2dcd:73e8::1/60(${rootOpts})
+      /export/downloads 192.168.0.0/24(${downloadsOpts}) fdee:2dcd:73e8::1/60(${downloadsOpts})
+    '';
+  };
+  networking.firewall.allowedTCPPorts = [2049]; # nfs v4 uses only 2049
+  users.users.nfsclient = {
+    uid = 114; # picked here https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/misc/ids.nix
+    isSystemUser = true;
+    group = "nfsclient";
+  };
+  users.groups.nfsclient = {
+    gid = 114;
   };
 
   modules = {
