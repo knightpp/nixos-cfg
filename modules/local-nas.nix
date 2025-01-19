@@ -18,8 +18,8 @@ in {
         mountConfig = {
           Options = "noatime,nofail,noauto";
         };
-        what = "alta.lan:/media";
-        where = "/mnt/media";
+        what = "alta.lan:/";
+        where = "/nas/media";
       }
     ];
 
@@ -29,7 +29,7 @@ in {
         automountConfig = {
           TimeoutIdleSec = "300";
         };
-        where = "/mnt/media";
+        where = "/nas/media";
       }
     ];
   };
