@@ -40,7 +40,6 @@
     {device = "/dev/disk/by-uuid/69c6f53c-7b80-4451-afe9-fbe63c9d4088";}
   ];
 
-  desktop-environment.user = "knightpp";
   desktop-environment.gnome.enable = true;
 
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

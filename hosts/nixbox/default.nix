@@ -42,7 +42,6 @@ in {
 
   networking.hostName = "nixbox";
 
-  desktop-environment.user = "knightpp";
   desktop-environment.gnome.enable = true;
 
   environment.systemPackages = builtins.attrValues {
@@ -60,7 +59,10 @@ in {
     enableOnBoot = false;
   };
 
-  modules.users.knightpp.enable = true;
+  modules = {
+    users.knightpp.interactive = true;
+    local-nas.mount = true;
+  };
 
   programs.steam = {
     enable = true;

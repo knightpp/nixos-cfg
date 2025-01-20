@@ -37,8 +37,8 @@
   };
 
   modules = {
+    users.knightpp.enable = true;
     nixpkgs-unstable.enable = true;
-    local-nas.mount = true;
     nix-serve = {
       enable = false;
       hostNames = ["chlap" "nixbox"];
@@ -67,7 +67,7 @@
       enable = true;
       extraRules = [
         {
-          users = ["knightpp" "potato"];
+          users = ["knightpp"];
           keepEnv = true;
           persist = true;
         }

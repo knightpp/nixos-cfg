@@ -45,7 +45,6 @@
   hardware.cpu.amd.updateMicrocode = true;
   hardware.bluetooth.enable = true;
 
-  desktop-environment.user = "knightpp";
   desktop-environment.gnome.enable = true;
 
   programs.steam = {

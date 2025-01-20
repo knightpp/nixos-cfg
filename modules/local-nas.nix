@@ -16,7 +16,7 @@ in {
       {
         type = "nfs";
         mountConfig = {
-          Options = "noatime,nofail,noauto";
+          Options = "noatime,nofail";
         };
         what = "alta.lan:/";
         where = "/nas/media";

@@ -5,8 +5,9 @@
 }: let
   cfg = config.modules.users.knightpp;
 in {
-  options = {
-    modules.users.knightpp.enable = lib.mkEnableOption "knightpp";
+  options.modules.users.knightpp = {
+    enable = lib.mkEnableOption "knightpp";
+    interactive = lib.mkEnableOption "interactive";
   };
 
   config = lib.mkIf cfg.enable {

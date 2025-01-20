@@ -63,28 +63,6 @@
   hardware.pulseaudio.enable = false;
   services.pipewire = {enable = false;};
 
-  users.users.potato = {
-    isNormalUser = true;
-    extraGroups = [];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG86t/Sa1mUjJtz7my7fhS0UvK3za5JCOyTw4u58rwvv Personal SSH"
-    ];
-  };
-
-  home-manager.users.potato = {
-    imports = [
-      ../../hm
-      {
-        modules.home-manager.tools.enable = true;
-        modules.home-manager.tools.interactive = false;
-      }
-    ];
-
-    home.stateVersion = config.system.stateVersion;
-
-    xdg.userDirs.createDirectories = false;
-  };
-
   modules = {
     transmission = {
       enable = true;

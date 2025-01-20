@@ -175,8 +175,6 @@
   };
 
   modules = {
-    users.knightpp.enable = true;
-
     cloudflared = {
       enable = true;
       tunnel = "alta";
