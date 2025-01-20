@@ -69,14 +69,16 @@ in {
       ssh.askPassword = lib.mkForce "${pkgs.ksshaskpass.out}/bin/ksshaskpass";
     };
 
-    home-manager.users."${config.desktop-environment.user}" = {
-      xdg.configFile."plasma-localerc".text = ''
-        [Formats]
-        LANG=${cfg.formats}
+    home-manager.sharedModules = [
+      {
+        xdg.configFile."plasma-localerc".text = ''
+          [Formats]
+          LANG=${cfg.formats}
 
-        [Translations]
-        LANGUAGE=${cfg.translations}
-      '';
-    };
+          [Translations]
+          LANGUAGE=${cfg.translations}
+        '';
+      }
+    ];
   };
 }

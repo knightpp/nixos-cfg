@@ -37,13 +37,12 @@ in {
     nix.settings.trusted-users = ["knightpp"];
 
     home-manager.users.knightpp = {
-      imports = [
-        ../hm
-        {
-          modules.home-manager.tools.enable = true;
-          modules.home-manager.tools.interactive = lib.mkDefault true;
-        }
-      ];
+      imports = [../hm];
+
+      modules.home-manager.tools = {
+        enable = true;
+        interactive = cfg.interactive;
+      };
 
       home.stateVersion = config.system.stateVersion;
 

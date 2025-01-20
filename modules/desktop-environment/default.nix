@@ -10,32 +10,30 @@ in {
 
   options.desktop-environment = {
     enable = lib.mkEnableOption "Desktop Environment";
-    user = lib.mkOption {
-      type = lib.types.str;
-      description = "User name. Some settings should be set for user, not system";
-    };
   };
 
   config = lib.mkIf cfg.enable {
-    home-manager.users."${cfg.user}" = {
-      programs = {
-        mpv = {
-          enable = true;
-          config = {
-            ao = "pipewire";
-            vo = "gpu";
-            profile = "gpu-hq";
-            hwdec = "auto";
+    home-manager.sharedModules = [
+      {
+        programs = {
+          mpv = {
+            enable = true;
+            config = {
+              ao = "pipewire";
+              vo = "gpu";
+              profile = "gpu-hq";
+              hwdec = "auto";
 
-            msg-color = "yes"; # color log messages on terminal
-            cache = "yes"; # uses a large seekable RAM cache even for local input.
-            # cache-secs=300 # uses extra large RAM cache (needs cache=yes to make it useful).
-            demuxer-max-back-bytes = "20M"; # sets fast seeking
-            demuxer-max-bytes = "80M"; # sets fast seeking
+              msg-color = "yes"; # color log messages on terminal
+              cache = "yes"; # uses a large seekable RAM cache even for local input.
+              # cache-secs=300 # uses extra large RAM cache (needs cache=yes to make it useful).
+              demuxer-max-back-bytes = "20M"; # sets fast seeking
+              demuxer-max-bytes = "80M"; # sets fast seeking
+            };
           };
         };
-      };
-    };
+      }
+    ];
 
     networking.networkmanager.enable = true;
 
