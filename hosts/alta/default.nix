@@ -73,7 +73,7 @@
         options = "nofail,ssd,noatime,commit=120,subvol=@matrix";
       }
       {
-        where = "/storage/ssd/readeck";
+        where = "/var/lib/private/readeck";
         what = "/dev/disk/by-uuid/cbd8666a-11b5-4fc0-928f-be955eaacb4e";
         type = "btrfs";
         options = "nofail,ssd,noatime,commit=120,subvol=@readeck";
@@ -109,7 +109,6 @@
     RequiresMountsFor = lib.strings.concatStringsSep " " [
       "/storage/ssd/mastodon"
       "/storage/ssd/matrix"
-      "/storage/ssd/readeck"
       "/var/lib/docker"
     ];
   };
@@ -172,6 +171,21 @@
   };
   users.groups.nfsclient = {
     gid = 114;
+  };
+
+  services.readeck = {
+    enable = true;
+    environmentFile = config.sops.secrets.readeckEnv.path;
+    settings = {
+      main.log_level = "warn";
+    };
+  };
+  systemd.services.readeck.unitConfig = {
+    RequiresMountsFor = "/var/lib/private/readeck";
+  };
+  sops.secrets.readeckEnv = {
+    mode = "0400";
+    owner = config.users.users.root.name;
   };
 
   modules = {

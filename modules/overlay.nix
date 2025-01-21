@@ -3,14 +3,15 @@
   lib,
   ...
 }: let
-  pkgsUnstable = config.modules.nixpkgs-unstable.pkgs;
+  unstable = config.modules.nixpkgs-unstable;
 in {
-  config = lib.mkIf config.modules.nixpkgs-unstable.enable {
+  config = lib.mkIf unstable.enable {
     nixpkgs.overlays = [
       (final: prev: {
-        helix = pkgsUnstable.helix;
-        ghostty = pkgsUnstable.ghostty;
-        jujutsu = pkgsUnstable.jujutsu;
+        helix = unstable.pkgs.helix;
+        ghostty = unstable.pkgs.ghostty;
+        jujutsu = unstable.pkgs.jujutsu;
+        readeck = unstable.pkgs.readeck;
       })
     ];
   };

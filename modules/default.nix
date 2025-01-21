@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./nixos
     ./desktop-environment
     ./sops
     ./workarounds
