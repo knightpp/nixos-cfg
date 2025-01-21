@@ -16,5 +16,6 @@
     ./nextcloud.nix
     ./cloudflared.nix
     ./transmission.nix
+    ./readeck.nix
   ];
 }

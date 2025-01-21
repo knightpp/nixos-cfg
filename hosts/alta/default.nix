@@ -175,21 +175,6 @@
     gid = 114;
   };
 
-  services.readeck = {
-    enable = true;
-    environmentFile = config.sops.secrets.readeckEnv.path;
-    settings = {
-      main.log_level = "warn";
-    };
-  };
-  systemd.services.readeck.unitConfig = {
-    RequiresMountsFor = "/var/lib/private/readeck";
-  };
-  sops.secrets.readeckEnv = {
-    mode = "0400";
-    owner = config.users.users.root.name;
-  };
-
   modules = {
     cloudflared = {
       enable = true;
@@ -199,8 +184,12 @@
     transmission = {
       enable = true;
       home = "/storage/porta/transmission";
-      systemd.after = ["storage-porta-transmission.automount"];
-      systemd.requires = ["storage-porta-transmission.automount"];
+      unitConfig.RequiresMountsFor = "/storage/porta/transmission";
+    };
+
+    readeck = {
+      enable = true;
+      unitConfig.RequiresMountsFor = "/var/lib/private/readeck";
     };
 
     local-nas.mount = lib.mkForce false;

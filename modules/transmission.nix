@@ -8,25 +8,19 @@
 in {
   options.modules.transmission = {
     enable = lib.mkEnableOption "transmission";
+
     withFlood = lib.mkEnableOption "flood" // {default = true;};
+
     home = lib.mkOption {
       example = "/storage/porta/transmission";
       description = "path to downloads/state data";
       type = lib.types.path;
     };
-    systemd = {
-      after = lib.mkOption {
-        default = [];
-        example = "storage-porta-transmission.automount";
-        description = "after dependencies of systemd unit";
-        type = lib.types.listOf lib.types.str;
-      };
-      requires = lib.mkOption {
-        default = [];
-        example = "storage-porta-transmission.automount";
-        description = "requires dependencies of systemd unit";
-        type = lib.types.listOf lib.types.str;
-      };
+
+    unitConfig = lib.mkOption {
+      description = "SystemD unit config";
+      default = {};
+      type = lib.types.attrs;
     };
   };
 
@@ -74,8 +68,7 @@ in {
     };
 
     systemd.services.transmission = {
-      after = cfg.systemd.after;
-      requires = cfg.systemd.requires;
+      unitConfig = cfg.unitConfig;
       serviceConfig = {
         RestartSec = "15";
         RestartMaxDelaySec = "120";
