@@ -129,15 +129,17 @@
     storageDriver = "btrfs";
   };
 
+  services.nfs.settings = {
+    nfsd = {
+      port = 2049;
+      UDP = "no";
+      TCP = "yes";
+      vers3 = "no";
+    };
+  };
   services.nfs.server = {
     enable = true;
     createMountPoints = true;
-    extraNfsdConfig = ''
-      port = 2049
-      UDP = no
-      TCP = yes
-      vers3 = no
-    '';
     exports = let
       commonOpts = [
         "insecure"
