@@ -67,7 +67,7 @@
         options = "nofail,ssd,noatime,commit=120,subvol=@mastodon";
       }
       {
-        where = "/storage/ssd/matrix";
+        where = "/var/lib/private/matrix-conduit";
         what = "/dev/disk/by-uuid/cbd8666a-11b5-4fc0-928f-be955eaacb4e";
         type = "btrfs";
         options = "nofail,ssd,noatime,commit=120,subvol=@matrix";
@@ -108,7 +108,6 @@
     # TODO: remove this when I get rid of docker
     RequiresMountsFor = lib.strings.concatStringsSep " " [
       "/storage/ssd/mastodon"
-      "/storage/ssd/matrix"
       "/var/lib/docker"
     ];
   };
@@ -190,6 +189,11 @@
     readeck = {
       enable = true;
       unitConfig.RequiresMountsFor = "/var/lib/private/readeck";
+    };
+
+    conduwuit = {
+      enable = true;
+      unitConfig.RequiresMountsFor = "/var/lib/private/matrix-conduit";
     };
 
     local-nas.mount = lib.mkForce false;

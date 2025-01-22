@@ -17,5 +17,6 @@
     ./cloudflared.nix
     ./transmission.nix
     ./readeck.nix
+    ./conduwuit.nix
   ];
 }
