@@ -18,5 +18,6 @@
     ./transmission.nix
     ./readeck.nix
     ./conduwuit.nix
+    ./mastodon.nix
   ];
 }

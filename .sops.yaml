@@ -4,10 +4,15 @@ keys:
   - &potato age193vtp8l62jz4hsmcxvcgwqyy4q7ghklz7g43s9esn75gsacd0gtq00uzdp
   - &alta age1rhq8630g2yndtug6p37cl4kyesdfq8gj85x3xvu9ef6rslyr5d9qrgungj
 creation_rules:
-  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+  - path_regex: secrets/(nix-serve-ssh-key\.yaml|secrets\.yaml)$
     key_groups:
       - age:
           - *knightpp
           - *nixbox
           - *potato
+          - *alta
+  - path_regex: secrets/mastodon.yaml$
+    key_groups:
+      - age:
+          - *knightpp
           - *alta

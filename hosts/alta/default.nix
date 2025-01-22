@@ -61,10 +61,16 @@
         type = "btrfs";
       }
       {
-        where = "/storage/ssd/mastodon";
+        where = "/var/lib/mastodon";
         what = "/dev/disk/by-uuid/cbd8666a-11b5-4fc0-928f-be955eaacb4e";
         type = "btrfs";
         options = "nofail,ssd,noatime,commit=120,subvol=@mastodon";
+      }
+      {
+        where = "/var/lib/postgresql";
+        what = "/dev/disk/by-uuid/cbd8666a-11b5-4fc0-928f-be955eaacb4e";
+        type = "btrfs";
+        options = "nofail,ssd,noatime,commit=120,subvol=@postgresql";
       }
       {
         where = "/var/lib/private/matrix-conduit";
@@ -194,6 +200,11 @@
     conduwuit = {
       enable = true;
       unitConfig.RequiresMountsFor = "/var/lib/private/matrix-conduit";
+    };
+
+    mastodon = {
+      enable = true;
+      unitConfig.RequiresMountsFor = "/var/lib/mastodon";
     };
 
     local-nas.mount = lib.mkForce false;
