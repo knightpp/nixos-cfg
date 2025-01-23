@@ -78,6 +78,32 @@ in {
         };
       };
 
+      xdg.configFile."jj/config.toml".source = let
+        toml = pkgs.formats.toml {};
+      in
+        toml.generate "config.toml" {
+          user = {
+            name = "Danylo Kondratiev";
+            email = "knightpp@proton.me";
+          };
+
+          ui = {
+            default-command = "log";
+          };
+
+          aliases = {
+            mb = ["bookmark" "move" "--from" "heads(::@- & bookmarks())" "--to" "@-"];
+          };
+
+          # see fileset syntax https://jj-vcs.github.io/jj/latest/filesets/
+          fix.tools = {
+            gofumpt = {
+              command = ["${lib.getExe pkgs.gofumpt}" "$path"];
+              patterns = ["glob:'**/*.go' ~ vendor/"];
+            };
+          };
+        };
+
       manual.html.enable = lib.mkDefault false;
       news.display = "show";
 
