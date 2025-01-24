@@ -29,18 +29,15 @@
       device = "/dev/disk/by-uuid/431ca128-2dcf-40b3-9e99-eef11689a03d";
     in [
       {
-        where = "/storage/porta/transmission";
+        where = "/var/lib/transmission";
         what = device;
         options = "nofail,ssd,noatime,commit=120,subvol=@transmission";
         type = "btrfs";
       }
       {
         where = "/export/downloads";
-        what = "/storage/porta/transmission/downloads";
+        what = "/var/lib/transmission/downloads";
         options = "bind";
-        unitConfig = {
-          RequiresMountsFor = "/storage/porta/transmission";
-        };
       }
       {
         where = "/var/lib/private/flood";
@@ -94,7 +91,7 @@
     in
       map mkAutoMount [
         "/export/downloads"
-        "/storage/porta/transmission"
+        "/var/lib/transmission"
         "/var/lib/private/flood"
         "/var/lib/docker"
         "/swap"
@@ -111,14 +108,12 @@
   ];
 
   systemd.services.docker.unitConfig = {
-    # TODO: remove this when I get rid of docker
     RequiresMountsFor = lib.strings.concatStringsSep " " [
-      "/storage/ssd/mastodon"
       "/var/lib/docker"
     ];
   };
   systemd.services.transmission.unitConfig = {
-    RequiresMountsFor = "/storage/porta/transmission";
+    RequiresMountsFor = "/var/lib/transmission";
   };
   systemd.services.flood.unitConfig = {
     RequiresMountsFor = "/var/lib/private/flood";
@@ -160,7 +155,7 @@
         ]
         ++ commonOpts);
       downloadsOpts = lib.strings.concatStringsSep "," ([
-          "mp=/storage/porta/transmission"
+          "mp=/var/lib/transmission"
           "anonuid=${toString config.users.users.transmission.uid}"
           "anongid=${toString config.users.groups.transmission.gid}"
         ]
@@ -188,8 +183,8 @@
 
     transmission = {
       enable = true;
-      home = "/storage/porta/transmission";
-      unitConfig.RequiresMountsFor = "/storage/porta/transmission";
+      home = "/var/lib/transmission";
+      unitConfig.RequiresMountsFor = "/var/lib/transmission";
     };
 
     readeck = {

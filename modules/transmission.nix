@@ -34,7 +34,6 @@ in {
           "--truser=transmission"
           "--trpass=transmission"
           "--trurl=http://127.0.0.1:9091/transmission/rpc"
-          "--allowedpath=${cfg.home}"
         ];
       };
 
