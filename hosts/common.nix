@@ -95,6 +95,8 @@
       ;
   };
 
+  services.fwupd.enable = true;
+
   i18n.supportedLocales = map (x: x + "/UTF-8") [
     "en_US.UTF-8"
     "en_GB.UTF-8"
