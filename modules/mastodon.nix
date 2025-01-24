@@ -85,18 +85,16 @@ in {
 
     services.nginx.virtualHosts."${localDomain}" = {
       enableACME = false;
-      forceSSL = false;
+      forceSSL = true;
 
-      locations."@proxy" = {
-        extraConfig = ''
-          proxy_set_header X-Forwarded-Proto https;
-        '';
-      };
-      locations."/api/v1/streaming/" = {
-        extraConfig = ''
-          proxy_set_header X-Forwarded-Proto https;
-        '';
-      };
+      sslCertificate = config.sops.secrets."mastodon.knightpp.cc.pem".path;
+      sslCertificateKey = config.sops.secrets."mastodon.knightpp.cc.key".path;
+
+      extraConfig = ''
+        ssl_session_cache shared:SSL:10m;
+        ssl_session_timeout 10m;
+        ssl_client_certificate ${config.sops.secrets."cloudflare_origin_pull_ca.crt".path};
+      '';
     };
 
     systemd.targets.mastodon.unitConfig = cfg.unitConfig;

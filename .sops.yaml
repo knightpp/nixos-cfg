@@ -16,3 +16,8 @@ creation_rules:
       - age:
           - *knightpp
           - *alta
+  - path_regex: secrets/nginx.yaml$
+    key_groups:
+      - age:
+          - *knightpp
+          - *alta

@@ -28,16 +28,29 @@ in {
       };
     };
 
-    sops.secrets = {
-      cloudflared-potato-creds = lib.mkIf (cfg.tunnel == "potato") {
+    sops.secrets = let
+      nginx = {
         mode = "0400";
-        owner = config.users.users.cloudflared.name;
+        owner = config.users.users.nginx.name;
+        sopsFile = ../secrets/nginx.yaml;
       };
 
-      cloudflared-alta-creds = lib.mkIf (cfg.tunnel == "alta") {
+      cloudflare = {
         mode = "0400";
         owner = config.users.users.cloudflared.name;
       };
-    };
+    in
+      lib.mkMerge [
+        {
+          cloudflared-potato-creds = lib.mkIf (cfg.tunnel == "potato") cloudflare;
+          cloudflared-alta-creds = lib.mkIf (cfg.tunnel == "alta") cloudflare;
+        }
+
+        (lib.mkIf config.services.nginx.enable {
+          "mastodon.knightpp.cc.pem" = nginx;
+          "mastodon.knightpp.cc.key" = nginx;
+          "cloudflare_origin_pull_ca.crt" = nginx;
+        })
+      ];
   };
 }
