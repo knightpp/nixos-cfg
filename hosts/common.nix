@@ -90,6 +90,8 @@
       distrobox
       btrfs-progs
       doas-sudo-shim # to use with nixos-rebuild --use-remote-sudo
+      nvme-cli
+      smartmontools # provides smartctl
       ;
   };
 
