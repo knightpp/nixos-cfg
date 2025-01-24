@@ -50,12 +50,12 @@
         options = "nofail,ssd,noatime,commit=120,subvol=@flood";
         type = "btrfs";
       }
-      {
-        where = "/var/lib/docker";
-        what = device;
-        options = "nofail,ssd,noatime,commit=120,subvol=@docker";
-        type = "btrfs";
-      }
+      # {
+      #   where = "/var/lib/docker";
+      #   what = device;
+      #   options = "nofail,ssd,noatime,commit=120,subvol=@docker";
+      #   type = "btrfs";
+      # }
       {
         where = "/swap";
         what = device;
@@ -97,6 +97,13 @@
       map mkAutoMount [
         "/export/downloads"
         "/export/watchdir"
+        "/swap"
+        "/var/lib/private/readeck"
+        "/var/lib/private/matrix-conduit"
+        "/var/lib/postgresql"
+        "/var/lib/mastodon"
+        "/var/lib/private/flood"
+        "/var/lib/transmission"
       ];
   };
 
