@@ -106,8 +106,8 @@
 
       x = "extend_line_below";
       X = "extend_line_above";
-      T = "extend_line_below";
-      S = "extend_line_above";
+      C-n = "extend_line_below";
+      C-e = "extend_line_above";
 
       z = {
         c = "no_op";
@@ -134,7 +134,6 @@
         i = "scroll_up";
       };
 
-      "Ctrl-space" = "completion";
       # see https://github.com/helix-editor/helix/discussions/2542#discussioncomment-2959010
       # run linter/lsp on ESC
       # esc = ["collapse_selection" ":u"];
@@ -172,6 +171,7 @@
     insert = {
       # run linter/lsp on ESC
       # esc = ["normal_mode" ":u"];
+      C-space = "completion";
     };
   };
 }
