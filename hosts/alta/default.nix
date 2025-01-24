@@ -40,6 +40,11 @@
         options = "bind";
       }
       {
+        where = "/export/watchdir";
+        what = "/var/lib/transmission/watchdir";
+        options = "bind";
+      }
+      {
         where = "/var/lib/private/flood";
         what = device;
         options = "nofail,ssd,noatime,commit=120,subvol=@flood";
@@ -91,10 +96,7 @@
     in
       map mkAutoMount [
         "/export/downloads"
-        "/var/lib/transmission"
-        "/var/lib/private/flood"
-        "/var/lib/docker"
-        "/swap"
+        "/export/watchdir"
       ];
   };
 

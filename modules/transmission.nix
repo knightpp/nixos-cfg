@@ -46,6 +46,9 @@ in {
           download-dir = "${cfg.home}/downloads";
           incomplete-dir = "${cfg.home}/incomplete";
           incomplete-dir-enabled = false;
+          watch-dir-enabled = true;
+          # watch-dir = "${cfg.home}/watchdir" # default
+
           encryption = 2; # require
           message-level = 3; # warn
           peer-limit-global = 5000;
@@ -70,6 +73,7 @@ in {
       unitConfig = cfg.unitConfig;
       serviceConfig = {
         RestartSec = "15";
+        RestartSteps = 5;
         RestartMaxDelaySec = "120";
         Restart = "on-failure";
       };
