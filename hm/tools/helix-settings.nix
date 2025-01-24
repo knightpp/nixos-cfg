@@ -134,6 +134,7 @@
         i = "scroll_up";
       };
 
+      "Ctrl-space" = "completion";
       # see https://github.com/helix-editor/helix/discussions/2542#discussioncomment-2959010
       # run linter/lsp on ESC
       # esc = ["collapse_selection" ":u"];
