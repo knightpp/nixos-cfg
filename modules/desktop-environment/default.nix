@@ -67,7 +67,7 @@ in {
         rawtherapee
         signal-desktop
         rquickshare
-        ghostty
+        # ghostty # compile from source for now
         ;
     };
 
