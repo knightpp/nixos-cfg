@@ -39,6 +39,8 @@ in {
             # Elixir
             elixir
             lexical
+            #
+            taplo # toml LSP
             ;
         };
       };
