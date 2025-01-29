@@ -63,8 +63,8 @@
       j = "search_next";
       J = "search_prev";
 
-      l = "extend_search_next";
-      L = "extend_search_prev";
+      l = "find_next_char";
+      L = "find_prev_char";
 
       g = {
         m = "goto_first_nonwhitespace";
