@@ -72,7 +72,6 @@ in {
     systemd.services.transmission = {
       unitConfig = cfg.unitConfig;
       serviceConfig = {
-        StateDirectoryMode = 755;
         RestartSec = "15";
         RestartSteps = 5;
         RestartMaxDelaySec = "120";
