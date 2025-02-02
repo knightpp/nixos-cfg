@@ -59,6 +59,7 @@ in {
           rpc-username = "transmission";
           rpc-password = "transmission";
         };
+        downloadDirPermissions = "777"; # allow other write acces to allow NFS access
 
         openPeerPorts = true;
         performanceNetParameters = true;
