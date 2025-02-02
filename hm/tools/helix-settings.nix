@@ -154,6 +154,9 @@
       j = "extend_search_next";
       J = "extend_search_prev";
 
+      l = "find_next_char";
+      L = "find_prev_char";
+
       t = minorMatchMode;
 
       g = {
