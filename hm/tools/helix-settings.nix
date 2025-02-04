@@ -70,6 +70,7 @@
         m = "goto_first_nonwhitespace";
         M = "goto_line_start";
         i = "goto_line_end";
+        I = "goto_line_end_newline";
         n = "goto_last_line";
         e = "goto_file_start";
 
@@ -163,6 +164,7 @@
         m = "goto_first_nonwhitespace";
         M = "goto_line_start";
         i = "goto_line_end";
+        I = "goto_line_end_newline";
         n = "goto_last_line";
         e = "goto_file_start";
       };
