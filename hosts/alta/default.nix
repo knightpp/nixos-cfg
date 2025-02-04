@@ -213,4 +213,7 @@
 
     local-nas.mount = lib.mkForce false;
   };
+
+  # takes up RAM and doesn't do much on SBCs
+  services.fwupd.enable = false;
 }

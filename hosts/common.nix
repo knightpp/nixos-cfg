@@ -95,7 +95,7 @@
       ;
   };
 
-  services.fwupd.enable = true;
+  services.fwupd.enable = lib.mkDefault true;
 
   i18n.supportedLocales = map (x: x + "/UTF-8") [
     "en_US.UTF-8"
