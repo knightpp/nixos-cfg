@@ -64,6 +64,11 @@ in {
     local-nas.mount = true;
   };
 
+  programs.mosh = {
+    enable = true;
+    openFirewall = true;
+  };
+
   programs.steam = {
     enable = true;
 
