@@ -46,22 +46,10 @@
       enable = false;
       hostNames = ["chlap" "nixbox"];
     };
+    write-optimizations.enable = true;
   };
 
   networking.networkmanager.wifi.backend = "iwd";
-
-  boot = {
-    tmp.useTmpfs = true;
-    kernel.sysctl = {
-      "vm.swappiness" = 5;
-      "vm.dirty_background_ratio" = 50;
-      "vm.dirty_ratio" = 50;
-      "vm.dirty_expire_centisecs" = 120 * 100;
-      # QUIC increase UDP buffer size
-      # "net.core.rmem_max" = 7500000;
-      # "net.core.wmem_max" = 7500000;
-    };
-  };
 
   security = {
     sudo.enable = false;

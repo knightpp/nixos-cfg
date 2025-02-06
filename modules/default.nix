@@ -19,5 +19,6 @@
     ./readeck.nix
     ./conduwuit.nix
     ./mastodon.nix
+    ./write-optimizations.nix
   ];
 }

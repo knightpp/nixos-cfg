@@ -128,11 +128,6 @@
     RequiresMountsFor = "/var/lib/private/flood";
   };
 
-  services.journald.extraConfig = ''
-    Storage=volatile
-    RuntimeMaxUse=64M
-  '';
-
   virtualisation.docker = {
     enable = false;
     storageDriver = "btrfs";

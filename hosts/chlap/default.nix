@@ -46,10 +46,6 @@
   hardware.enableRedistributableFirmware = true;
   services.xserver.xkbModel = "chromebook"; # TODO: Verify that it affects something
 
-  services.journald.extraConfig = ''
-    Storage=volatile
-  '';
-
   boot.blacklistedKernelModules = [
     # Disable touch screen because sometimes it hangs and spams journald logs, which causes
     # high journald CPU usage. Usually happens after sleep.

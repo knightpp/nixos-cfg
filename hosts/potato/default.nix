@@ -52,11 +52,6 @@
     {device = "/var/swapfile";}
   ];
 
-  services.journald.extraConfig = ''
-    Storage=volatile
-    RuntimeMaxUse=64M
-  '';
-
   networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
