@@ -40,8 +40,6 @@ in {
     fsType = "vfat";
   };
 
-  networking.hostName = "nixbox";
-
   desktop-environment.gnome.enable = true;
 
   environment.systemPackages = builtins.attrValues {

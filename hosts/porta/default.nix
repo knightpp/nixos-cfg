@@ -39,8 +39,6 @@
     {device = "/dev/disk/by-uuid/22d6f7dc-dac6-4a3a-a466-ce8d8c6bd779";}
   ];
 
-  networking.hostName = "porta";
-
   hardware.cpu.intel.updateMicrocode = true;
   hardware.cpu.amd.updateMicrocode = true;
   hardware.bluetooth.enable = true;
