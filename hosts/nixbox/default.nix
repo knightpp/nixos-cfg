@@ -53,10 +53,9 @@ in {
 
   i18n.defaultLocale = "uk_UA.UTF-8";
 
-  virtualisation.docker = {
+  virtualisation.podman = {
     enable = true;
-    storageDriver = "btrfs";
-    enableOnBoot = false;
+    dockerCompat = true;
   };
 
   modules = {

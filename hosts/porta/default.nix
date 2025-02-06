@@ -61,10 +61,9 @@
 
   modules.users.knightpp.enable = true;
 
-  virtualisation.docker = {
+  virtualisation.podman = {
     enable = true;
-    storageDriver = "btrfs";
-    enableOnBoot = false;
+    dockerCompat = true;
   };
 
   services.flatpak.enable = true;
