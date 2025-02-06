@@ -99,6 +99,8 @@
   };
 
   services.fwupd.enable = lib.mkDefault true;
+  # NOTE: docker and libvirt won't work with nftables!
+  networking.nftables.enable = true;
 
   i18n.supportedLocales = map (x: x + "/UTF-8") [
     "en_US.UTF-8"
