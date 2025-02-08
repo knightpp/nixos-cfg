@@ -45,9 +45,9 @@ in {
           # also it needs $home/.config/transmission-daemon folder
           download-dir = "${cfg.home}/downloads";
           incomplete-dir = "${cfg.home}/incomplete";
+          watch-dir = "${cfg.home}/watcher";
           incomplete-dir-enabled = false;
           watch-dir-enabled = true;
-          # watch-dir = "${cfg.home}/watchdir" # default
 
           encryption = 2; # require
           message-level = 3; # warn
@@ -59,7 +59,8 @@ in {
           rpc-username = "transmission";
           rpc-password = "transmission";
         };
-        downloadDirPermissions = "777"; # allow other write acces to allow NFS access
+        # this wont't work because it runs too early in boot process, it accepts "deps" though
+        # downloadDirPermissions = "777"; # allow other write acces to allow NFS access
 
         openPeerPorts = true;
         performanceNetParameters = true;

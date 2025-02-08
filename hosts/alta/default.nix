@@ -40,8 +40,8 @@
         options = "bind";
       }
       {
-        where = "/export/watchdir";
-        what = "/var/lib/transmission/watchdir";
+        where = "/export/watcher";
+        what = "/var/lib/transmission/watcher";
         options = "bind";
       }
       {
@@ -50,12 +50,6 @@
         options = "nofail,ssd,noatime,commit=120,subvol=@flood";
         type = "btrfs";
       }
-      # {
-      #   where = "/var/lib/docker";
-      #   what = device;
-      #   options = "nofail,ssd,noatime,commit=120,subvol=@docker";
-      #   type = "btrfs";
-      # }
       {
         where = "/swap";
         what = device;
@@ -96,7 +90,7 @@
     in
       map mkAutoMount [
         "/export/downloads"
-        "/export/watchdir"
+        "/export/watcher"
         "/swap"
         "/var/lib/private/readeck"
         "/var/lib/private/matrix-conduit"
@@ -116,21 +110,11 @@
     }
   ];
 
-  systemd.services.docker.unitConfig = {
-    RequiresMountsFor = lib.strings.concatStringsSep " " [
-      "/var/lib/docker"
-    ];
-  };
   systemd.services.transmission.unitConfig = {
     RequiresMountsFor = "/var/lib/transmission";
   };
   systemd.services.flood.unitConfig = {
     RequiresMountsFor = "/var/lib/private/flood";
-  };
-
-  virtualisation.docker = {
-    enable = false;
-    storageDriver = "btrfs";
   };
 
   services.nfs.settings = {
