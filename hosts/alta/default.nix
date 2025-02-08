@@ -45,12 +45,6 @@
         options = "bind";
       }
       {
-        where = "/var/lib/private/flood";
-        what = device;
-        options = "nofail,ssd,noatime,commit=120,subvol=@flood";
-        type = "btrfs";
-      }
-      {
         where = "/swap";
         what = device;
         options = "nofail,ssd,noatime,commit=120,subvol=@swap";
@@ -96,7 +90,6 @@
         "/var/lib/private/matrix-conduit"
         "/var/lib/postgresql"
         "/var/lib/mastodon"
-        "/var/lib/private/flood"
         "/var/lib/transmission"
       ];
   };
@@ -112,9 +105,6 @@
 
   systemd.services.transmission.unitConfig = {
     RequiresMountsFor = "/var/lib/transmission";
-  };
-  systemd.services.flood.unitConfig = {
-    RequiresMountsFor = "/var/lib/private/flood";
   };
 
   services.nfs.settings = {

@@ -9,7 +9,7 @@ in {
   options.modules.transmission = {
     enable = lib.mkEnableOption "transmission";
 
-    withFlood = lib.mkEnableOption "flood" // {default = true;};
+    withFlood = lib.mkEnableOption "flood";
 
     home = lib.mkOption {
       example = "/storage/porta/transmission";
@@ -55,6 +55,7 @@ in {
           peer-limit-per-torrent = 500;
           peer-port = 51413;
           rpc-port = 9091;
+          rpc-bind-address = "0.0.0.0";
           trash-original-torrent-files = true;
           rpc-username = "transmission";
           rpc-password = "transmission";
@@ -63,6 +64,7 @@ in {
         # downloadDirPermissions = "777"; # allow other write acces to allow NFS access
 
         openPeerPorts = true;
+        openRPCPort = true;
         performanceNetParameters = true;
 
         home = cfg.home;
