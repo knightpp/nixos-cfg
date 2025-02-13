@@ -12,6 +12,7 @@ in {
         ghostty = unstable.pkgs.ghostty;
         jujutsu = unstable.pkgs.jujutsu;
         readeck = unstable.pkgs.readeck;
+        elixir = prev.elixir_1_18;
       })
     ];
   };

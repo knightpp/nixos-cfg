@@ -38,7 +38,7 @@ in {
             rustup
             # Elixir
             elixir
-            lexical
+            elixir-ls
             #
             taplo # toml LSP
             ;
@@ -47,7 +47,7 @@ in {
 
       programs = {
         gh.enable = true;
-        go = {enable = true;};
+        go.enable = true;
       };
 
       # Provide offline documentation for home-manager
@@ -196,10 +196,6 @@ in {
                   "formatting.gofumpt" = true;
                 };
               };
-
-              lexical = {
-                command = "${pkgs.lexical}/bin/lexical";
-              };
             };
             language = [
               {
@@ -216,11 +212,11 @@ in {
                 name = "elixir";
                 auto-format = true;
                 diagnostic-severity = "hint";
-                language-servers = ["lexical"];
+                language-servers = ["elixir-ls"];
               }
               {
                 name = "heex";
-                language-servers = ["lexical"];
+                language-servers = ["elixir-ls"];
               }
             ];
           };
