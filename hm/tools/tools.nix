@@ -163,7 +163,7 @@ in {
         helix = {
           enable = true;
           defaultEditor = false;
-          settings = import ./helix-settings.nix;
+          settings = import ./helix-settings.nix {inherit lib;};
           ignores = ["vendor" "node_modules" "_build"];
 
           languages = {

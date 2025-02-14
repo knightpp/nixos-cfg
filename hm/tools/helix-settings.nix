@@ -1,4 +1,4 @@
-{
+{lib}: {
   theme = "gruvbox";
   editor = {
     cursor-shape = {
@@ -44,27 +44,27 @@
       e = "select_textobject_around";
       n = "select_textobject_inner";
     };
-  in {
-    normal = {
+
+    normalAndSelect = {
       m = "move_char_left"; # h
       n = "move_visual_line_down"; # j
       e = "move_visual_line_up"; # k
       i = "move_char_right"; # l
 
-      N = "add_newline_below";
-      E = "add_newline_above";
-
       h = "insert_mode";
       H = "insert_at_line_start";
 
-      f = "move_next_word_end";
-      F = "move_next_long_word_end";
-
-      j = "search_next";
-      J = "search_prev";
-
       l = "find_next_char";
       L = "find_prev_char";
+
+      C-d = "no_op";
+      # C-u = "no_op";
+      C-n = "half_page_down";
+      C-e = "half_page_up";
+      pageup = "page_up";
+      pagedown = "page_down";
+
+      C-s = "split_selection_on_newline";
 
       g = {
         m = "goto_first_nonwhitespace";
@@ -89,6 +89,17 @@
         h = "no_op";
         p = "no_op";
       };
+    };
+
+    normal = {
+      N = "add_newline_below";
+      E = "add_newline_above";
+
+      f = "move_next_word_end";
+      F = "move_next_long_word_end";
+
+      j = "search_next";
+      J = "search_prev";
 
       t = minorMatchMode;
 
@@ -107,8 +118,8 @@
 
       x = "extend_line_below";
       X = "extend_line_above";
-      C-n = "extend_line_below";
-      C-e = "extend_line_above";
+      C-l = "extend_line_below";
+      C-u = "extend_line_above";
 
       z = {
         c = "no_op";
@@ -141,37 +152,21 @@
     };
 
     select = {
-      m = "extend_char_left"; # h
-      n = "extend_visual_line_down"; # j
-      e = "extend_visual_line_up"; # k
-      i = "extend_char_right"; # l
-
-      h = "insert_mode";
-      H = "insert_at_line_start";
-
       f = "extend_next_word_end";
       F = "extend_next_long_word_end";
 
       j = "extend_search_next";
       J = "extend_search_prev";
 
-      l = "find_next_char";
-      L = "find_prev_char";
-
       t = minorMatchMode;
-
-      g = {
-        m = "goto_first_nonwhitespace";
-        M = "goto_line_start";
-        i = "goto_line_end";
-        I = "goto_line_end_newline";
-        n = "goto_last_line";
-        e = "goto_file_start";
-      };
 
       # run linter/lsp on ESC
       # esc = ["collapse_selection" "normal_mode" ":u"];
     };
+  in {
+    normal = lib.mkMerge [normal normalAndSelect];
+
+    select = lib.mkMerge [select normalAndSelect];
 
     insert = {
       # run linter/lsp on ESC
