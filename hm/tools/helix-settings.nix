@@ -46,11 +46,6 @@
     };
 
     normalAndSelect = {
-      m = "move_char_left"; # h
-      n = "move_visual_line_down"; # j
-      e = "move_visual_line_up"; # k
-      i = "move_char_right"; # l
-
       h = "insert_mode";
       H = "insert_at_line_start";
 
@@ -92,6 +87,11 @@
     };
 
     normal = {
+      m = "move_char_left"; # h
+      n = "move_visual_line_down"; # j
+      e = "move_visual_line_up"; # k
+      i = "move_char_right"; # l
+
       N = "add_newline_below";
       E = "add_newline_above";
 
@@ -152,6 +152,11 @@
     };
 
     select = {
+      m = "extend_char_left"; # h
+      n = "extend_visual_line_down"; # j
+      e = "extend_visual_line_up"; # k
+      i = "extend_char_right"; # l
+
       f = "extend_next_word_end";
       F = "extend_next_long_word_end";
 
