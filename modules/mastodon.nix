@@ -94,6 +94,7 @@ in {
         ssl_session_cache shared:SSL:10m;
         ssl_session_timeout 10m;
         ssl_client_certificate ${config.sops.secrets."cloudflare_origin_pull_ca.crt".path};
+        client_max_body_size 100m;
       '';
     };
 
