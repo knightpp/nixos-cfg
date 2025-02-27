@@ -26,14 +26,15 @@
 
   systemd = {
     mounts = let
-      device = "/dev/disk/by-uuid/431ca128-2dcf-40b3-9e99-eef11689a03d";
-    in [
-      {
-        where = "/var/lib/transmission";
+      nvme = "/dev/disk/by-uuid/431ca128-2dcf-40b3-9e99-eef11689a03d";
+      oldSsd = "/dev/disk/by-uuid/cbd8666a-11b5-4fc0-928f-be955eaacb4e";
+      mkBtrfsMount = device: subvol: where: {
+        where = where;
         what = device;
-        options = "nofail,ssd,noatime,commit=120,subvol=@transmission";
+        options = "nofail,ssd,noatime,commit=120,subvol=${subvol}";
         type = "btrfs";
-      }
+      };
+    in [
       {
         where = "/export/downloads";
         what = "/var/lib/transmission/downloads";
@@ -44,36 +45,13 @@
         what = "/var/lib/transmission/watcher";
         options = "bind";
       }
-      {
-        where = "/swap";
-        what = device;
-        options = "nofail,ssd,noatime,commit=120,subvol=@swap";
-        type = "btrfs";
-      }
-      {
-        where = "/var/lib/mastodon";
-        what = "/dev/disk/by-uuid/cbd8666a-11b5-4fc0-928f-be955eaacb4e";
-        type = "btrfs";
-        options = "nofail,ssd,noatime,commit=120,subvol=@mastodon";
-      }
-      {
-        where = "/var/lib/postgresql";
-        what = "/dev/disk/by-uuid/cbd8666a-11b5-4fc0-928f-be955eaacb4e";
-        type = "btrfs";
-        options = "nofail,ssd,noatime,commit=120,subvol=@postgresql";
-      }
-      {
-        where = "/var/lib/private/matrix-conduit";
-        what = "/dev/disk/by-uuid/cbd8666a-11b5-4fc0-928f-be955eaacb4e";
-        type = "btrfs";
-        options = "nofail,ssd,noatime,commit=120,subvol=@matrix";
-      }
-      {
-        where = "/var/lib/private/readeck";
-        what = "/dev/disk/by-uuid/cbd8666a-11b5-4fc0-928f-be955eaacb4e";
-        type = "btrfs";
-        options = "nofail,ssd,noatime,commit=120,subvol=@readeck";
-      }
+      (mkBtrfsMount nvme "@swap" "/swap")
+      (mkBtrfsMount nvme "@transmission" "/var/lib/transmission")
+      (mkBtrfsMount oldSsd "@mastodon" "/var/lib/mastodon")
+      (mkBtrfsMount oldSsd "@redis-mastodon" "/var/lib/redis-mastodon")
+      (mkBtrfsMount oldSsd "@postgresql" "/var/lib/postgresql")
+      (mkBtrfsMount oldSsd "@matrix" "/var/lib/private/matrix-conduit")
+      (mkBtrfsMount oldSsd "@readeck" "/var/lib/private/readeck")
     ];
 
     automounts = let
@@ -88,6 +66,7 @@
         "/swap"
         "/var/lib/private/readeck"
         "/var/lib/private/matrix-conduit"
+        "/var/lib/redis-mastodon"
         "/var/lib/postgresql"
         "/var/lib/mastodon"
         "/var/lib/transmission"
@@ -181,6 +160,10 @@
     };
 
     local-nas.mount = lib.mkForce false;
+  };
+
+  systemd.services.redis-mastodon.unitConfig = {
+    RequiresMountsFor = "/var/lib/redis-mastodon";
   };
 
   # takes up RAM and doesn't do much on SBCs

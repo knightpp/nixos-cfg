@@ -100,8 +100,8 @@ in {
 
     systemd.targets.mastodon.unitConfig = cfg.unitConfig;
 
-    # disable redis persistence
-    services.redis.servers.mastodon.save = [];
+    # disable redis persistence, but this disables saving home feed
+    # services.redis.servers.mastodon.save = [];
 
     services.postgresql.authentication = let
       db = config.services.mastodon.database;
