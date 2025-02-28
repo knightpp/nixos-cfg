@@ -55,6 +55,7 @@ in {
         (pkgs)
         appimage-run
         firefox
+        vivaldi
         discord
         discord-canary # can share audio/video on wayland. yay!
         # calibre # calibre is not passing a test, wait for https://github.com/NixOS/nixpkgs/pull/356515 in nixos-24.11 branch
