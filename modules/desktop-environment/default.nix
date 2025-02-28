@@ -64,7 +64,6 @@ in {
         easyeffects
         workrave
         gparted
-        element-desktop
         rawtherapee
         signal-desktop
         rquickshare
