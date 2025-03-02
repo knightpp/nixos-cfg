@@ -56,6 +56,11 @@ in {
           peer-port = 51413;
           rpc-port = 9091;
           rpc-bind-address = "0.0.0.0";
+          rpc-whitelist = "192.168.1.*";
+          rpc-whitelist-enable = true;
+          rpc-host-whitelist-enabled = true;
+          rpc-host-whitelist = "alta.lan";
+          rpc-authentication-required = false;
           trash-original-torrent-files = true;
           rpc-username = "transmission";
           rpc-password = "transmission";
