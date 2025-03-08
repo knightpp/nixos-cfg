@@ -46,6 +46,7 @@ in {
         polari # IRC chat
         gnome-tweaks
         tuba # fediverse/mastodon GTK client
+        fractal # matrix client
         ;
 
       inherit
