@@ -38,6 +38,7 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./modules
+          ./services
 
           {
             networking.hostName = hostName;

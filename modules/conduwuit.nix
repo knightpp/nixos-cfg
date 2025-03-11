@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   config,
   ...
@@ -16,20 +15,26 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    services.matrix-conduit = {
+    services.conduwuit = {
       enable = true;
-      package = pkgs.conduwuit;
       settings = {
         global = {
           server_name = "knightpp.cc";
-          port = 6167;
-          address = "::1";
-          log = "warn";
-          database_backend = "rocksdb";
+          address = ["127.0.0.1" "::1"];
+          port = [6167];
           max_request_size = 100 * 1000 * 1000;
-          zstd_compression = false;
-          gzip_compression = false;
-          brotli_compression = false;
+
+          new_user_displayname_suffix = "";
+          allow_check_for_updates = false;
+          # allow_legacy_media = false;
+
+          forget_forced_upon_leave = true;
+          lockdown_public_room_directory = true;
+
+          log = "warn";
+          log_colors = false;
+
+          rocksdb_direct_io = false;
           ip_range_denylist = [
             "127.0.0.0/8"
             "10.0.0.0/8"
@@ -52,43 +57,11 @@ in {
             "fec0::/10"
           ];
 
-          allow_guest_registration = false;
-          log_guest_registrations = true;
-          allow_guests_auto_join_rooms = false;
-          allow_registration = false;
-
-          # registration_token = false; # should be env secret CONDUWUIT_REGISTRATION_TOKEN
-
-          allow_public_room_directory_over_federation = false;
-          allow_public_room_directory_without_auth = false;
-          lockdown_public_room_directory = true;
-          allow_device_name_federation = false;
           url_preview_domain_contains_allowlist = [];
           url_preview_domain_explicit_allowlist = [];
-          allow_profile_lookup_federation_requests = true;
-
-          allow_check_for_updates = false;
-          new_user_displayname_suffix = "";
-
-          trusted_servers = ["matrix.org"];
 
           media_compat_file_link = false;
-
-          allow_local_presence = true;
-
-          allow_incoming_presence = true;
-
-          allow_outgoing_presence = true;
-
           presence_offline_timeout_s = 900;
-
-          allow_incoming_read_receipts = true;
-
-          allow_outgoing_read_receipts = true;
-
-          allow_outgoing_typing = true;
-
-          allow_incoming_typing = true;
 
           well_known = {
             server = "matrix.knightpp.cc:443";
@@ -98,6 +71,6 @@ in {
       };
     };
 
-    systemd.services.conduit.unitConfig = cfg.unitConfig;
+    systemd.services.conduwuit.unitConfig = cfg.unitConfig;
   };
 }

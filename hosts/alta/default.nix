@@ -50,7 +50,7 @@
       (mkBtrfsMount oldSsd "@mastodon" "/var/lib/mastodon")
       (mkBtrfsMount oldSsd "@redis-mastodon" "/var/lib/redis-mastodon")
       (mkBtrfsMount oldSsd "@postgresql" "/var/lib/postgresql")
-      (mkBtrfsMount oldSsd "@matrix" "/var/lib/private/matrix-conduit")
+      (mkBtrfsMount oldSsd "@matrix" "/var/lib/private/conduwuit")
       (mkBtrfsMount oldSsd "@readeck" "/var/lib/private/readeck")
     ];
 
@@ -65,7 +65,7 @@
         "/export/watcher"
         "/swap"
         "/var/lib/private/readeck"
-        "/var/lib/private/matrix-conduit"
+        "/var/lib/private/conduwuit"
         "/var/lib/redis-mastodon"
         "/var/lib/postgresql"
         "/var/lib/mastodon"
@@ -151,7 +151,7 @@
 
     conduwuit = {
       enable = true;
-      unitConfig.RequiresMountsFor = "/var/lib/private/matrix-conduit";
+      unitConfig.RequiresMountsFor = "/var/lib/private/conduwuit";
     };
 
     mastodon = {
