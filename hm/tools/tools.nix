@@ -101,7 +101,12 @@ in {
           fix.tools = {
             gofumpt = {
               command = ["${lib.getExe pkgs.gofumpt}" "$path"];
-              patterns = ["glob:'**/*.go' ~ vendor/"];
+              patterns = ["glob:'**/*.go' ~ (vendor/ & glob:'**/mocks/**')"];
+            };
+
+            prettier = {
+              command = ["${lib.getExe pkgs.nodePackages.prettier}" "$path"];
+              patterns = ["(glob:'**/*.yaml' & glob:'**/*.yml' & glob:'**/*.md') ~ vendor/"];
             };
           };
         };
