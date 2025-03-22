@@ -79,7 +79,7 @@
       alta = mkHost "alta" "aarch64-linux";
     };
 
-    formatter = forAllSystems (pkgs: pkgs.alejandra);
+    formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
 
     packages = forAllSystems (
       pkgs: {

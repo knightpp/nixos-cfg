@@ -17,7 +17,6 @@ in {
         packages = builtins.attrValues {
           inherit
             (pkgs)
-            alejandra
             nil
             nix-init
             nurl # generates nix fetcher expressions based on url
@@ -107,6 +106,11 @@ in {
             prettier = {
               command = ["${lib.getExe pkgs.nodePackages.prettier}" "$path"];
               patterns = ["(glob:'**/*.yaml' & glob:'**/*.yml' & glob:'**/*.md') ~ vendor/"];
+            };
+
+            nix = {
+              command = ["${lib.getExe pkgs.nixfmt-rfc-style}" "--filename=$path"];
+              patterns = ["glob:'**/*.nix' ~ vendor/"];
             };
           };
         };
@@ -206,12 +210,12 @@ in {
               {
                 name = "nix";
                 auto-format = true;
-                formatter.command = "${pkgs.alejandra}/bin/alejandra";
+                formatter.command = "${lib.getExe pkgs.nixfmt-rfc-style}";
               }
               {
                 name = "go";
                 auto-format = true;
-                # formatter.command = "${pkgs.gofumpt}/bin/gofumpt";
+                # formatter.command = "${lib.getExe pkgs.gofumpt}";
               }
               {
                 name = "elixir";
