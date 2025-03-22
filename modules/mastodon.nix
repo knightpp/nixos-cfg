@@ -2,31 +2,34 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.modules.mastodon;
   localDomain = "mastodon.knightpp.cc";
-in {
+in
+{
   options.modules.mastodon = {
     enable = lib.mkEnableOption "mastodon";
     unitConfig = lib.mkOption {
       description = "SystemD unit config";
-      default = {};
+      default = { };
       type = lib.types.attrs;
     };
   };
 
   config = lib.mkIf cfg.enable {
-    services.mastodon = let
-      secrets = lib.attrsets.genAttrs [
-        "vapidPublicKeyFile"
-        "vapidPrivateKeyFile"
-        "activeRecordEncryptionDeterministicKeyFile"
-        "activeRecordEncryptionKeyDerivationSaltFile"
-        "activeRecordEncryptionPrimaryKeyFile"
-        "secretKeyBaseFile"
-        "otpSecretFile"
-      ] (attr: config.sops.secrets."${lib.strings.removeSuffix "File" attr}".path);
-    in
+    services.mastodon =
+      let
+        secrets = lib.attrsets.genAttrs [
+          "vapidPublicKeyFile"
+          "vapidPrivateKeyFile"
+          "activeRecordEncryptionDeterministicKeyFile"
+          "activeRecordEncryptionKeyDerivationSaltFile"
+          "activeRecordEncryptionPrimaryKeyFile"
+          "secretKeyBaseFile"
+          "otpSecretFile"
+        ] (attr: config.sops.secrets."${lib.strings.removeSuffix "File" attr}".path);
+      in
       {
         enable = true;
         configureNginx = true;
@@ -65,13 +68,14 @@ in {
       }
       // secrets;
 
-    sops.secrets = let
-      allow = {
-        mode = "0400";
-        owner = config.users.users."${config.services.mastodon.user}".name;
-        sopsFile = ../secrets/mastodon.yaml;
-      };
-    in
+    sops.secrets =
+      let
+        allow = {
+          mode = "0400";
+          owner = config.users.users."${config.services.mastodon.user}".name;
+          sopsFile = ../secrets/mastodon.yaml;
+        };
+      in
       lib.attrsets.genAttrs [
         "activeRecordEncryptionPrimaryKey"
         "activeRecordEncryptionKeyDerivationSalt"
@@ -103,10 +107,12 @@ in {
     # disable redis persistence, but this disables saving home feed
     # services.redis.servers.mastodon.save = [];
 
-    services.postgresql.authentication = let
-      db = config.services.mastodon.database;
-    in ''
-      local ${db.name} ${db.user} trust
-    '';
+    services.postgresql.authentication =
+      let
+        db = config.services.mastodon.database;
+      in
+      ''
+        local ${db.name} ${db.user} trust
+      '';
   };
 }

@@ -2,7 +2,8 @@
   appimageTools,
   fetchurl,
   ...
-}: let
+}:
+let
   pname = "zen";
   version = "1.8.2b";
 
@@ -15,17 +16,17 @@
     inherit pname version src;
   };
 in
-  appimageTools.wrapType2 {
-    inherit pname version src;
+appimageTools.wrapType2 {
+  inherit pname version src;
 
-    extraInstallCommands = ''
-      # Install .desktop file
-      install -m 444 -D ${appimageContents}/zen.desktop $out/share/applications/${pname}.desktop
-      # Install icon
-      install -m 444 -D ${appimageContents}/zen.png $out/share/icons/hicolor/128x128/apps/${pname}.png
-    '';
+  extraInstallCommands = ''
+    # Install .desktop file
+    install -m 444 -D ${appimageContents}/zen.desktop $out/share/applications/${pname}.desktop
+    # Install icon
+    install -m 444 -D ${appimageContents}/zen.png $out/share/icons/hicolor/128x128/apps/${pname}.png
+  '';
 
-    meta = {
-      platforms = ["x86_64-linux"];
-    };
-  }
+  meta = {
+    platforms = [ "x86_64-linux" ];
+  };
+}

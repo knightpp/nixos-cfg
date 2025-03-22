@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.modules.write-optimizations;
-in {
+in
+{
   options.modules.write-optimizations = {
     enable = lib.mkEnableOption "write optimizations";
   };

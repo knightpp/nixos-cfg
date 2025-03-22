@@ -1,5 +1,6 @@
-{...}: {
-  imports = [./knightpp.nix];
+{ ... }:
+{
+  imports = [ ./knightpp.nix ];
 
   config = {
     users.users = {
@@ -8,8 +9,8 @@
       };
     };
     users.groups = {
-      plugdev = {};
-      nixoscfg = {};
+      plugdev = { };
+      nixoscfg = { };
     };
   };
 }

@@ -2,14 +2,16 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.modules.conduwuit;
-in {
+in
+{
   options.modules.conduwuit = {
     enable = lib.mkEnableOption "conduwuit";
     unitConfig = lib.mkOption {
       description = "SystemD unit config";
-      default = {};
+      default = { };
       type = lib.types.attrs;
     };
   };
@@ -20,8 +22,11 @@ in {
       settings = {
         global = {
           server_name = "knightpp.cc";
-          address = ["127.0.0.1" "::1"];
-          port = [6167];
+          address = [
+            "127.0.0.1"
+            "::1"
+          ];
+          port = [ 6167 ];
           max_request_size = 100 * 1000 * 1000;
 
           new_user_displayname_suffix = "";
@@ -57,8 +62,8 @@ in {
             "fec0::/10"
           ];
 
-          url_preview_domain_contains_allowlist = [];
-          url_preview_domain_explicit_allowlist = [];
+          url_preview_domain_contains_allowlist = [ ];
+          url_preview_domain_explicit_allowlist = [ ];
 
           media_compat_file_link = false;
           presence_offline_timeout_s = 900;

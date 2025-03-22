@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.modules.zsa-udev-rules;
-in {
+in
+{
   options = {
     modules.zsa-udev-rules = {
       enable = lib.mkEnableOption "ZSA keebs udev rules";

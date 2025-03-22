@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.custom.nixbuild;
-in {
+in
+{
   options = {
     custom.nixbuild = {
       enable = lib.mkEnableOption "";
@@ -21,7 +23,7 @@ in {
 
     programs.ssh.knownHosts = {
       nixbuild = {
-        hostNames = ["eu.nixbuild.net"];
+        hostNames = [ "eu.nixbuild.net" ];
         publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIQCZc54poJ8vqawd8TraNryQeJnvH1eLpIDgbiqymM";
       };
     };
@@ -33,7 +35,10 @@ in {
           hostName = "eu.nixbuild.net";
           system = "x86_64-linux";
           maxJobs = 100;
-          supportedFeatures = ["benchmark" "big-parallel"];
+          supportedFeatures = [
+            "benchmark"
+            "big-parallel"
+          ];
         }
       ];
     };

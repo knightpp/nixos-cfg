@@ -3,24 +3,33 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.modules.nextcloud;
-in {
+in
+{
   options.modules.nextcloud = {
     enable = lib.mkEnableOption "nextcloud";
 
     trusted_domains = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = ["potato.lan" "alta.lan"];
+      default = [
+        "potato.lan"
+        "alta.lan"
+      ];
       description = "domains allowed to access nextcloud";
     };
 
     preview = {
-      heic = lib.mkEnableOption "heic" // {default = true;};
+      heic = lib.mkEnableOption "heic" // {
+        default = true;
+      };
       video = lib.mkEnableOption "video";
     };
 
-    openPort = lib.mkEnableOption "open port" // {default = true;};
+    openPort = lib.mkEnableOption "open port" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -75,17 +84,19 @@ in {
     };
 
     sops.secrets =
-      lib.genAttrs [
-        "nextcloudSecretAccessKey"
-        "nextcloudDBPass"
-        "nextcloudDBAdminPass"
-      ] (_: {
-        mode = "0400";
-        owner = config.users.users.nextcloud.name;
-      });
+      lib.genAttrs
+        [
+          "nextcloudSecretAccessKey"
+          "nextcloudDBPass"
+          "nextcloudDBAdminPass"
+        ]
+        (_: {
+          mode = "0400";
+          owner = config.users.users.nextcloud.name;
+        });
 
     networking.firewall = lib.mkIf config.openPort {
-      allowedTCPPorts = lib.mkIf cfg.openPort [80];
+      allowedTCPPorts = lib.mkIf cfg.openPort [ 80 ];
     };
   };
 }

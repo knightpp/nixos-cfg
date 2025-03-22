@@ -2,14 +2,16 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.modules.readeck;
-in {
+in
+{
   options.modules.readeck = {
     enable = lib.mkEnableOption "readeck";
     unitConfig = lib.mkOption {
       description = "SystemD unit config";
-      default = {};
+      default = { };
       type = lib.types.attrs;
     };
   };

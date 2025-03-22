@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.modules.local-nas;
-in {
+in
+{
   options.modules.local-nas = {
     mount = lib.mkEnableOption "mount local nas";
   };
@@ -25,7 +27,7 @@ in {
 
     systemd.automounts = [
       {
-        wantedBy = ["multi-user.target"];
+        wantedBy = [ "multi-user.target" ];
         automountConfig = {
           TimeoutIdleSec = "300";
         };

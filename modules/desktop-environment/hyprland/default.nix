@@ -4,9 +4,11 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   cfg = config.desktop-environment.hyprland;
-in {
+in
+{
   options = {
     desktop-environment.hyprland = {
       enable = lib.mkEnableOption "Hyprland";
@@ -24,8 +26,7 @@ in {
     # hint electron apps to use wayland:
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
     environment.systemPackages = builtins.attrValues {
-      inherit
-        (pkgs)
+      inherit (pkgs)
         neovim
         kitty # terminal
         mako # notification daemon
@@ -38,8 +39,8 @@ in {
     };
 
     nix.settings = {
-      substituters = ["https://hyprland.cachix.org"];
-      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+      substituters = [ "https://hyprland.cachix.org" ];
+      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
     };
   };
 }

@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.modules.users.knightpp;
-in {
+in
+{
   options.modules.users.knightpp = {
     enable = lib.mkEnableOption "knightpp";
     interactive = lib.mkEnableOption "interactive";
@@ -32,12 +34,12 @@ in {
       };
     };
     users.groups = {
-      knightpp = {};
+      knightpp = { };
     };
-    nix.settings.trusted-users = ["knightpp"];
+    nix.settings.trusted-users = [ "knightpp" ];
 
     home-manager.users.knightpp = {
-      imports = [../hm];
+      imports = [ ../hm ];
 
       modules.home-manager.tools = {
         enable = true;

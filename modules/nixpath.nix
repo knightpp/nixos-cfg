@@ -3,10 +3,12 @@
   config,
   inputs,
   ...
-}: let
+}:
+let
   cfg = config.modules.nixpath;
   nixpkgs = inputs.nixpkgs;
-in {
+in
+{
   options = {
     modules.nixpath = {
       enable = lib.mkOption {
@@ -20,7 +22,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     nix = {
-      nixPath = lib.mkDefault ["nixpkgs=${nixpkgs}"];
+      nixPath = lib.mkDefault [ "nixpkgs=${nixpkgs}" ];
       registry.nixpkgs.flake = lib.mkDefault nixpkgs;
     };
   };

@@ -2,15 +2,24 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+{
   imports = with inputs.nixos-hardware.nixosModules; [
     common-cpu-intel
     common-gpu-nvidia-disable
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
-  boot.initrd.availableKernelModules = ["xhci_pci" "nvme" "usbhid" "usb_storage" "uas" "sd_mod" "rtsx_pci_sdmmc"];
-  boot.initrd.kernelModules = ["dm-snapshot"];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "nvme"
+    "usbhid"
+    "usb_storage"
+    "uas"
+    "sd_mod"
+    "rtsx_pci_sdmmc"
+  ];
+  boot.initrd.kernelModules = [ "dm-snapshot" ];
 
   boot.loader.systemd-boot.enable = true;
   # boot.loader.efi.canTouchEfiVariables = true;
@@ -27,7 +36,7 @@
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/379dba30-67ad-45ef-9736-345c498a5e16";
     fsType = "btrfs";
-    options = ["subvol=@root,compress-force=zstd:4,discard=async,noatime"];
+    options = [ "subvol=@root,compress-force=zstd:4,discard=async,noatime" ];
   };
 
   fileSystems."/boot/efi" = {
@@ -36,7 +45,7 @@
   };
 
   swapDevices = [
-    {device = "/dev/disk/by-uuid/22d6f7dc-dac6-4a3a-a466-ce8d8c6bd779";}
+    { device = "/dev/disk/by-uuid/22d6f7dc-dac6-4a3a-a466-ce8d8c6bd779"; }
   ];
 
   hardware.cpu.intel.updateMicrocode = true;
@@ -49,8 +58,8 @@
     enable = true;
 
     package = pkgs.steam.override {
-      extraPkgs = pkgs:
-        with pkgs; [
+      extraPkgs =
+        pkgs: with pkgs; [
           gamescope
           mangohud
         ];

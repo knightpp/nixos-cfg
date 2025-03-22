@@ -3,10 +3,16 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.desktop-environment;
-in {
-  imports = [./kde ./gnome ./hyprland];
+in
+{
+  imports = [
+    ./kde
+    ./gnome
+    ./hyprland
+  ];
 
   options.desktop-environment = {
     enable = lib.mkEnableOption "Desktop Environment";
@@ -52,8 +58,7 @@ in {
         ];
       };
 
-      inherit
-        (pkgs)
+      inherit (pkgs)
         appimage-run
         firefox
         vivaldi
@@ -86,8 +91,7 @@ in {
 
     fonts = {
       packages = builtins.attrValues {
-        inherit
-          (pkgs)
+        inherit (pkgs)
           noto-fonts
           noto-fonts-emoji
           noto-fonts-cjk-sans
@@ -95,7 +99,7 @@ in {
           dejavu_fonts
           monaspace
           ;
-        nerdfonts = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
+        nerdfonts = pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; };
       };
 
       enableDefaultPackages = false; # Fixes wrong braille symbols for graph in the bottom app

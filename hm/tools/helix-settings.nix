@@ -1,4 +1,5 @@
-{lib}: {
+{ lib }:
+{
   theme = "gruvbox";
   editor = {
     cursor-shape = {
@@ -35,148 +36,156 @@
     };
   };
   # Colemak DH helix keys
-  keys = let
-    minorMatchMode = {
-      t = "match_brackets";
-      s = "surround_add";
-      r = "surround_replace";
-      d = "surround_delete";
-      e = "select_textobject_around";
-      n = "select_textobject_inner";
-    };
-
-    normalAndSelect = {
-      h = "insert_mode";
-      H = "insert_at_line_start";
-
-      l = "find_next_char";
-      L = "find_prev_char";
-
-      C-d = "no_op";
-      # C-u = "no_op";
-      C-n = "half_page_down";
-      C-e = "half_page_up";
-      pageup = "page_up";
-      pagedown = "page_down";
-
-      C-s = "split_selection_on_newline";
-
-      g = {
-        m = "goto_first_nonwhitespace";
-        M = "goto_line_start";
-        i = "goto_line_end";
-        I = "goto_line_end_newline";
-        n = "goto_last_line";
-        e = "goto_file_start";
-
-        l = "goto_next_buffer";
-        u = "goto_previous_buffer";
-
-        t = "goto_type_definition";
-        s = "goto_implementation";
-
-        w = "no_op";
-        y = "no_op";
-        k = "no_op";
-        j = "no_op";
-        c = "no_op";
-        b = "no_op";
-        h = "no_op";
-        p = "no_op";
+  keys =
+    let
+      minorMatchMode = {
+        t = "match_brackets";
+        s = "surround_add";
+        r = "surround_replace";
+        d = "surround_delete";
+        e = "select_textobject_around";
+        n = "select_textobject_inner";
       };
-    };
 
-    normal = {
-      m = "move_char_left"; # h
-      n = "move_visual_line_down"; # j
-      e = "move_visual_line_up"; # k
-      i = "move_char_right"; # l
+      normalAndSelect = {
+        h = "insert_mode";
+        H = "insert_at_line_start";
 
-      N = "add_newline_below";
-      E = "add_newline_above";
+        l = "find_next_char";
+        L = "find_prev_char";
 
-      f = "move_next_word_end";
-      F = "move_next_long_word_end";
+        C-d = "no_op";
+        # C-u = "no_op";
+        C-n = "half_page_down";
+        C-e = "half_page_up";
+        pageup = "page_up";
+        pagedown = "page_down";
 
-      j = "search_next";
-      J = "search_prev";
+        C-s = "split_selection_on_newline";
 
-      t = minorMatchMode;
+        g = {
+          m = "goto_first_nonwhitespace";
+          M = "goto_line_start";
+          i = "goto_line_end";
+          I = "goto_line_end_newline";
+          n = "goto_last_line";
+          e = "goto_file_start";
 
-      k = "join_selections";
-      K = "join_selections_space";
+          l = "goto_next_buffer";
+          u = "goto_previous_buffer";
 
-      space = {
-        F = "file_picker_in_current_buffer_directory";
-        w = {
-          m = "jump_view_left";
-          n = "jump_view_down";
-          e = "jump_view_up";
-          i = "jump_view_right";
+          t = "goto_type_definition";
+          s = "goto_implementation";
+
+          w = "no_op";
+          y = "no_op";
+          k = "no_op";
+          j = "no_op";
+          c = "no_op";
+          b = "no_op";
+          h = "no_op";
+          p = "no_op";
         };
       };
 
-      x = "extend_line_below";
-      X = "extend_line_above";
-      C-l = "extend_line_below";
-      C-u = "extend_line_above";
+      normal = {
+        m = "move_char_left"; # h
+        n = "move_visual_line_down"; # j
+        e = "move_visual_line_up"; # k
+        i = "move_char_right"; # l
 
-      z = {
-        c = "no_op";
-        b = "no_op";
-        i = "no_op";
-        k = "no_op";
-        j = "no_op";
-        up = "no_op";
-        down = "no_op";
-        C-u = "no_op";
-        C-d = "no_op";
+        N = "add_newline_below";
+        E = "add_newline_above";
 
-        s = "align_view_top";
-        t = "align_view_bottom";
-        g = "align_view_middle";
-        r = "align_view_middle";
+        f = "move_next_word_end";
+        F = "move_next_long_word_end";
 
-        n = "page_down";
-        e = "page_up";
+        j = "search_next";
+        J = "search_prev";
+
+        t = minorMatchMode;
+
+        k = "join_selections";
+        K = "join_selections_space";
+
+        space = {
+          F = "file_picker_in_current_buffer_directory";
+          w = {
+            m = "jump_view_left";
+            n = "jump_view_down";
+            e = "jump_view_up";
+            i = "jump_view_right";
+          };
+        };
+
+        x = "extend_line_below";
+        X = "extend_line_above";
+        C-l = "extend_line_below";
+        C-u = "extend_line_above";
+
+        z = {
+          c = "no_op";
+          b = "no_op";
+          i = "no_op";
+          k = "no_op";
+          j = "no_op";
+          up = "no_op";
+          down = "no_op";
+          C-u = "no_op";
+          C-d = "no_op";
+
+          s = "align_view_top";
+          t = "align_view_bottom";
+          g = "align_view_middle";
+          r = "align_view_middle";
+
+          n = "page_down";
+          e = "page_up";
+        };
+
+        Z = {
+          n = "scroll_down";
+          i = "scroll_up";
+        };
+
+        # see https://github.com/helix-editor/helix/discussions/2542#discussioncomment-2959010
+        # run linter/lsp on ESC
+        # esc = ["collapse_selection" ":u"];
       };
 
-      Z = {
-        n = "scroll_down";
-        i = "scroll_up";
+      select = {
+        m = "extend_char_left"; # h
+        n = "extend_visual_line_down"; # j
+        e = "extend_visual_line_up"; # k
+        i = "extend_char_right"; # l
+
+        f = "extend_next_word_end";
+        F = "extend_next_long_word_end";
+
+        j = "extend_search_next";
+        J = "extend_search_prev";
+
+        t = minorMatchMode;
+
+        # run linter/lsp on ESC
+        # esc = ["collapse_selection" "normal_mode" ":u"];
       };
+    in
+    {
+      normal = lib.mkMerge [
+        normal
+        normalAndSelect
+      ];
 
-      # see https://github.com/helix-editor/helix/discussions/2542#discussioncomment-2959010
-      # run linter/lsp on ESC
-      # esc = ["collapse_selection" ":u"];
+      select = lib.mkMerge [
+        select
+        normalAndSelect
+      ];
+
+      insert = {
+        # run linter/lsp on ESC
+        # esc = ["normal_mode" ":u"];
+        C-space = "completion";
+      };
     };
-
-    select = {
-      m = "extend_char_left"; # h
-      n = "extend_visual_line_down"; # j
-      e = "extend_visual_line_up"; # k
-      i = "extend_char_right"; # l
-
-      f = "extend_next_word_end";
-      F = "extend_next_long_word_end";
-
-      j = "extend_search_next";
-      J = "extend_search_prev";
-
-      t = minorMatchMode;
-
-      # run linter/lsp on ESC
-      # esc = ["collapse_selection" "normal_mode" ":u"];
-    };
-  in {
-    normal = lib.mkMerge [normal normalAndSelect];
-
-    select = lib.mkMerge [select normalAndSelect];
-
-    insert = {
-      # run linter/lsp on ESC
-      # esc = ["normal_mode" ":u"];
-      C-space = "completion";
-    };
-  };
 }

@@ -2,13 +2,18 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.modules.cloudflared;
-in {
+in
+{
   options.modules.cloudflared = {
     enable = lib.mkEnableOption "cloudflared";
     tunnel = lib.mkOption {
-      type = lib.types.enum ["potato" "alta"];
+      type = lib.types.enum [
+        "potato"
+        "alta"
+      ];
     };
   };
 
@@ -28,18 +33,19 @@ in {
       };
     };
 
-    sops.secrets = let
-      nginx = {
-        mode = "0400";
-        owner = config.users.users.nginx.name;
-        sopsFile = ../secrets/nginx.yaml;
-      };
+    sops.secrets =
+      let
+        nginx = {
+          mode = "0400";
+          owner = config.users.users.nginx.name;
+          sopsFile = ../secrets/nginx.yaml;
+        };
 
-      cloudflare = {
-        mode = "0400";
-        owner = config.users.users.cloudflared.name;
-      };
-    in
+        cloudflare = {
+          mode = "0400";
+          owner = config.users.users.cloudflared.name;
+        };
+      in
       lib.mkMerge [
         {
           cloudflared-potato-creds = lib.mkIf (cfg.tunnel == "potato") cloudflare;

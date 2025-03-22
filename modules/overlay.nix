@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   unstable = config.modules.nixpkgs-unstable;
-in {
+in
+{
   config = lib.mkIf unstable.enable {
     nixpkgs.overlays = [
       (final: prev: {

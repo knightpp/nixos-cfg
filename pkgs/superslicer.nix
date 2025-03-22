@@ -3,7 +3,8 @@
   fetchurl,
   makeDesktopItem,
   buildEnv,
-}: let
+}:
+let
   version = "2.5.60.0";
   superslicer = appimageTools.wrapType2 {
     name = "superslicer";
@@ -13,12 +14,13 @@
     };
   };
 
-  superslicerDesktopItem = let
-    icon = fetchurl {
-      url = "https://raw.githubusercontent.com/supermerill/SuperSlicer/master/resources/icons/SuperSlicer.svg";
-      hash = "sha256-PhOCUe8FgmTxkqta5uka5YtrWwZl7MiIqYkAIM492X0=";
-    };
-  in
+  superslicerDesktopItem =
+    let
+      icon = fetchurl {
+        url = "https://raw.githubusercontent.com/supermerill/SuperSlicer/master/resources/icons/SuperSlicer.svg";
+        hash = "sha256-PhOCUe8FgmTxkqta5uka5YtrWwZl7MiIqYkAIM492X0=";
+      };
+    in
     makeDesktopItem {
       name = "SuperSlicer";
       desktopName = "SuperSlicer";
@@ -40,7 +42,10 @@
       inherit icon;
     };
 in
-  buildEnv {
-    name = "superslicer";
-    paths = [superslicerDesktopItem superslicer];
-  }
+buildEnv {
+  name = "superslicer";
+  paths = [
+    superslicerDesktopItem
+    superslicer
+  ];
+}

@@ -2,9 +2,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.workarounds.steam;
-in {
+in
+{
   options = {
     workarounds.steam = {
       enable = lib.mkEnableOption "steam workaround";

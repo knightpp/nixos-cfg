@@ -3,7 +3,8 @@
   fetchurl,
   makeDesktopItem,
   buildEnv,
-}: let
+}:
+let
   version = "2.8.0";
   ts = "202406270929";
   prusaslicer = appimageTools.wrapType2 {
@@ -14,12 +15,13 @@
     };
   };
 
-  prusaslicerDesktopItem = let
-    icon = fetchurl {
-      url = "https://raw.githubusercontent.com/prusa3d/PrusaSlicer/master/resources/icons/PrusaSlicer.svg";
-      hash = "sha256-gK6DT+AgBO1nrrqSE0p15CpRFyXTALdeFQdGFhZGpFg=";
-    };
-  in
+  prusaslicerDesktopItem =
+    let
+      icon = fetchurl {
+        url = "https://raw.githubusercontent.com/prusa3d/PrusaSlicer/master/resources/icons/PrusaSlicer.svg";
+        hash = "sha256-gK6DT+AgBO1nrrqSE0p15CpRFyXTALdeFQdGFhZGpFg=";
+      };
+    in
     makeDesktopItem {
       name = "PrusaSlicer";
       desktopName = "PrusaSlicer";
@@ -41,7 +43,10 @@
       inherit icon;
     };
 in
-  buildEnv {
-    name = "prusaslicer";
-    paths = [prusaslicerDesktopItem prusaslicer];
-  }
+buildEnv {
+  name = "prusaslicer";
+  paths = [
+    prusaslicerDesktopItem
+    prusaslicer
+  ];
+}

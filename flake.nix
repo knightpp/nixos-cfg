@@ -81,25 +81,23 @@
 
     formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
 
-    packages = forAllSystems (
-      pkgs: {
-        diff = pkgs.writeShellScriptBin "diff" ''
-          shopt -s nullglob
+    packages = forAllSystems (pkgs: {
+      diff = pkgs.writeShellScriptBin "diff" ''
+        shopt -s nullglob
 
-          generations=(/nix/var/nix/profiles/system-*-link)
+        generations=(/nix/var/nix/profiles/system-*-link)
 
-          last=''${generations[-1]}
-          beforeLast=''${generations[-2]}
+        last=''${generations[-1]}
+        beforeLast=''${generations[-2]}
 
-          echo "Boot system is $(readlink /nix/var/nix/profiles/system)"
-          echo "Comparing"
-          echo -e "\t''${beforeLast}"
-          echo -e "\t''${last}"
-          echo ""
+        echo "Boot system is $(readlink /nix/var/nix/profiles/system)"
+        echo "Comparing"
+        echo -e "\t''${beforeLast}"
+        echo -e "\t''${last}"
+        echo ""
 
-          ${pkgs.nvd}/bin/nvd diff "''${beforeLast}" "''${last}"
-        '';
-      }
-    );
+        ${pkgs.nvd}/bin/nvd diff "''${beforeLast}" "''${last}"
+      '';
+    });
   };
 }

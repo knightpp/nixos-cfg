@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.modules.fcitx5;
-in {
+in
+{
   options = {
     modules.fcitx5 = {
       enable = lib.mkEnableOption "Fcitx5";
@@ -14,7 +16,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     i18n.inputMethod.enabled = "fcitx5";
-    i18n.inputMethod.fcitx5.addons = builtins.attrValues {inherit (pkgs) fcitx5-mozc;};
+    i18n.inputMethod.fcitx5.addons = builtins.attrValues { inherit (pkgs) fcitx5-mozc; };
     environment.sessionVariables = {
       XMODIFIERS = "@im=fcitx";
       QT_IM_MODULE = "fcitx";
@@ -22,8 +24,6 @@ in {
     };
 
     environment.systemPackages =
-      if config.modules.desktop-environment.gnome.enable
-      then [pkgs.gnomeExtensions.kimpanel]
-      else [];
+      if config.modules.desktop-environment.gnome.enable then [ pkgs.gnomeExtensions.kimpanel ] else [ ];
   };
 }

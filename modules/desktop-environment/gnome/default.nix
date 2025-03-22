@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.desktop-environment.gnome;
-in {
+in
+{
   options = {
     desktop-environment.gnome = {
       enable = lib.mkEnableOption "Gnome";
@@ -26,7 +28,7 @@ in {
     services.xserver.displayManager.gdm.enable = true;
     services.xserver.desktopManager.gnome = {
       enable = true;
-      extraGSettingsOverridePackages = [pkgs.mutter];
+      extraGSettingsOverridePackages = [ pkgs.mutter ];
       # enable fractional scaling in gnome
       extraGSettingsOverrides = ''
         [org.gnome.mutter]
@@ -40,8 +42,7 @@ in {
     # hint electron apps to use wayland:
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
     environment.systemPackages = builtins.attrValues {
-      inherit
-        (pkgs)
+      inherit (pkgs)
         papers
         polari # IRC chat
         gnome-tweaks
@@ -49,13 +50,12 @@ in {
         fractal # matrix client
         ;
 
-      inherit
-        (pkgs.gnomeExtensions)
+      inherit (pkgs.gnomeExtensions)
         appindicator
         night-theme-switcher
         ;
     };
-    services.udev.packages = with pkgs; [gnome-settings-daemon];
+    services.udev.packages = with pkgs; [ gnome-settings-daemon ];
 
     environment.gnome.excludePackages = with pkgs; [
       epiphany # web browser

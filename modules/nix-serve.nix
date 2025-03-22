@@ -2,11 +2,13 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.modules.nix-serve;
   self = config.networking.hostName;
   hostNames = builtins.filter (x: x != self) cfg.hostNames;
-in {
+in
+{
   options.modules.nix-serve = {
     enable = lib.mkEnableOption "Nix serve";
 
@@ -36,36 +38,35 @@ in {
       #   publicKey = cfg.pubKey;
       # });
 
-      extraConfig =
-        lib
-        .concatLines
-        (builtins
-          .map (host: ''
-            Host ${host}
-              HostName ${host}.lan
-              User nix-ssh
+      extraConfig = lib.concatLines (
+        builtins.map (host: ''
+          Host ${host}
+            HostName ${host}.lan
+            User nix-ssh
 
-              AddKeysToAgent yes
-              IdentitiesOnly yes
-              IdentityFile ${config.sops.secrets.ssh-key.path}
-            Host *
-          '')
-          hostNames);
+            AddKeysToAgent yes
+            IdentitiesOnly yes
+            IdentityFile ${config.sops.secrets.ssh-key.path}
+          Host *
+        '') hostNames
+      );
     };
 
-    nix = let
-      protocol = "ssh";
-    in {
-      sshServe = {
-        enable = true;
-        protocol = protocol;
-        keys = [cfg.pubKey];
-      };
+    nix =
+      let
+        protocol = "ssh";
+      in
+      {
+        sshServe = {
+          enable = true;
+          protocol = protocol;
+          keys = [ cfg.pubKey ];
+        };
 
-      settings = {
-        extra-trusted-public-keys = [cfg.pubKey];
-        substituters = map (x: "${protocol}://nix-ssh@${x}.lan") hostNames;
+        settings = {
+          extra-trusted-public-keys = [ cfg.pubKey ];
+          substituters = map (x: "${protocol}://nix-ssh@${x}.lan") hostNames;
+        };
       };
-    };
   };
 }

@@ -4,7 +4,8 @@
   inputs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     "${inputs.nixpkgs}/nixos/modules/installer/scan/not-detected.nix"
     inputs.sops-nix.nixosModules.sops
@@ -44,7 +45,10 @@
     nixpkgs-unstable.enable = true;
     nix-serve = {
       enable = false;
-      hostNames = ["chlap" "nixbox"];
+      hostNames = [
+        "chlap"
+        "nixbox"
+      ];
     };
     write-optimizations.enable = true;
   };
@@ -58,7 +62,7 @@
       enable = true;
       extraRules = [
         {
-          users = ["knightpp"];
+          users = [ "knightpp" ];
           keepEnv = true;
           persist = true;
         }
@@ -67,8 +71,7 @@
   };
 
   environment.systemPackages = builtins.attrValues {
-    inherit
-      (pkgs)
+    inherit (pkgs)
       compsize # check btrfs compression
       git # this should be in system packages since nix depends on it
       file
@@ -99,7 +102,7 @@
   time.timeZone = "Europe/Kyiv";
   i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
 
-  services.udev.packages = [pkgs.picoprobe-udev-rules];
+  services.udev.packages = [ pkgs.picoprobe-udev-rules ];
   hardware.keyboard.qmk.enable = true;
   modules.zsa-udev-rules.enable = true;
   hardware.keyboard.zsa.enable = false; # the rules does not include Voyager, have to hardcode newer rules
