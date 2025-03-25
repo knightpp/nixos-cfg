@@ -63,7 +63,6 @@ in
         firefox
         vivaldi
         discord
-        discord-canary # can share audio/video on wayland. yay!
         calibre
         handbrake
         xclip
