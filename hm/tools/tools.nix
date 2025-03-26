@@ -51,6 +51,33 @@ in
           go.enable = true;
         };
 
+        xdg.configFile."ghostty/config".text = ''
+          theme = GruvboxDark
+          # I launch fish from bash, so autodetect does not work
+          shell-integration = fish
+          # cursor feature sets cursor to blinking bar forcibly
+          shell-integration-features = no-cursor, sudo, title
+          cursor-style = block
+          # font-size = 12
+          font-family = FiraCode Nerd Font
+          auto-update = off
+
+          keybind = alt+m=goto_split:left
+          keybind = alt+n=goto_split:bottom
+          keybind = alt+e=goto_split:top
+          keybind = alt+i=goto_split:right
+
+          keybind = alt+s=new_split:auto
+          keybind = alt+h=new_split:down
+          keybind = alt+l=new_split:right
+
+          keybind = alt+p=write_scrollback_file:paste
+          keybind = alt+b=write_scrollback_file:open
+
+          keybind = page_up=scroll_page_up
+          keybind = page_down=scroll_page_down
+        '';
+
         # Provide offline documentation for home-manager
         manual.html.enable = true;
       };
