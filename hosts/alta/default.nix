@@ -28,8 +28,8 @@
   systemd = {
     mounts =
       let
-        nvme = "/dev/disk/by-uuid/431ca128-2dcf-40b3-9e99-eef11689a03d";
         oldSsd = "/dev/disk/by-uuid/cbd8666a-11b5-4fc0-928f-be955eaacb4e";
+        datatraveler = "/dev/disk/by-uuid/317f3945-1d41-4857-8d7f-b9f49d93c088";
         mkBtrfsMount = device: subvol: where: {
           where = where;
           what = device;
@@ -48,8 +48,8 @@
           what = "/var/lib/transmission/watcher";
           options = "bind";
         }
-        (mkBtrfsMount nvme "@swap" "/swap")
-        (mkBtrfsMount nvme "@transmission" "/var/lib/transmission")
+        (mkBtrfsMount datatraveler "@swap" "/swap")
+        (mkBtrfsMount datatraveler "@transmission" "/var/lib/transmission")
         (mkBtrfsMount oldSsd "@mastodon" "/var/lib/mastodon")
         (mkBtrfsMount oldSsd "@redis-mastodon" "/var/lib/redis-mastodon")
         (mkBtrfsMount oldSsd "@postgresql" "/var/lib/postgresql")
