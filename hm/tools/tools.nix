@@ -86,6 +86,7 @@ in
         home = {
           sessionVariables = {
             EDITOR = "${pkgs.helix}/bin/hx"; # also can be configured with "defaultEditor", but does not work
+            PAGER = "${pkgs.less} -FRX";
           };
           sessionPath = [ "$HOME/.local/bin" ];
 
@@ -102,6 +103,7 @@ in
               nvd # nix differ
               gitui
               jujutsu # better git
+              watchman # jj needs it to monitor fs
               ;
           };
         };
@@ -111,13 +113,36 @@ in
             toml = pkgs.formats.toml { };
           in
           toml.generate "config.toml" {
+            "$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json";
+
             user = {
               name = "Danylo Kondratiev";
               email = "knightpp@proton.me";
             };
 
+            core = {
+              fsmonitor = "watchman";
+              watchman.register_snapshot_trigger = false;
+            };
+
             ui = {
               default-command = "log";
+              diff.tool = [
+                "${lib.getExe pkgs.difftastic}"
+                "--color=always"
+                "$left"
+                "$right"
+              ];
+
+              movement = {
+                # changes jj next, jj prev to always --edit
+                # edit = true
+              };
+            };
+
+            git = {
+              # Prevent pushing anything explicitly labeled "private"
+              private-commits = "description(glob:'private:*')";
             };
 
             aliases = {
