@@ -85,8 +85,8 @@ in
       server = lib.mkIf cfg.enable {
         home = {
           sessionVariables = {
-            EDITOR = "${pkgs.helix}/bin/hx"; # also can be configured with "defaultEditor", but does not work
-            PAGER = "${pkgs.less} -FRX";
+            EDITOR = "${lib.getExe pkgs.helix}"; # also can be configured with "defaultEditor", but does not work
+            PAGER = "${lib.getExe pkgs.less} -FRX";
           };
           sessionPath = [ "$HOME/.local/bin" ];
 
