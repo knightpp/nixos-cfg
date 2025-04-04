@@ -68,10 +68,9 @@ in
     local-nas.mount = true;
   };
 
-  programs.mosh = {
-    enable = true;
-    openFirewall = true;
-  };
+  programs.virt-manager.enable = true;
+  virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
 
   programs.steam = {
     enable = true;
