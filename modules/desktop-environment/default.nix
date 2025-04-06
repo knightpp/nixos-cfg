@@ -51,6 +51,7 @@ in
       # superslicer = pkgs.callPackage ./../../pkgs/superslicer.nix {};
       # prusaslicer = pkgs.callPackage ./../../pkgs/prusa-slicer.nix {};
       # zenbrowser = pkgs.callPackage ./../../pkgs/zen-browser.nix {};
+      deezer = pkgs.callPackage ./../../pkgs/deezer.nix { };
       heroic = pkgs.heroic.override {
         extraPkgs = pkgs: [
           pkgs.gamescope
