@@ -25,7 +25,6 @@ in
           "plugdev" # probably for qmk keyboards
           "dialout" # for serial ports (esp32)
           "adbusers" # see https://nixos.wiki/wiki/Android
-          "libvirtd" # virtualization
           config.users.groups.keys.name # sops
         ];
         initialHashedPassword = "$6$pgzhN8I3kJ1O35mZ$dzoVn596Htt3Jc7S1ftGyRnoxHmqvNpY.ZKtN3c/j5y0K3ZlbpwbaMaA6Mw5XnuVQxrDQ0184dkMtZp98thXU1";

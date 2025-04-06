@@ -48,7 +48,6 @@ in
         gnome-tweaks
         tuba # fediverse/mastodon GTK client
         fractal # matrix client
-        gnome-boxes # qemu frontend
         ;
 
       inherit (pkgs.gnomeExtensions)
