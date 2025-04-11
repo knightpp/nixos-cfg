@@ -11,6 +11,14 @@
 nix store diff-closures /nix/var/nix/profiles/system-{1,2}-link/
 ```
 
+### CLI
+
+Quickly build a package
+
+```nix
+nix eval --impure --expr '(import <nixpkgs> {}).callPackage ./package.nix {}'
+```
+
 ## Debugging
 
 ```shell
