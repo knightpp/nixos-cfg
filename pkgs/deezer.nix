@@ -5,12 +5,12 @@
   buildEnv,
 }:
 let
-  version = "7.0.40";
+  version = "7.0.50";
   deezer = appimageTools.wrapType2 {
     name = "deezer";
     src = fetchurl {
       url = "https://github.com/aunetx/deezer-linux/releases/download/v${version}/deezer-desktop-${version}-x86_64.AppImage";
-      hash = "sha256-r0/ifkFX6gBPeqW+cz3X1Qcw8UiNQ2vSYtTM2ghi/ds=";
+      hash = "sha256-CHrN57fMBN2Wh+HYuoIwmvjgCMisYZSaWCGbXl7TyrQ=";
     };
   };
 
