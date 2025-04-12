@@ -278,6 +278,10 @@ in
                     "formatting.gofumpt" = true;
                   };
                 };
+
+                guile-lsp-server = {
+                  command = "${lib.getExe (pkgs.callPackage ./../../pkgs/guile-lsp-server.nix { })}";
+                };
               };
               language = [
                 {
@@ -288,7 +292,6 @@ in
                 {
                   name = "go";
                   auto-format = true;
-                  # formatter.command = "${lib.getExe pkgs.gofumpt}";
                 }
                 {
                   name = "elixir";
@@ -299,6 +302,10 @@ in
                 {
                   name = "heex";
                   language-servers = [ "elixir-ls" ];
+                }
+                {
+                  name = "scheme";
+                  language-servers = [ "guile-lsp-server" ];
                 }
               ];
             };
