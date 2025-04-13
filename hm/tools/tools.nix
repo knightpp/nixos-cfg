@@ -108,6 +108,13 @@ in
           };
         };
 
+        # Enables Guile readline by default
+        home.file.".guile".text = ''
+          (use-modules (ice-9 readline))
+
+          (activate-readline)
+        '';
+
         xdg.configFile."jj/config.toml".source =
           let
             toml = pkgs.formats.toml { };
