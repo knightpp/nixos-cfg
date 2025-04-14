@@ -43,11 +43,12 @@ in
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
     environment.systemPackages = builtins.attrValues {
       inherit (pkgs)
-        papers
+        papers # pdf viewer
         polari # IRC chat
         gnome-tweaks
         tuba # fediverse/mastodon GTK client
         fractal # matrix client
+        dino # xmpp client
         ;
 
       inherit (pkgs.gnomeExtensions)
