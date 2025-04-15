@@ -49,6 +49,7 @@ in
         tuba # fediverse/mastodon GTK client
         fractal # matrix client
         dino # xmpp client
+        bottles # wine
         ;
 
       inherit (pkgs.gnomeExtensions)
