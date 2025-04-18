@@ -5,12 +5,12 @@
   buildEnv,
 }:
 let
-  version = "2.5.60.0";
+  version = "2.7.61.2";
   superslicer = appimageTools.wrapType2 {
     name = "superslicer";
     src = fetchurl {
       url = "https://github.com/supermerill/SuperSlicer/releases/download/${version}/SuperSlicer-ubuntu_20.04-${version}.AppImage";
-      hash = "sha256-9tuez9Y2wBd9Zca2/O3VOzPHnoHULz91dL0sm3weWM0=";
+      hash = "sha256-5BZ4hs19WfUWWcWOaDJHcqZ9lzGtl/oRCNIMHs1TBsw=";
     };
   };
 

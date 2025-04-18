@@ -48,9 +48,10 @@ in
     programs.dconf.enable = true; # Needed for easyeffects
 
     environment.systemPackages = builtins.attrValues {
-      # superslicer = pkgs.callPackage ./../../pkgs/superslicer.nix {};
+      superslicer = pkgs.callPackage ./../../pkgs/superslicer.nix { };
       # prusaslicer = pkgs.callPackage ./../../pkgs/prusa-slicer.nix {};
       # zenbrowser = pkgs.callPackage ./../../pkgs/zen-browser.nix {};
+
       deezer = pkgs.callPackage ./../../pkgs/deezer.nix { };
       heroic = pkgs.heroic.override {
         extraPkgs = pkgs: [
