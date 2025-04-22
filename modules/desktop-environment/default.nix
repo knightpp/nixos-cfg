@@ -75,6 +75,7 @@ in
         signal-desktop
         rquickshare
         ghostty
+        freecad-wayland
         ;
     };
 
