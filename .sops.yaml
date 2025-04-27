@@ -2,7 +2,7 @@ keys:
   - &knightpp age14gn7ttk9tk22h2at6fpx9u7d53lf60hz46h2g6se33wg8r5ygffqw72a5r
   - &nixbox age1p54nu6hnjsmyjhtcx79zrq3q2ey9x6zpavy7cdesxhhfy90y2p8szlnq6h
   - &potato age193vtp8l62jz4hsmcxvcgwqyy4q7ghklz7g43s9esn75gsacd0gtq00uzdp
-  - &alta age1rhq8630g2yndtug6p37cl4kyesdfq8gj85x3xvu9ef6rslyr5d9qrgungj
+  - &alta age1eg2mus3dsut5pa69nh7tlqgspcdccv9783cfjtzflkzlu34wg3usez30dv
 creation_rules:
   - path_regex: secrets/(nix-serve-ssh-key\.yaml|secrets\.yaml)$
     key_groups:
