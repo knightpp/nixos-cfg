@@ -10,19 +10,27 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.loader.grub.enable = false;
-  boot.loader.generic-extlinux-compatible.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
-      fsType = "ext4";
-      options = [
-        "noatime"
-        "commit=120"
-      ];
-    };
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = false;
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/3cf23025-8ad7-4b2c-8466-3bd44108e03b";
+    fsType = "btrfs";
+    options = [ "subvol=@root,compress=zstd:1,noatime,commit=120" ];
+  };
+
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/3cf23025-8ad7-4b2c-8466-3bd44108e03b";
+    fsType = "btrfs";
+    options = [ "subvol=@home,compress=zstd:1,noatime,commit=120" ];
+  };
+
+  fileSystems."/boot/efi" = {
+    device = "/dev/disk/by-uuid/7920-5DF0";
+    fsType = "vfat";
   };
 
   systemd = {
