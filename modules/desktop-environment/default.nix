@@ -21,6 +21,17 @@ in
   config = lib.mkIf cfg.enable {
     home-manager.sharedModules = [
       {
+        # Enable mailvelope to connect to system GnuPG agent
+        home.file.".mozilla/native-messaging-hosts/gpgmejson.json".text = ''
+          {
+            "name": "gpgmejson",
+            "description": "JavaScript binding for GnuPG",
+            "path": "${pkgs.gpgme}/bin/gpgme-json",
+            "type": "stdio",
+            "allowed_extensions": ["jid1-AQqSMBYb0a8ADg@jetpack"]
+          }
+        '';
+
         programs = {
           mpv = {
             enable = true;

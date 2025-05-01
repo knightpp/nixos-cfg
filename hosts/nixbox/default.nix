@@ -63,6 +63,10 @@ in
     dockerCompat = true;
   };
 
+  programs.gnupg.agent = {
+    enable = true;
+  };
+
   modules = {
     users.knightpp.interactive = true;
     local-nas.mount = true;
