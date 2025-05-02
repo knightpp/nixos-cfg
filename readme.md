@@ -1,5 +1,8 @@
 # My NixOS configurations
 
+> [!WARNING]
+> Moved to https://codeberg.org/knightpp/nixos-cfg
+
 ## QOL
 
 ### Show changes between generations
